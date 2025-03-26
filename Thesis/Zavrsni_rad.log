@@ -1,10 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 MAR 2025 22:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  26 MAR 2025 01:06
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
-**Zavrsni_rad.tex
-(./Zavrsni_rad.tex
+**"/Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/Zavrsni_rad.tex"
+(/Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/Zavrsni_rad.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
 (./fer.cls
@@ -800,14 +799,46 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
-al/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}] [2
+al/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
+<zadatak.pdf, id=41, 598.235pt x 845.1575pt>
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf>
+Package pdftex.def Info: zadatak.pdf  used on input line 46.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf>
+Package pdftex.def Info: zadatak.pdf  used on input line 46.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+<zadatak.pdf, id=44, page=1, 598.235pt x 845.1575pt>
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf, page 1>
+Package pdftex.def Info: zadatak.pdf , page1 used on input line 46.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf, page 1>
+Package pdftex.def Info: zadatak.pdf , page1 used on input line 46.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf, page 1>
+Package pdftex.def Info: zadatak.pdf , page1 used on input line 46.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf, page 1>
+Package pdftex.def Info: zadatak.pdf , page1 used on input line 46.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: zadatak.pdf Graphic file (type pdf)
+<use zadatak.pdf, page 1>
+Package pdftex.def Info: zadatak.pdf , page1 used on input line 46.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+ [2
 
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t1.enc}]
+ <./zadatak.pdf>]
 LaTeX Font Info:    Font shape `T1/stix2/m/sl' in size <12> not available
 (Font)              Font shape `T1/stix2/m/it' tried instead on input line 51.
- [3
 
-]
+[3
+
+{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t1.enc}]
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <18> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
@@ -829,27 +860,7 @@ l.66 \chapter
 
 ]
 Poglavlje 1..
-
-LaTeX Warning: Citation `6248073' on page 2 undefined on input line 69.
-
-
-LaTeX Warning: Citation `6247753' on page 2 undefined on input line 69.
-
-
-LaTeX Warning: Citation `ghiglia_pritt_phase_unwrapping' on page 2 undefined on
- input line 69.
-
-
-LaTeX Warning: Citation `hartley2003multiple' on page 2 undefined on input line
- 69.
-
-
-LaTeX Warning: Citation `4250461' on page 2 undefined on input line 69.
-
-
-LaTeX Warning: Citation `123DCatch' on page 2 undefined on input line 69.
-
-<Figures/lenovo_yoga_tab3_pro_front.png, id=59, 562.1pt x 346.29375pt>
+<Figures/lenovo_yoga_tab3_pro_front.png, id=89, 562.1pt x 346.29375pt>
 File: Figures/lenovo_yoga_tab3_pro_front.png Graphic file (type png)
 <use Figures/lenovo_yoga_tab3_pro_front.png>
 Package pdftex.def Info: Figures/lenovo_yoga_tab3_pro_front.png  used on input 
@@ -942,17 +953,18 @@ Poglavlje 4..
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 109.
 
-No file Zavrsni_rad.bbl.
-[7
+(./Zavrsni_rad.bbl [7
+
+]) [8
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 126.
 
-[8
+[9
 
-] [9
+] [10
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
@@ -978,7 +990,7 @@ Package blindtext Warning: croatian not defined, using English instead.
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 153.
 
-[10
+[11
 
 
 ]
@@ -990,7 +1002,7 @@ Package blindtext Warning: croatian not defined, using English instead.
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 153.
 
-[11] (./Zavrsni_rad.aux)
+[12] (./Zavrsni_rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1100,24 +1112,26 @@ ls1stix2sf.fd    2018/04/02 v2.0.0-latex stix2 sans-serif LS1 font definitions
 ls2stix2tt.fd    2018/04/02 v2.0.0-latex stix2 typewriter LS2 font definitions
     umsa.fd    2013/01/14 v3.01 AMS symbols A
     umsb.fd    2013/01/14 v3.01 AMS symbols B
+ zadatak.pdf    Graphic file (type pdf)
+ zadatak.pdf    Graphic file (type pdf)
+ zadatak.pdf    Graphic file (type pdf)
+ zadatak.pdf    Graphic file (type pdf)
 Figures/lenovo_yoga_tab3_pro_front.png
   t1cmtt.fd    2023/04/13 v2.5m Standard LaTeX font definitions
+Zavrsni_rad.bbl
  ***********
 
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: CC0883094826B68771B2840DE3FEF057;651.
+(rerunfilecheck)             Checksum: F64CA0B185096B347789EE964136D58C;745.
  ) 
 Here is how much of TeX's memory you used:
- 17869 strings out of 474116
- 278452 string characters out of 5743683
+ 17914 strings out of 474116
+ 279519 string characters out of 5743683
  1931187 words of memory out of 5000000
- 39912 multiletter control sequences out of 15000+600000
+ 39945 multiletter control sequences out of 15000+600000
  637415 words of font info for 136 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,6n,131p,505b,630s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,17n,131p,561b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
 ld.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSa
 ns-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-typ
@@ -1126,10 +1140,10 @@ ype1/STIX2Text-Bold.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/
 stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
 fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (14 pages, 819866 bytes).
+Output written on Zavrsni_rad.pdf (15 pages, 850289 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 128 compressed objects within 2 object streams
- 21 named destinations out of 1000 (max. 500000)
- 62 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 211 PDF objects out of 1000 (max. 8388607)
+ 165 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 90 words of extra memory for PDF output out of 10000 (max. 10000000)
 
