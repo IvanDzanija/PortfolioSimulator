@@ -115,8 +115,8 @@ Vidimo kako je moguće imati negativan povrat ako je cijena koju promatramo
 manja od početne cijene i to je upravo situacija koji pokušavamo izbjeći.
 \begin{definition}
   Očekivani povrat promatramo kao srednju vrijednost prijašnjih
-  povrata. Ovako definirano očekivanje je nepristran procjenitelj
-  za koji vrijedi:
+  povrata jer je upravo srednja vrijednost nepristran procjenitelj 
+očekivanja slučajne varijable $R_t$ za koji vrijedi:
 \end{definition}
 \begin{align*}
   E(R_t) =\frac{1}{N} \sum_{i = 1}^{N} R_i
@@ -128,16 +128,16 @@ Volatilnost je upravo jednostavna mjera rizika koja ima pogodna matematička svo
 Promatramo je kao standardnu devijaciju slučajne varijable $R_t$, a ima je smisla tako promatrati
 jer će nam upravo takva mjera kvantificirati kretanje povrata.
 \begin{definition}
-  Volatilnost investicije definiramo kao:
+  Volatilnost investicije definiramo kao nepristran procjenitelj
+    standardne devijacije slučajne varijable $R_t$:
 \end{definition}
 \begin{align*}
   \sigma_R = \sqrt{\frac{1}{N - 1} \sum_{i = 1}^{N} \left[R_i - E(R_t)\right]^2}
 \end{align*}
-\indent Ovo je upravo nepristran procjenitelj standardne devijacije slučajne varijable $R_t$.
-\\
 \\
 Kod ovakvog jednostavnog modela rizika imamo problem što jednako tretiramo i pozitivane i negativne povrate.
-U slučajevima kada modeliramo kretanje povrata sa simetričnom distribucijom ovo nije problem, ali to ne mora uvijek biti slučaj.
+U slučajevima kada modeliramo kretanje povrata sa simetričnom distribucijom ovo 
+ne mora biti problem, ali to nije uvijek slučaj.
 
 \section{Portfelj}
 Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
@@ -156,7 +156,17 @@ pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
 \begin{align*}
   R_p = \sum_{i = 1}^{N} w_i R_i
 \end{align*}
-\indent Vidimo kako je portfelju zapravo otežana suma povrata svih investicija.
+\indent Vidimo kako je povrat portfelja zapravo otežana suma povrata svih investicija.
+
+\begin{definition}
+    Volatilnost portfelja definiramo:
+\end{definition}
+\begin{align*}
+    \sqrt{Var(R_p)} = \sqrt{\mathbf{w^\intercal}\boldsymbol{\Sigma} \mathbf{w}}\\
+\end{align*}
+\indent \quad \quad $\mathbf{w}$ je ranije definirani vektor udjela investicija\\
+\indent \quad \quad $\boldsymbol{\Sigma}$ je matrica kovarijance slučajnog vektora $\mathbf{w}$\\
+
 
 % Rasprava
 \chapter{Rezultati i rasprava}
