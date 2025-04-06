@@ -1,0 +1,65 @@
+INFO:  latexindent version 3.24.4, 2024-07-18, a script to indent .tex files
+       latexindent lives here: /Users/dzanijaivan/.local/share/nvim/mason/packages/latexindent/
+       Sun Apr  6 03:00:40 2025
+       Filename: /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex
+INFO:  Processing switches:
+       -w|--overwrite: Overwrite mode active, will make a back up before overwriting
+       -l|--localSettings: Read localSettings YAML file
+       -m|--modifylinebreaks: modify line breaks
+INFO:  Directory for backup files and log file indent.log:
+       /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis
+INFO:  YAML settings read: defaultSettings.yaml
+       Reading defaultSettings.yaml from /Users/dzanijaivan/.local/share/nvim/mason/packages/latexindent/defaultSettings.yaml
+       Reading defaultSettings.yaml (2nd attempt) from /Users/dzanijaivan/.local/share/nvim/mason/packages/latexindent/../../texmf-dist/scripts/latexindent/defaultSettings.yaml
+       and then, if necessary, /Users/dzanijaivan/.local/share/nvim/mason/packages/latexindent/LatexIndent/defaultSettings.yaml
+INFO:  YAML reading settings
+       Home directory is /Users/dzanijaivan
+       latexindent.pl didn't find indentconfig.yaml or .indentconfig.yaml
+       see all possible locations: https://latexindentpl.readthedocs.io/en/latest/sec-appendices.html#indentconfig-options)
+INFO:  YAML settings read: -l switch
+       Adding /Users/dzanijaivan/.config/latex/latexindent.yaml to YAML read paths
+INFO:  YAML settings, reading from the following files:
+       Reading USER settings from /Users/dzanijaivan/.config/latex/latexindent.yaml
+       ---
+       defaultIndent: '  '
+       textWrapOptions:
+         blocksBeginWith:
+           0-9: '0'
+           A-Z: '1'
+           a-z: '1'
+           other: '0'
+         blocksEndBefore:
+           commentOnOwnLine: '1'
+           filecontents: '1'
+           other: \\begin\{|\\\[|\\end\{
+           verbatim: '1'
+         blocksFollow:
+           blankLine: '1'
+           commentOnPreviousLine: '1'
+           filecontents: '1'
+           headings: '1'
+           other: \\\]|\\item(?:\h|\[)
+           par: '1'
+           verbatim: '1'
+         columns: '60'
+         comments:
+           inheritLeadingSpace: '0'
+           wrap: '0'
+         huge: overflow
+         multipleSpacesToSingle: '1'
+         removeBlockLineBreaks: '1'
+         separator: ''
+         when: before
+
+INFO:  Backup procedure (-w flag active):
+       Backing up /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex to /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.bak0...
+       /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex will be overwritten after indentation
+INFO:  Phase 1: searching for objects
+INFO:  Phase 2: finding surrounding indentation
+INFO:  Phase 3: indenting objects
+INFO:  Phase 4: final indentation check
+INFO:  Output routine:
+       Overwriting file /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex
+       --------------
+INFO:  Please direct all communication/issues to:
+        https://github.com/cmhughes/latexindent.pl
