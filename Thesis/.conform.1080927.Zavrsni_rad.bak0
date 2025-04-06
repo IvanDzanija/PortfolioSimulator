@@ -124,8 +124,7 @@ manja od početne cijene i to je upravo situacija koji pokušavamo izbjeći.
 \section{Volatilnost}
 Drugi dio optimizacijskog problema teorije portfelja je smanjenje rizika.
 Volatilnost je upravo jednostavna mjera rizika koja ima pogodna matematička svojstva.
-Promatramo je kao standardnu devijaciju slučajne varijable $R_t$, a ima je smisla tako promatrati
-jer će nam upravo takva mjera kvantificirati kretanje povrata.
+Promatramo je kao standardnu devijaciju slučajne varijable $R_t$.
 \begin{definition}
   Volatilnost investicije definiramo kao:
 \end{definition}
@@ -135,28 +134,8 @@ jer će nam upravo takva mjera kvantificirati kretanje povrata.
 \indent Ovo je upravo nepristran procjenitelj standardne devijacije slučajne varijable $R_t$.
 \\
 \\
-Kod ovakvog jednostavnog modela rizika imamo problem što jednako tretiramo i pozitivane i negativne povrate.
+Kod ovakve jednostavnog modela rizika imamo problem što jednako tretiramo i pozitivan i negativan povrat.
 U slučajevima kada modeliramo kretanje povrata sa simetričnom distribucijom ovo nije problem, ali to ne mora uvijek biti slučaj.
-
-\section{Portfelj}
-Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
-pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
-\begin{definition}
-  Vektor $\mathbf{w}$ predstavlja udjele investicija u portfelju.
-\end{definition}
-\begin{align*}
-  \mathbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ ... \\ w_N \end{pmatrix},
-  \indent \sum_{i = 1}^{N} w_i = 1
-\end{align*}
-
-\begin{definition}
-  Povrat portfelja je ponderirani prosjek povrata investicija u portfelju:
-\end{definition}
-\begin{align*}
-  R_p = \sum_{i = 1}^{N} w_i R_i
-\end{align*}
-\indent Vidimo kako je portfelju zapravo otežana suma povrata svih investicija.
-
 % Rasprava
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}

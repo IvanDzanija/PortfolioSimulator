@@ -155,8 +155,7 @@ pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
 \begin{align*}
   R_p = \sum_{i = 1}^{N} w_i R_i
 \end{align*}
-\indent Vidimo kako je portfelju zapravo otežana suma povrata svih investicija.
-
+Vidimo kako je portfelju zapravo otežana suma povrata svih investicija.
 % Rasprava
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}

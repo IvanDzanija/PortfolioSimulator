@@ -1,7 +1,7 @@
 INFO:  latexindent version 3.24.4, 2024-07-18, a script to indent .tex files
        latexindent lives here: /Users/dzanijaivan/.local/share/nvim/mason/packages/latexindent/
-       Sun Apr  6 03:00:40 2025
-       Filename: /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex
+       Sun Apr  6 04:08:52 2025
+       Filename: /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.8665961.Zavrsni_rad.tex
 INFO:  Processing switches:
        -w|--overwrite: Overwrite mode active, will make a back up before overwriting
        -l|--localSettings: Read localSettings YAML file
@@ -52,14 +52,14 @@ INFO:  YAML settings, reading from the following files:
          when: before
 
 INFO:  Backup procedure (-w flag active):
-       Backing up /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex to /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.bak0...
-       /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex will be overwritten after indentation
+       Backing up /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.8665961.Zavrsni_rad.tex to /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.8665961.Zavrsni_rad.bak0...
+       /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.8665961.Zavrsni_rad.tex will be overwritten after indentation
 INFO:  Phase 1: searching for objects
 INFO:  Phase 2: finding surrounding indentation
 INFO:  Phase 3: indenting objects
 INFO:  Phase 4: final indentation check
 INFO:  Output routine:
-       Overwriting file /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.1154196.Zavrsni_rad.tex
+       Overwriting file /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis/.conform.8665961.Zavrsni_rad.tex
        --------------
 INFO:  Please direct all communication/issues to:
         https://github.com/cmhughes/latexindent.pl

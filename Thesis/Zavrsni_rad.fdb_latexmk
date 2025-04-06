@@ -1,19 +1,20 @@
 # Fdb version 4
-["bibtex Zavrsni_rad"] 1743901041.25431 "Zavrsni_rad.aux" "Zavrsni_rad.bbl" "Zavrsni_rad" 1743901243.16172 0
+["bibtex Zavrsni_rad"] 1743905292.47412 "Zavrsni_rad.aux" "Zavrsni_rad.bbl" "Zavrsni_rad" 1743905336.12119 0
   "./fer_IEEEtran_HR.bst" 1623666897 60896 90d69aefaad7b24856119a58e789af2e ""
   "./literatura.bib" 1623666897 6295 5d4d40abb48b9c4001b6079bc6b50278 ""
-  "Zavrsni_rad.aux" 1743901242.62305 3078 62828e92a554b29b57f10ceb3d57749d "pdflatex"
+  "Zavrsni_rad.aux" 1743905335.59073 3305 3bae7aba2a5a3e695ed9c210a85c2e27 "pdflatex"
   (generated)
   "Zavrsni_rad.bbl"
   "Zavrsni_rad.blg"
   (rewritten before read)
-["pdflatex"] 1743901241.40272 "./Zavrsni_rad.tex" "Zavrsni_rad.pdf" "Zavrsni_rad" 1743901243.16196 0
-  "./Zavrsni_rad.tex" 1743901240.26269 5647 f107a1a3a1c42a62b41bfe2dd30940a7 ""
+["pdflatex"] 1743905334.39999 "./Zavrsni_rad.tex" "Zavrsni_rad.pdf" "Zavrsni_rad" 1743905336.12137 0
+  "./Zavrsni_rad.tex" 1743905332.40071 7332 883c22731aa1072c1e8e03f4de9f9917 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc" 1561498186 2952 84fda6c8ae8be17712e9d998ffe48bad ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathcal.enc" 1610747736 3356 2818ff063f8b5d0d850e1203330b9fda ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc" 1610747736 3374 7b7c21d9493820ef4980dfa6fd22840f ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.enc" 1610747736 3416 3b99a05a42a4705ec5a5521d2bffa072 ""
+  "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bold.enc" 1610747736 3232 f66a2bec88e5f591cfa639998baaa6bf ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.enc" 1610747736 3159 6cd87b3b51190b4d6117d4c2f083ba2e ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc" 1610747736 2985 50a8cc5f8d35d60a3a371f6172be1026 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-t1.enc" 1610747736 7007 7bfc8f72039f2cce6ca911c3c71db584 ""
@@ -161,11 +162,11 @@
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1741208330 8221446 16f171965a30fdf1602ff44bdd833ba3 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
   "Figures/lenovo_yoga_tab3_pro_front.png" 1623666897 151137 d184f93bed096b9065bc80fcba786b60 ""
-  "Zavrsni_rad.aux" 1743901242.62305 3078 62828e92a554b29b57f10ceb3d57749d "pdflatex"
-  "Zavrsni_rad.bbl" 1743901041.39897 2507 2de39b471f8a9838acd381b257bc5a97 "bibtex Zavrsni_rad"
-  "Zavrsni_rad.out" 1743901242.62879 869 412914dcaaa54deee528fab3cc42ae07 "pdflatex"
-  "Zavrsni_rad.tex" 1743901240.26269 5647 f107a1a3a1c42a62b41bfe2dd30940a7 ""
-  "Zavrsni_rad.toc" 1743901242.62907 908 bd4542b0ab2661fb556ef3437d86f39f "pdflatex"
+  "Zavrsni_rad.aux" 1743905335.59073 3305 3bae7aba2a5a3e695ed9c210a85c2e27 "pdflatex"
+  "Zavrsni_rad.bbl" 1743905292.62227 2507 2de39b471f8a9838acd381b257bc5a97 "bibtex Zavrsni_rad"
+  "Zavrsni_rad.out" 1743905335.59653 1074 75c35c7640107173005fc4b6c5352dd1 "pdflatex"
+  "Zavrsni_rad.tex" 1743905332.40071 7332 883c22731aa1072c1e8e03f4de9f9917 ""
+  "Zavrsni_rad.toc" 1743905335.59685 1051 39b0722d9b3e67201034c05e9526e6a5 "pdflatex"
   "fer.cls" 1743893154.58505 27533 a4a365caff0c0893264b74a53b35e7ed ""
   "zadatak.pdf" 1741204811.60259 16248 33ee537c5ddbb0b9df1a2ba92b71fe7c ""
   (generated)

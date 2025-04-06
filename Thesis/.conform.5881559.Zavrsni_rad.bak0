@@ -140,23 +140,14 @@ U slučajevima kada modeliramo kretanje povrata sa simetričnom distribucijom ov
 
 \section{Portfelj}
 Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
-pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
+pojedinih investicija sa vektorom pojedinih udjela $w$.
 \begin{definition}
-  Vektor $\mathbf{w}$ predstavlja udjele investicija u portfelju.
+  Vektor $w$ predstavlja udjele investicija u portfelju.
 \end{definition}
 \begin{align*}
-  \mathbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ ... \\ w_N \end{pmatrix},
-  \indent \sum_{i = 1}^{N} w_i = 1
+  \mathbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ ... \\ w_n \end{pmatrix},
+  \indent \sum_{i = 1}^{n} w_i = 1
 \end{align*}
-
-\begin{definition}
-  Povrat portfelja je ponderirani prosjek povrata investicija u portfelju:
-\end{definition}
-\begin{align*}
-  R_p = \sum_{i = 1}^{N} w_i R_i
-\end{align*}
-\indent Vidimo kako je portfelju zapravo otežana suma povrata svih investicija.
-
 % Rasprava
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}

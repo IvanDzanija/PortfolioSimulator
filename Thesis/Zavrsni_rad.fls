@@ -388,6 +388,7 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Bo
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/vf/ascender/opensans/OpenSans-Bold-T1-TLF.vf
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Bold-T1-TLF--base.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.enc
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bold.enc
 INPUT ./Zavrsni_rad.bbl
 INPUT ./Zavrsni_rad.bbl
 INPUT Zavrsni_rad.bbl

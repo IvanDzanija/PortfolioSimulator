@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  6 APR 2025 03:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  6 APR 2025 04:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -801,7 +801,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<zadatak.pdf, id=45, 598.235pt x 845.1575pt>
+<zadatak.pdf, id=53, 598.235pt x 845.1575pt>
 File: zadatak.pdf Graphic file (type pdf)
 <use zadatak.pdf>
 Package pdftex.def Info: zadatak.pdf  used on input line 47.
@@ -810,7 +810,7 @@ File: zadatak.pdf Graphic file (type pdf)
 <use zadatak.pdf>
 Package pdftex.def Info: zadatak.pdf  used on input line 47.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<zadatak.pdf, id=48, page=1, 598.235pt x 845.1575pt>
+<zadatak.pdf, id=56, page=1, 598.235pt x 845.1575pt>
 File: zadatak.pdf Graphic file (type pdf)
 <use zadatak.pdf, page 1>
 Package pdftex.def Info: zadatak.pdf , page1 used on input line 47.
@@ -861,7 +861,7 @@ l.63 \chapter
 
 ]
 Poglavlje 1..
-<Figures/lenovo_yoga_tab3_pro_front.png, id=94, 562.1pt x 346.29375pt>
+<Figures/lenovo_yoga_tab3_pro_front.png, id=104, 562.1pt x 346.29375pt>
 File: Figures/lenovo_yoga_tab3_pro_front.png Graphic file (type png)
 <use Figures/lenovo_yoga_tab3_pro_front.png>
 Package pdftex.def Info: Figures/lenovo_yoga_tab3_pro_front.png  used on input 
@@ -889,103 +889,121 @@ Poglavlje 2..
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 97.
+e 99.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 97.
+(Font)              scaled to size 16.0pt on input line 99.
+
+Overfull \hbox (16.53676pt too wide) in paragraph at lines 116--119
+[][]\T1/stix2/m/it/12 O£ekivani po-vrat pro-ma-tramo kao sred-nju vri-jed-nost 
+pri-ja²-njih po-vrata. Ovako
+ []
+
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.122 \chapter
-              {Rezultati i rasprava} [3
+l.130   V
+         olatilnost investicije definiramo kao: [3
 
 {/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.en
 c}]
+Underfull \hbox (badness 10000) in paragraph at lines 134--140
+
+ []
+
+
+Overfull \hbox (10.69785pt too wide) in paragraph at lines 142--145
+\T1/stix2/m/n/12 Investicijske por-t-fe-lje ma-te-ma-ti£ki pri-ka-zu-jemo kao l
+i-ne-arnu kom-bi-na-ciju po-je-di-nih inves-
+ []
+
+[4{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-
+bold.enc}] [5]
 Poglavlje 3..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 126.
+(blindtext)                 on input line 165.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 126.
+(blindtext)                 on input line 165.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 126.
+(blindtext)                 on input line 165.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 126.
+(blindtext)                 on input line 165.
 
-[4
+[6
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 126.
+(blindtext)                 on input line 165.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 126.
+(blindtext)                 on input line 165.
 
-[5]
+[7]
 Poglavlje 4..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 132.
+(blindtext)                 on input line 171.
 
-(./Zavrsni_rad.bbl [6
+(./Zavrsni_rad.bbl [8
 
-]) [7
+]) [9
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 146.
+(blindtext)                 on input line 185.
 
-[8
+[10
 
-] [9
+] [11
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.168 \chapter{The Code}
+l.207 \chapter{The Code}
                         
 Privitak A.
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 171.
+(blindtext)                 on input line 210.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 171.
+(blindtext)                 on input line 210.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 171.
+(blindtext)                 on input line 210.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 171.
+(blindtext)                 on input line 210.
 
-[10
+[12
 
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 171.
+(blindtext)                 on input line 210.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 171.
+(blindtext)                 on input line 210.
 
-[11] (./Zavrsni_rad.aux)
+[13] (./Zavrsni_rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1105,13 +1123,13 @@ Zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 412914DCAAA54DEEE528FAB3CC42AE07;869.
+(rerunfilecheck)             Checksum: 75C35C7640107173005FC4B6C5352DD1;1074.
  ) 
 Here is how much of TeX's memory you used:
- 17944 strings out of 474116
- 280017 string characters out of 5743683
- 1932187 words of memory out of 5000000
- 39971 multiletter control sequences out of 15000+600000
+ 17956 strings out of 474116
+ 280194 string characters out of 5743683
+ 1934187 words of memory out of 5000000
+ 39975 multiletter control sequences out of 15000+600000
  638222 words of font info for 138 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,507b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1123,10 +1141,10 @@ ype1/STIX2Text-Bold.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/
 stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
 fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (14 pages, 861796 bytes).
+Output written on Zavrsni_rad.pdf (16 pages, 871918 bytes).
 PDF statistics:
- 219 PDF objects out of 1000 (max. 8388607)
- 173 compressed objects within 2 object streams
- 31 named destinations out of 1000 (max. 500000)
- 98 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 247 PDF objects out of 1000 (max. 8388607)
+ 198 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 
