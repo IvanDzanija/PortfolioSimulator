@@ -2,7 +2,7 @@ PWD /Users/dzanijaivan/Documents/FER/6. SEM/ZAVRAD/Thesis
 INPUT /usr/local/texlive/2024/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT ./Zavrsni_rad.tex
+INPUT Zavrsni_rad.tex
 OUTPUT Zavrsni_rad.log
 INPUT ./fer.cls
 INPUT fer.cls
