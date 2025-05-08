@@ -1,4 +1,5 @@
-#include "Monte_Carlo.h"
+#include "CSV_parser.h"
+#include "Cryptocurrency.h"
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <chrono>
 #include <exception>
@@ -10,16 +11,6 @@ namespace py = pybind11;
 
 using AssetAmount = boost::multiprecision::cpp_dec_float_50;
 
-struct Candle {
-	// HLOC
-	double high, low, open, close;
-	double volume, marketcap;
-	std::chrono::sys_seconds timestamp;
-
-	double log_return;
-	Candle() {}
-};
-
 class CorruptData : public std::exception {
   private:
 	std::string message;
@@ -30,64 +21,51 @@ class CorruptData : public std::exception {
 	const char *what() const noexcept override { return message.c_str(); }
 };
 
-class Cryptocurrency {
-	// this class needs to provide default hashing
-  public:
-	std::string name, tick;
-	std::vector<Candle> hist_data;
-	bool metrics_calculated = false;
-
-	// Drift = sum(return_i) / n;
-	// Volatility = sqrt((1/n - 1) * sum((return_i - Drift)^2)
-	double drift, volatility;
-
-	void calculate_metrics() {
-		if (metrics_calculated)
-			return;
-
-		double sum = 0, sum_sq = 0;
-		int n = 0;
-
-		for (const Candle &c : hist_data) {
-			if (std::isnan(c.log_return))
-				// shouldn't ever get here
-				throw CorruptData("Log return is NaN!");
-			sum += c.log_return;
-			sum_sq += c.log_return * c.log_return;
-			++n;
-		}
-		if (n > 1) {
-			drift = sum / n;
-			volatility = std::sqrt((sum_sq - n * drift * drift) / (n - 1));
-		}
-		metrics_calculated = true;
+void Cryptocurrency::calculate_metrics() {
+	if (metrics_calculated)
 		return;
+
+	double sum = 0, sum_sq = 0;
+	int n = 0;
+
+	for (const Candle &c : hist_data) {
+		if (std::isnan(c.log_return))
+			// shouldn't ever get here
+			throw CorruptData("Log return is NaN!");
+		sum += c.log_return;
+		sum_sq += c.log_return * c.log_return;
+		++n;
 	}
-	void reevaluate_metrics() {
-		metrics_calculated = false;
-		return;
+	if (n > 1) {
+		drift = sum / n;
+		volatility = std::sqrt((sum_sq - n * drift * drift) / (n - 1));
 	}
+	metrics_calculated = true;
+	return;
+}
+void Cryptocurrency::reevaluate_metrics() {
+	metrics_calculated = false;
+	return;
+}
 
-	void individual_monte_carlo(int sim_count, int forecast_days) {
+void Cryptocurrency::individual_monte_carlo(int sim_count, int forecast_days) {
 
-		std::default_random_engine gen(std::random_device{}());
-		std::normal_distribution<double> dist(0.0, 1.0);
+	std::default_random_engine gen(std::random_device{}());
+	std::normal_distribution<double> dist(0.0, 1.0);
 
-		this->calculate_metrics();
-		double S0 = this->hist_data.back().close;
-		double mu = this->drift;
-		double sigma = this->volatility;
+	this->calculate_metrics();
+	double S0 = this->hist_data.back().close;
+	double mu = this->drift;
+	double sigma = this->volatility;
 
-		std::vector<std::vector<double>> simulations(sim_count);
+	std::vector<std::vector<double>> simulations(sim_count);
 
-		for (int i = 0; i < sim_count; ++i) {
-			double price = S0;
-			for (int j = 0; j < forecast_days; ++j) {
-				double Z = dist(gen);
-				price =
-					price * std::exp((mu - 0.5 * sigma * sigma) + sigma * Z);
-				simulations[i].push_back(price);
-			}
+	for (int i = 0; i < sim_count; ++i) {
+		double price = S0;
+		for (int j = 0; j < forecast_days; ++j) {
+			double Z = dist(gen);
+			price = price * std::exp((mu - 0.5 * sigma * sigma) + sigma * Z);
+			simulations[i].push_back(price);
 		}
 	}
 };
@@ -97,7 +75,8 @@ using Crypto_Matrix = std::vector<std::vector<Cryptocurrency>>;
 class Portfolio {
   public:
 	// maybe add Names and IDS in the future
-	std::unordered_map<Cryptocurrency, AssetAmount> assets;
+	std::unordered_map<Cryptocurrency, AssetAmount, Cryptocurrency::Hash>
+		assets;
 
 	// Covariance matrix
 	Doubles_Matrix covariance_matrix;
@@ -138,7 +117,7 @@ class Portfolio {
 		return ret;
 	}
 
-	void calculate_covariance() { Doubles_Matrix aligned = align_dates(); }
+	void calculate_covariance() { Crypto_Matrix aligned = align_dates(); }
 };
 
 // Implementacija Monte Carlo simulacije
@@ -160,7 +139,14 @@ double run_simulation(int num_paths, int steps) {
 	// Vrati prosjek
 	return sum_final / num_paths;
 }
-int main(void) { return 0; }
+int main(void) {
+	CSV_Parser parser;
+	std::string filename = "../datasets/coin_Bitcoin.csv";
+	Cryptocurrency crypto = parser.fastReadCryptoCSV(filename);
+
+	Portfolio test;
+	test.add_asset(crypto, 1);
+}
 
 // Definicija pybind11 modula 'montecarlo'
 PYBIND11_MODULE(montecarlo, m) {
