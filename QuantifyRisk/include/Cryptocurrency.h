@@ -2,7 +2,6 @@
 #define CRYPTOCURRENCY_H
 #include "DateTime_formatting.h"
 #include <cmath>
-#include <string>
 #include <vector>
 
 struct Candle {

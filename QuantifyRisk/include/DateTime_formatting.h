@@ -1,4 +1,9 @@
+#ifndef DATETIME_FORMATTING_H
+#define DATETIME_FORMATTING_H
 #include <chrono>
+#include <iomanip>
+#include <iostream>
+#include <string>
 
 typedef std::chrono::sys_seconds timestamp;
 
@@ -24,3 +29,5 @@ inline timestamp string_to_timestamp(const std::string &datetime) {
 	return std::chrono::time_point_cast<std::chrono::seconds>(
 		std::chrono::system_clock::from_time_t(t));
 }
+
+#endif // DATETIME_FORMATTING_H

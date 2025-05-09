@@ -1,4 +1,7 @@
+#ifndef PORTFOLIO_H
+#define PORTFOLIO_H
 #include "Cryptocurrency.h"
+#include "DateTime_formatting.h"
 #include <algorithm>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 // TODO: remove iostream
@@ -88,7 +91,7 @@ class Portfolio {
 			}
 			if (asset_index + 1 == assets.size()) {
 				ret.push_back(possible);
-				std::cout << stamp.time_since_epoch().<< std::endl;
+				std::cout << timestamp_to_string(stamp) << std::endl;
 				break;
 			}
 			std::cout << "tu2" << std::endl;
@@ -98,3 +101,5 @@ class Portfolio {
 
 	void calculate_covariance() {}
 };
+
+#endif // PORTFOLIO_H
