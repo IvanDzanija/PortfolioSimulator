@@ -1,12 +1,11 @@
 #include "Alignment_test.h"
 #include "CSV_parser.h"
-#include "Portfolio.h"
 #include <filesystem>
 #include <iostream>
 #include <map>
 namespace fs = std::filesystem;
 
-int alignment_test(void) {
+Portfolio alignment_test(void) {
 	CSV_Parser parser;
 
 	std::string folder_path = "../datasets/";
@@ -31,5 +30,5 @@ int alignment_test(void) {
 	}
 	std::cout << aligned.size() << " x " << aligned[0].size() << std::endl;
 
-	return 0;
+	return test;
 }

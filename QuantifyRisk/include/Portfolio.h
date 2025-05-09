@@ -125,6 +125,7 @@ class Portfolio {
 	}
 
 	Doubles_Matrix calculate_covariance();
+	std::vector<double> calculate_aligned_means();
 };
 
 #endif // PORTFOLIO_H

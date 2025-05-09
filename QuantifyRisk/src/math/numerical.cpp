@@ -1,6 +1,28 @@
 #include "math/numerical.h"
 #include <stdexcept>
 
+double mean(const std::vector<double> &data) {
+	// O(n)
+	// Calculate the mean of a vector
+	double sum = 0.0;
+	for (const auto &value : data) {
+		sum += value;
+	}
+	return sum / data.size();
+}
+
+double covariance(const std::vector<double> &x, double mean_x,
+				  const std::vector<double> &y, double mean_y) {
+	size_t n = x.size();
+	//	double mean_x = mean(x);
+	//	double mean_y = mean(y);
+	double cov = 0.0;
+
+	for (int i = 0; i < n; ++i) {
+		cov += (x[i] - mean_x) * (y[i] - mean_y);
+	}
+	return cov / (n - 1);
+}
 template <typename T>
 std::vector<std::vector<T>>
 matrix_transpose(const std::vector<std::vector<T>> &matrix) {
