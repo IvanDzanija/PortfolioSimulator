@@ -77,14 +77,14 @@ Doubles_Matrix Portfolio::aligned_log_returns() {
 		}
 	}
 	log_returns_aligned = true;
-
+	aligned_log_return_matrix = math::matrix_transpose(ret);
 	return math::matrix_transpose(ret);
 }
 
 std::vector<double> Portfolio::calculate_aligned_means() {
 	Doubles_Matrix returns = aligned_log_returns();
-	int rows = returns.size();	  // number of assets
-	int cols = returns[0].size(); // number of candles
+	size_t rows = returns.size();		// number of assets
+	size_t cols = returns.at(0).size(); // number of candles
 
 	std::vector<double> means(rows);
 	for (int i = 0; i < rows; ++i) {
@@ -104,18 +104,16 @@ Doubles_Matrix Portfolio::calculate_covariance() {
 
 	Doubles_Matrix returns = aligned_log_returns();
 	std::vector<double> means = calculate_aligned_means();
-	int rows = returns.size();		 // number of assets
-	int cols = returns.at(0).size(); // number of candles
+	int rows = returns.size(); // number of assets
 	Doubles_Matrix covariance(rows, std::vector<double>(rows));
 
 	for (int i = 0; i < rows; ++i) {
 		for (int j = 0; j < rows; ++j) {
-			if (i == j) {
-				covariance.at(i).at(j) = 1.0;
-			} else {
-				covariance.at(i).at(j) = math::covariance(
-					returns.at(i), means.at(i), returns.at(j), means.at(j));
-			}
+			covariance.at(i).at(j) = math::covariance(
+				returns.at(i), means.at(i), returns.at(j), means.at(j));
+
+			// covariance is symmetric
+			covariance.at(j).at(i) = covariance.at(i).at(j);
 		}
 	}
 

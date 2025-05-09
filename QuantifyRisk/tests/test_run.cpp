@@ -38,21 +38,20 @@ int main(void) {
 	std::cout << "Math test:" << std::endl;
 	std::vector<double> means = mean_test(test);
 
-	std::cout << "Means:" << std::endl;
-	for (const auto &value : means) {
-		std::cout << value << ' ';
-	}
-	std::cout << std::endl;
-	return 0;
+	//	std::cout << "Means:" << std::endl;
+	//	for (const auto &value : means) {
+	//		std::cout << value << ' ';
+	//	}
+	//	std::cout << std::endl;
 	Doubles_Matrix cov = covariance_test(test);
 
-	std::cout << "Covariance:" << std::endl;
-	for (const auto &row : cov) {
-		for (const auto &value : row) {
-			std::cout << value << ' ';
-		}
-		std::cout << std::endl;
-	}
+	//	std::cout << "Covariance:" << std::endl;
+	//	for (const auto &row : cov) {
+	//		for (const auto &value : row) {
+	//			std::cout << value << ' ';
+	//		}
+	//		std::cout << std::endl;
+	//	}
 
 	return 0;
 }
