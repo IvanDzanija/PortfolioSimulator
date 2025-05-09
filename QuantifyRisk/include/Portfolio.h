@@ -17,9 +17,11 @@ class Portfolio {
 	// Covariance matrix
 	Doubles_Matrix aligned_log_return_matrix;
 	Doubles_Matrix covariance_matrix;
+	std::vector<double> aligned_means;
 
 	bool log_returns_aligned = false;
 	bool covariance_matrix_calculated = false;
+	bool aligned_means_calculated = false;
 
 	void add_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
 		assets.emplace(crypto, ammount);
@@ -43,9 +45,9 @@ class Portfolio {
 		}
 	}
 
-	Doubles_Matrix aligned_log_returns();
-	Doubles_Matrix calculate_covariance();
-	std::vector<double> calculate_aligned_means();
+	Doubles_Matrix &aligned_log_returns();
+	Doubles_Matrix &calculate_covariance();
+	std::vector<double> &calculate_aligned_means();
 };
 
 #endif // PORTFOLIO_H

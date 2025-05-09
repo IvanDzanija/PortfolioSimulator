@@ -53,5 +53,14 @@ int main(void) {
 	//		std::cout << std::endl;
 	//	}
 
+	Doubles_Matrix cholesky = cholesky_test(test);
+	//  std::cout << "Cholesky:" << std::endl;
+	//  for (const auto &row : cholesky) {
+	//      for (const auto &value : row) {
+	//      std::cout << value << ' ';
+	//      }
+	//      std::cout << std::endl;
+	//      }
+	//
 	return 0;
 }

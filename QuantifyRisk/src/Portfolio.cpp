@@ -3,7 +3,7 @@
 #include "math/numerical.h"
 #include <algorithm>
 
-Doubles_Matrix Portfolio::aligned_log_returns() {
+Doubles_Matrix &Portfolio::aligned_log_returns() {
 	if (log_returns_aligned) {
 		return aligned_log_return_matrix;
 	}
@@ -78,10 +78,13 @@ Doubles_Matrix Portfolio::aligned_log_returns() {
 	}
 	log_returns_aligned = true;
 	aligned_log_return_matrix = math::matrix_transpose(ret);
-	return math::matrix_transpose(ret);
+	return aligned_log_return_matrix;
 }
 
-std::vector<double> Portfolio::calculate_aligned_means() {
+std::vector<double> &Portfolio::calculate_aligned_means() {
+	if (aligned_means_calculated) {
+		return aligned_means;
+	}
 	Doubles_Matrix returns = aligned_log_returns();
 	size_t rows = returns.size();		// number of assets
 	size_t cols = returns.at(0).size(); // number of candles
@@ -94,10 +97,12 @@ std::vector<double> Portfolio::calculate_aligned_means() {
 		means.at(i) /= cols;
 	}
 
-	return means;
+	aligned_means = means;
+	aligned_means_calculated = true;
+	return aligned_means;
 }
 
-Doubles_Matrix Portfolio::calculate_covariance() {
+Doubles_Matrix &Portfolio::calculate_covariance() {
 	if (covariance_matrix_calculated) {
 		return covariance_matrix;
 	}
@@ -117,5 +122,7 @@ Doubles_Matrix Portfolio::calculate_covariance() {
 		}
 	}
 
-	return covariance;
+	covariance_matrix = covariance;
+	covariance_matrix_calculated = true;
+	return covariance_matrix;
 }
