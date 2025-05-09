@@ -26,8 +26,9 @@ target_link_libraries(main PRIVATE
 )
 
 # === Tests ===
+list(REMOVE_ITEM SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/gui_handler.cpp")
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
-add_executable(run_tests ${TEST_SOURCES})
+add_executable(run_tests ${TEST_SOURCES} ${SRC_FILES})
 target_include_directories(run_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${pybind11_INCLUDE_DIRS}

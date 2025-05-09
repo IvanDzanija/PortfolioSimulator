@@ -106,7 +106,6 @@ Doubles_Matrix Portfolio::calculate_covariance() {
 	std::vector<double> means = calculate_aligned_means();
 	int rows = returns.size();		 // number of assets
 	int cols = returns.at(0).size(); // number of candles
-	std::cout << "rows: " << rows << ", cols: " << cols << std::endl;
 	Doubles_Matrix covariance(rows, std::vector<double>(rows));
 
 	for (int i = 0; i < rows; ++i) {

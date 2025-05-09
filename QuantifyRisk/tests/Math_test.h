@@ -1,8 +1,8 @@
 #ifndef MATH_TEST_H
 #define MATH_TEST_H
 
-#include "Alignment_test.h"
-std::vector<double> mean_test(void);
-Doubles_Matrix covariance_test(void);
+#include "Portfolio.h"
+std::vector<double> mean_test(Portfolio &test);
+Doubles_Matrix covariance_test(Portfolio &test);
 
 #endif // MATH_TEST_H
