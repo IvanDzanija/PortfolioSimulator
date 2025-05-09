@@ -17,16 +17,38 @@ class Portfolio {
 		assets;
 
 	// Covariance matrix
+	Doubles_Matrix aligned_log_return_matrix;
 	Doubles_Matrix covariance_matrix;
+
+	bool log_returns_aligned = false;
 	bool covariance_matrix_calculated = false;
 
 	void add_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
 		assets.emplace(crypto, ammount);
+		log_returns_aligned = false;
+		covariance_matrix_calculated = false;
 	}
 
-	// TODO: add remove_asset function
+	void remove_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
+		auto it = assets.find(crypto);
+		if (it != assets.end()) {
+			if (it->second >= ammount) {
+				it->second -= ammount;
+				if (it->second == 0) {
+					assets.erase(it);
+				}
+			} else {
+				std::cerr << "Not enough asset to remove" << std::endl;
+			}
+			log_returns_aligned = false;
+			covariance_matrix_calculated = false;
+		}
+	}
 
 	Doubles_Matrix aligned_log_returns() {
+		if (log_returns_aligned) {
+			return aligned_log_return_matrix;
+		}
 		// O(n^2) is best possible ?
 		Doubles_Matrix ret;
 		std::vector<size_t> last_positions(assets.size() - 1, 0);
@@ -96,10 +118,11 @@ class Portfolio {
 				ret.push_back(possible);
 			}
 		}
+		log_returns_aligned = true;
 		return ret;
 	}
 
-	void calculate_covariance() {}
+	Doubles_Matrix calculate_covariance();
 };
 
 #endif // PORTFOLIO_H
