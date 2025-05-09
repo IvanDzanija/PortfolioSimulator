@@ -10,16 +10,9 @@ find_package(pybind11 REQUIRED)
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
 find_package(Boost 1.88.0 REQUIRED)
 
-pybind11_add_module(main SHARED src/gui_handler.cpp)
-target_link_libraries(main PRIVATE
-    Boost::headers
-    pybind11::pybind11
-)
-
-# === Tests ===
-add_executable(test_parser tests/Parser_test.cpp)
-add_executable(test_alignment tests/Alignment_test.cpp)
-
+# === PyQt6 ===
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+pybind11_add_module(main SHARED ${SRC_FILES})
 target_include_directories(main PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${pybind11_INCLUDE_DIRS}
@@ -27,20 +20,25 @@ target_include_directories(main PRIVATE
     ${Boost_INCLUDE_DIRS}
 )
 
-target_include_directories(test_parser PRIVATE
+target_link_libraries(main PRIVATE
+    Boost::headers
+    pybind11::pybind11
+)
+
+# === Tests ===
+file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
+add_executable(run_tests ${TEST_SOURCES})
+target_include_directories(run_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${pybind11_INCLUDE_DIRS}
     ${Python_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
 )
 
-target_include_directories(test_alignment PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${pybind11_INCLUDE_DIRS}
-    ${Python_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
+target_link_libraries(run_tests PRIVATE
+    pybind11::pybind11
+    Boost::headers
 )
-
 
 set_target_properties(main PROPERTIES
     PREFIX ""

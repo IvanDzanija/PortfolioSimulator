@@ -6,9 +6,9 @@ Doubles_Matrix Portfolio::calculate_covariance() {
 	}
 
 	Doubles_Matrix returns = aligned_log_returns();
-	int rows = returns.size();
-	int cols = returns[0].size();
-	Doubles_Matrix covariance(rows, std::vector<double>(rows, 0.0));
+	int rows = returns.size();	  // number of points in time
+	int cols = returns[0].size(); // number of assets
+	Doubles_Matrix covariance(cols, std::vector<double>(cols, 0.0));
 
 	for (int i = 0; i < rows; ++i) {
 		for (int j = 0; j < rows; ++j) {

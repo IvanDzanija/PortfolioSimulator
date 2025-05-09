@@ -1,11 +1,12 @@
 #include "CSV_parser.h"
+#include "Parser_test.h"
 #include "Portfolio.h"
 #include <filesystem>
 #include <iostream>
 
 namespace fs = std::filesystem;
 
-int main(void) {
+int parser_test(void) {
 	CSV_Parser parser;
 
 	std::string folder_path = "../datasets/";

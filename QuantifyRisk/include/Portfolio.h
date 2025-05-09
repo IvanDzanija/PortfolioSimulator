@@ -2,6 +2,7 @@
 #define PORTFOLIO_H
 #include "Cryptocurrency.h"
 #include "DateTime_formatting.h"
+#include "math/numerical.h"
 #include <algorithm>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <unordered_map>
@@ -49,7 +50,7 @@ class Portfolio {
 		if (log_returns_aligned) {
 			return aligned_log_return_matrix;
 		}
-		// O(n^2) is best possible ?
+
 		Doubles_Matrix ret;
 		std::vector<size_t> last_positions(assets.size() - 1, 0);
 		timestamp skip_to{};
@@ -119,7 +120,8 @@ class Portfolio {
 			}
 		}
 		log_returns_aligned = true;
-		return ret;
+
+		return math::matrix_transpose(ret);
 	}
 
 	Doubles_Matrix calculate_covariance();
