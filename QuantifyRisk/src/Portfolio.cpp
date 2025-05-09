@@ -3,8 +3,8 @@
 #include "math/numerical.h"
 #include <algorithm>
 
-Doubles_Matrix &Portfolio::aligned_log_returns() {
-	if (log_returns_aligned) {
+Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
+	if (aligned_returns_calculated && aligned_stamp == start) {
 		return aligned_log_return_matrix;
 	}
 
@@ -15,6 +15,9 @@ Doubles_Matrix &Portfolio::aligned_log_returns() {
 	for (size_t index = 0; index < pivot.hist_data.size(); ++index) {
 		const Candle &candle_pivot = pivot.hist_data.at(index);
 		timestamp stamp = candle_pivot.timestamp;
+		if (stamp > start) {
+			break;
+		}
 
 		if (stamp < skip_to) {
 			auto skip = std::lower_bound(
@@ -76,53 +79,64 @@ Doubles_Matrix &Portfolio::aligned_log_returns() {
 			ret.push_back(possible);
 		}
 	}
-	log_returns_aligned = true;
+	aligned_stamp = start;
 	aligned_log_return_matrix = math::matrix_transpose(ret);
 	return aligned_log_return_matrix;
 }
 
-std::vector<double> &Portfolio::calculate_aligned_means() {
-	if (aligned_means_calculated) {
-		return aligned_means;
+int Portfolio::calculate_aligned_metrics(timestamp start) {
+	if (aligned_metrics_calculated && aligned_stamp == start) {
+		return 0;
 	}
-	Doubles_Matrix returns = aligned_log_returns();
+	Doubles_Matrix returns = aligned_log_returns(start);
 	size_t rows = returns.size();		// number of assets
 	size_t cols = returns.at(0).size(); // number of candles
 
-	std::vector<double> means(rows);
-	for (int i = 0; i < rows; ++i) {
-		for (int j = 0; j < cols; ++j) {
-			means.at(i) += returns.at(i).at(j);
+	for (size_t i = 0; i < rows; ++i) {
+		double sum = 0, sum_sq = 0;
+		int n = 0;
+		for (size_t j = 0; j < cols; ++j) {
+			sum += returns.at(i).at(j);
+			sum_sq += returns.at(i).at(j) * returns.at(i).at(j);
+			++n;
 		}
-		means.at(i) /= cols;
+		if (n > 1) {
+			aligned_means.at(i) = sum / n;
+			aligned_volatilities.at(i) = std::sqrt(
+				(sum_sq - n * aligned_means.at(i) * aligned_means.at(i)) /
+				(n - 1));
+		}
 	}
-
-	aligned_means = means;
-	aligned_means_calculated = true;
-	return aligned_means;
+	aligned_metrics_calculated = true;
+	return 0;
 }
 
-Doubles_Matrix &Portfolio::calculate_covariance() {
-	if (covariance_matrix_calculated) {
+Doubles_Matrix &Portfolio::calculate_covariance(timestamp start) {
+	if (covariance_matrix_calculated && aligned_stamp == start) {
 		return covariance_matrix;
 	}
 
-	Doubles_Matrix returns = aligned_log_returns();
-	std::vector<double> means = calculate_aligned_means();
+	Doubles_Matrix returns = aligned_log_returns(start);
+	int info = calculate_aligned_metrics(start);
+	if (info != 0) {
+		std::cerr << "Error calculating aligned metrics" << std::endl;
+		return covariance_matrix;
+	}
 	int rows = returns.size(); // number of assets
 	Doubles_Matrix covariance(rows, std::vector<double>(rows));
 
 	for (int i = 0; i < rows; ++i) {
 		for (int j = 0; j < rows; ++j) {
-			covariance.at(i).at(j) = math::covariance(
-				returns.at(i), means.at(i), returns.at(j), means.at(j));
+			covariance.at(i).at(j) =
+				math::covariance(returns.at(i), aligned_means.at(i),
+								 returns.at(j), aligned_means.at(j));
 
 			// covariance is symmetric
 			covariance.at(j).at(i) = covariance.at(i).at(j);
 		}
 	}
 
-	covariance_matrix = covariance;
+	covariance_matrix = std::move(covariance);
 	covariance_matrix_calculated = true;
 	return covariance_matrix;
 }

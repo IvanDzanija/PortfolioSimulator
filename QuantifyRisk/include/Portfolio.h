@@ -18,14 +18,18 @@ class Portfolio {
 	Doubles_Matrix aligned_log_return_matrix;
 	Doubles_Matrix covariance_matrix;
 	std::vector<double> aligned_means;
+	std::vector<double> aligned_volatilities;
 
-	bool log_returns_aligned = false;
+	timestamp aligned_stamp = timestamp();
+	bool aligned_returns_calculated = false;
 	bool covariance_matrix_calculated = false;
-	bool aligned_means_calculated = false;
+	bool aligned_metrics_calculated = false;
 
 	void add_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
 		assets.emplace(crypto, ammount);
-		log_returns_aligned = false;
+		aligned_stamp = timestamp();
+		aligned_returns_calculated = false;
+		aligned_metrics_calculated = false;
 		covariance_matrix_calculated = false;
 	}
 
@@ -40,14 +44,18 @@ class Portfolio {
 			} else {
 				std::cerr << "Not enough asset to remove" << std::endl;
 			}
-			log_returns_aligned = false;
+			aligned_stamp = timestamp();
+			aligned_returns_calculated = false;
+			aligned_metrics_calculated = false;
 			covariance_matrix_calculated = false;
 		}
 	}
 
-	Doubles_Matrix &aligned_log_returns();
-	Doubles_Matrix &calculate_covariance();
-	std::vector<double> &calculate_aligned_means();
+	Doubles_Matrix &aligned_log_returns(timestamp start);
+	Doubles_Matrix &calculate_covariance(timestamp start);
+	int calculate_aligned_metrics(timestamp start);
+	std::vector<Doubles_Matrix> &monte_carlo(int simulations, int steps,
+											 timestamp start);
 };
 
 #endif // PORTFOLIO_H
