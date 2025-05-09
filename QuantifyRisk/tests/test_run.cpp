@@ -1,4 +1,3 @@
-#include "Alignment_test.h"
 #include "Math_test.h"
 #include "Parser_test.h"
 #include <iostream>
