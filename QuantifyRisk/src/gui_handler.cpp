@@ -1,15 +1,11 @@
 #include "CSV_parser.h"
-#include "Cryptocurrency.h"
-#include <boost/multiprecision/cpp_dec_float.hpp>
-#include <chrono>
+#include "Portfolio.h"
 #include <exception>
+#include <iostream>
 #include <pybind11/pybind11.h>
 #include <random>
-#include <unordered_map>
 
 namespace py = pybind11;
-
-using AssetAmount = boost::multiprecision::cpp_dec_float_50;
 
 class CorruptData : public std::exception {
   private:
@@ -70,56 +66,6 @@ void Cryptocurrency::individual_monte_carlo(int sim_count, int forecast_days) {
 	}
 };
 
-using Doubles_Matrix = std::vector<std::vector<double>>;
-using Crypto_Matrix = std::vector<std::vector<Cryptocurrency>>;
-class Portfolio {
-  public:
-	// maybe add Names and IDS in the future
-	std::unordered_map<Cryptocurrency, AssetAmount, Cryptocurrency::Hash>
-		assets;
-
-	// Covariance matrix
-	Doubles_Matrix covariance_matrix;
-	bool covariance_matrix_calculated = false;
-
-	void add_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
-		assets.emplace(crypto, ammount);
-	}
-
-	Crypto_Matrix align_dates() {
-		// O(n^2) is best possible ?
-		Crypto_Matrix ret;
-		std::vector<size_t> last_positions;
-		std::chrono::sys_seconds skip_to{};
-		const Cryptocurrency &pivot = assets.begin()->first;
-		for (const Candle &candle : pivot.hist_data) {
-			std::chrono::sys_seconds stamp = candle.timestamp;
-			if (stamp < skip_to) {
-				continue;
-			}
-			auto iter = std::next(assets.begin());
-
-			std::vector<Cryptocurrency> possible;
-			for (; iter != assets.end(); iter = std::next(iter)) {
-				for (const Candle &candle : iter->first.hist_data) {
-					if (candle.timestamp > stamp) {
-						skip_to = candle.timestamp;
-						break;
-					} else if (candle.timestamp == stamp) {
-						possible.push_back(iter->first);
-					}
-				}
-			}
-			if (possible.size() == assets.size()) {
-				ret.push_back(possible);
-			}
-		}
-		return ret;
-	}
-
-	void calculate_covariance() { Crypto_Matrix aligned = align_dates(); }
-};
-
 // Implementacija Monte Carlo simulacije
 double run_simulation(int num_paths, int steps) {
 	// Inicijaliziraj generator slučajnih brojeva
@@ -138,14 +84,6 @@ double run_simulation(int num_paths, int steps) {
 	}
 	// Vrati prosjek
 	return sum_final / num_paths;
-}
-int main(void) {
-	CSV_Parser parser;
-	std::string filename = "../datasets/coin_Bitcoin.csv";
-	Cryptocurrency crypto = parser.fastReadCryptoCSV(filename);
-
-	Portfolio test;
-	test.add_asset(crypto, 1);
 }
 
 // Definicija pybind11 modula 'montecarlo'

@@ -1,6 +1,6 @@
 #ifndef CRYPTOCURRENCY_H
 #define CRYPTOCURRENCY_H
-#include <chrono>
+#include "DateTime_formatting.h"
 #include <cmath>
 #include <string>
 #include <vector>
@@ -9,7 +9,7 @@ struct Candle {
 	// OHLC
 	double open, high, low, close;
 	double volume, marketcap;
-	std::chrono::sys_seconds timestamp;
+	timestamp timestamp;
 
 	double log_return;
 

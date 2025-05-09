@@ -4,17 +4,6 @@
 #include "Cryptocurrency.h"
 #include <filesystem>
 #include <fstream>
-#include <sstream>
-
-inline std::chrono::sys_seconds
-string_to_sys_seconds(const std::string &datetime) {
-	std::chrono::sys_seconds tp;
-	std::istringstream in(datetime);
-	in >> std::chrono::parse("%Y-%m-%d %H:%M:%S", tp); // or "%F %T"
-	if (!in)
-		throw std::runtime_error("Failed to parse datetime");
-	return tp;
-}
 
 class CSV_Parser {
   public:
@@ -42,17 +31,22 @@ class CSV_Parser {
 		file.rdbuf()->pubsetbuf(buffer, bufferSize);
 
 		std::string line;
-		bool first_line = true;
+		bool first_line = true, first_reading = true;
 		while (std::getline(file, line)) {
+			if (first_line) {
+				// Skip the header line
+				first_line = false;
+				continue;
+			}
 			Candle row;
 
 			// Fast parsing with manual index tracking
 			size_t pos = 0;
 			size_t nextComma = 0;
 
-			// Process Name and Tick on the first line only
-			if (first_line) {
-				first_line = false;
+			// Process Name and Tick on the first reading only
+			if (first_reading) {
+				first_reading = false;
 
 				// Dummy (column 0)
 				nextComma = line.find(',', pos);
@@ -84,7 +78,7 @@ class CSV_Parser {
 			// Parse DateTime (column 3)
 			nextComma = line.find(',', pos);
 			row.timestamp =
-				string_to_sys_seconds(line.substr(pos, nextComma - pos));
+				string_to_timestamp(line.substr(pos, nextComma - pos));
 			pos = nextComma + 1;
 
 			// Parse High (column 5)
