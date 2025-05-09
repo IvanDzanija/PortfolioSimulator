@@ -4,8 +4,6 @@
 #include "DateTime_formatting.h"
 #include <algorithm>
 #include <boost/multiprecision/cpp_dec_float.hpp>
-// TODO: remove iostream
-#include <iostream>
 #include <unordered_map>
 
 using AssetAmount = boost::multiprecision::cpp_dec_float_50;
@@ -83,18 +81,20 @@ class Portfolio {
 						// updating after will think we found
 						++asset_index;
 						break;
+					} else {
+						// this is the case when we have a candle that is
+						// older than the pivot candle
+						// we can skip this candle and move to the next one
+						continue;
 					}
-					// if we are here, it means that the candle is not found and
-					// we can break the rest of the loop
-					skip_assets = true;
+				}
+				if (skip_assets) {
+					break;
 				}
 			}
 			if (asset_index + 1 == assets.size()) {
 				ret.push_back(possible);
-				std::cout << timestamp_to_string(stamp) << std::endl;
-				break;
 			}
-			std::cout << "tu2" << std::endl;
 		}
 		return ret;
 	}

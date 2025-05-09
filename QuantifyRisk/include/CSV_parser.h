@@ -38,7 +38,9 @@ class CSV_Parser {
 				first_line = false;
 				continue;
 			}
-			Candle row;
+
+			double high, low, open, close, volume, marketcap;
+			timestamp timestamp;
 
 			// Fast parsing with manual index tracking
 			size_t pos = 0;
@@ -77,39 +79,44 @@ class CSV_Parser {
 
 			// Parse DateTime (column 3)
 			nextComma = line.find(',', pos);
-			row.timestamp =
-				string_to_timestamp(line.substr(pos, nextComma - pos));
+			try {
+				timestamp =
+					string_to_timestamp(line.substr(pos, nextComma - pos));
+			} catch (const std::exception &e) {
+				std::cerr << "Greška: " << e.what() << std::endl;
+			}
 			pos = nextComma + 1;
 
 			// Parse High (column 5)
 			nextComma = line.find(',', pos);
-			row.high = std::stod(line.substr(pos, nextComma - pos));
+			high = std::stod(line.substr(pos, nextComma - pos));
 			pos = nextComma + 1;
 
 			// Parse Low (column 6)
 			nextComma = line.find(',', pos);
-			row.low = std::stod(line.substr(pos, nextComma - pos));
+			low = std::stod(line.substr(pos, nextComma - pos));
 			pos = nextComma + 1;
 
 			// Parse Open (column 7)
 			nextComma = line.find(',', pos);
-			row.open = std::stod(line.substr(pos, nextComma - pos));
+			open = std::stod(line.substr(pos, nextComma - pos));
 			pos = nextComma + 1;
 
 			// Parse Close (column 8)
 			nextComma = line.find(',', pos);
-			row.close = std::stod(line.substr(pos, nextComma - pos));
+			close = std::stod(line.substr(pos, nextComma - pos));
 			pos = nextComma + 1;
 
 			// Parse Volume (column 9)
 			nextComma = line.find(',', pos);
-			row.volume = std::stod(line.substr(pos, nextComma - pos));
+			volume = std::stod(line.substr(pos, nextComma - pos));
 			pos = nextComma + 1;
 
 			// Parse Market Cap (column 10, last column)
-			row.marketcap = std::stod(line.substr(pos));
+			marketcap = std::stod(line.substr(pos));
 
-			data.hist_data.push_back(std::move(row));
+			data.hist_data.emplace_back(open, high, low, close, volume,
+										marketcap, timestamp);
 		}
 
 		delete[] buffer;

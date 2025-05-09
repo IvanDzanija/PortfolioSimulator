@@ -5,6 +5,8 @@
 #include <vector>
 
 struct Candle {
+
+  public:
 	// OHLC
 	double open, high, low, close;
 	double volume, marketcap;
@@ -14,14 +16,16 @@ struct Candle {
 
 	Candle() {}
 
-	Candle(double o, double h, double l, double c, int v)
-		: open(o), high(h), low(l), close(c), volume(v) {
+	Candle(double o, double h, double l, double c, double v, double m,
+		   ::timestamp t)
+		: open(o), high(h), low(l), close(c), volume(v), marketcap(m),
+		  timestamp(t) {
+		std::cout << high / low << std::endl;
 		log_return = std::log(high / low);
 	}
 };
 
 class Cryptocurrency {
-	// this class needs to provide default hashing
   public:
 	std::string name, tick;
 	std::vector<Candle> hist_data;

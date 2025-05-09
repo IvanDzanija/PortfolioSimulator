@@ -26,7 +26,11 @@ int main(void) {
 				std::cout << "Coin prices:" << std::endl;
 				for (auto y : x.first.hist_data) {
 					std::cout << y.high << ' ' << y.low << ' ' << y.open << ' '
-							  << y.close << ' ' << y.log_return << std::endl;
+							  << y.close << std::endl;
+					std::cout << "Coin log return: " << y.log_return
+							  << std::endl;
+					std::cout << "Coin market cap: " << y.marketcap
+							  << std::endl;
 					std::cout << "Coin volume: " << y.volume << std::endl;
 					std::cout << "Coin timestamp: "
 							  << y.timestamp.time_since_epoch().count()
