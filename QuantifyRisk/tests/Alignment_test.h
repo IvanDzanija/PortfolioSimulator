@@ -3,6 +3,6 @@
 
 #include "Portfolio.h"
 
-Doubles_Matrix alignment_test(Portfolio &test);
+Doubles_Matrix alignment_test(Portfolio &test, timestamp start);
 
 #endif // ALIGNMENT_TEST_H

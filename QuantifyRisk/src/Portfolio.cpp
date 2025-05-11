@@ -62,7 +62,13 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
 					last_positions.at(asset_index) = i + 1;
 					// we update here in case we don't find the last candle
 					// updating after will think we found
+					if (asset_index == 0) {
+						// we need to save this as the starting timestamp
+						aligned_start = candle.timestamp;
+					}
 					++asset_index;
+					// we update ending timestamp on each iteration
+					aligned_end = candle.timestamp;
 					break;
 				} else {
 					// this is the case when we have a candle that is
@@ -91,6 +97,9 @@ int Portfolio::calculate_aligned_metrics(timestamp start) {
 	Doubles_Matrix returns = aligned_log_returns(start);
 	size_t rows = returns.size();		// number of assets
 	size_t cols = returns.at(0).size(); // number of candles
+
+	aligned_means.resize(rows);
+	aligned_volatilities.resize(rows);
 
 	for (size_t i = 0; i < rows; ++i) {
 		double sum = 0, sum_sq = 0;

@@ -5,6 +5,8 @@
 #include <iostream>
 
 int main(void) {
+	timestamp start = std::chrono::floor<std::chrono::seconds>(
+		std::chrono::system_clock::now());
 	std::cout << "Running tests..." << std::endl;
 
 	Portfolio test = parser_test();
@@ -24,7 +26,7 @@ int main(void) {
 	// 	}
 	// }
 	// std::cout << "Alignment test:" << std::endl;
-	Doubles_Matrix aligned = alignment_test(test);
+	Doubles_Matrix aligned = alignment_test(test, start);
 
 	//	for (const auto &row : aligned) {
 	//		for (const auto &value : row) {
@@ -36,16 +38,17 @@ int main(void) {
 	// std::endl;
 
 	std::cout << "Math test:" << std::endl;
-	std::vector<double> means = mean_test(test);
 
-	//	std::cout << "Means:" << std::endl;
+	std::vector<double> means = mean_test(test, start);
+
+	// std::cout << "Means:" << std::endl;
 	//	for (const auto &value : means) {
 	//		std::cout << value << ' ';
 	//	}
 	//	std::cout << std::endl;
-	Doubles_Matrix cov = covariance_test(test);
+	Doubles_Matrix cov = covariance_test(test, start);
 
-	//	std::cout << "Covariance:" << std::endl;
+	// std::cout << "Covariance:" << std::endl;
 	//	for (const auto &row : cov) {
 	//		for (const auto &value : row) {
 	//			std::cout << value << ' ';
@@ -53,7 +56,7 @@ int main(void) {
 	//		std::cout << std::endl;
 	//	}
 
-	Doubles_Matrix cholesky = cholesky_test(test);
+	Doubles_Matrix cholesky = cholesky_test(test, start);
 	//  std::cout << "Cholesky:" << std::endl;
 	//  for (const auto &row : cholesky) {
 	//      for (const auto &value : row) {
@@ -62,5 +65,21 @@ int main(void) {
 	//      std::cout << std::endl;
 	//      }
 	//
+
+	std::cout << "Monte Carlo test:" << std::endl;
+	int simulations = 10000;
+	int steps = 100;
+	std::vector<Doubles_Matrix> monte_carlo =
+		test.monte_carlo(simulations, steps, start);
+	std::cout << "Monte Carlo:" << std::endl;
+	for (const auto &simulation : monte_carlo) {
+		for (const auto &row : simulation) {
+			for (const auto &value : row) {
+				std::cout << value << ' ';
+			}
+			std::cout << std::endl;
+		}
+		std::cout << std::endl;
+	}
 	return 0;
 }
