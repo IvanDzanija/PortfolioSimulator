@@ -36,16 +36,28 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 	//		std::cout << starting_prices.at(i) << std::endl;
 	//	}
 
-	std::vector<double> Z(n);
-	for (size_t i = 0; i < n; ++i) {
-		Z.at(i) = std::normal_distribution<double>(0.0, 1.0)(rnd);
-		std::cout << Z.at(i) << std::endl;
+	std::vector<Doubles_Matrix> Z(
+		simulations, Doubles_Matrix(steps, std::vector<double>(n)));
+
+	for (size_t i = 0; i < simulations; ++i) {
+		for (size_t j = 0; j < steps; ++j) {
+			for (size_t k = 0; k < n; ++k) {
+				Z.at(i).at(j).at(k) =
+					std::normal_distribution<double>(0.0, 1.0)(rnd);
+			}
+		}
 	}
 
 	Doubles_Matrix L = math::cholesky_decomposition(covariance);
 
 	// Generate correlated shocks
-	std::vector<double> Y = math::correlated_shocks(L, Z);
+	std::vector<Doubles_Matrix> Y(
+		simulations, Doubles_Matrix(steps, std::vector<double>(n)));
+	for (size_t i = 0; i < simulations; ++i) {
+		for (size_t j = 0; j < steps; ++j) {
+			Y.at(i).at(j) = math::correlated_shocks(L, Z.at(i).at(j));
+		}
+	}
 
 	std::vector<Doubles_Matrix> prices(
 		simulations, Doubles_Matrix(n, std::vector<double>(steps)));
@@ -56,16 +68,15 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 
 			double mu = aligned_means.at(j);
 			double sigma = aligned_volatilities.at(j);
+			std::cout << "mu: " << mu << std::endl;
+			std::cout << "sigma: " << sigma << std::endl;
 
 			prices.at(i).at(j).at(0) = starting_prices.at(j);
 
 			for (size_t k = 1; k < steps; ++k) {
-				double change = std::exp((mu - 0.5 * sigma * sigma) * dt +
-										 sigma * Y.at(j) * std::sqrt(dt));
-				if (change < 1) {
-					std::cout << "ovde sam" << std::endl;
-					std::cout << change << std::endl;
-				}
+				double change =
+					std::exp((mu - 0.5 * sigma * sigma) * dt +
+							 sigma * Y.at(i).at(k).at(j) * std::sqrt(dt));
 				prices.at(i).at(j).at(k) =
 					prices.at(i).at(j).at(k - 1) * change;
 			}
