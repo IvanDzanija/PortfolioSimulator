@@ -78,8 +78,10 @@ int main(void) {
 				std::cout << value << ' ';
 			}
 			std::cout << std::endl;
+			break;
 		}
 		std::cout << std::endl;
+		break;
 	}
 	return 0;
 }

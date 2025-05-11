@@ -29,6 +29,8 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 									   return candle.timestamp < stamp;
 								   });
 		starting_prices.at(index) = it->close;
+		//	std::cout << "Starting price for " << crypto.name << ": "
+		//			  << starting_prices.at(index) << std::endl;
 		++index;
 	}
 
@@ -68,8 +70,6 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 
 			double mu = aligned_means.at(j);
 			double sigma = aligned_volatilities.at(j);
-			std::cout << "mu: " << mu << std::endl;
-			std::cout << "sigma: " << sigma << std::endl;
 
 			prices.at(i).at(j).at(0) = starting_prices.at(j);
 

@@ -20,7 +20,7 @@ struct Candle {
 		   ::timestamp t)
 		: open(o), high(h), low(l), close(c), volume(v), marketcap(m),
 		  timestamp(t) {
-		log_return = std::log(high / low);
+		log_return = std::log(close / open);
 	}
 };
 
