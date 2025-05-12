@@ -77,6 +77,11 @@ class Cryptocurrency {
 		return name == other.name;
 	}
 
+	std::string get_name() const { return name; }
+	std::string get_tick() const { return tick; }
+	void set_name(const std::string &name) { this->name = name; }
+	void set_tick(const std::string &tick) { this->tick = tick; }
+
 	void calculate_metrics();
 	void reevaluate_metrics();
 	void individual_monte_carlo(int sim_count, int forecast_days);
