@@ -9,7 +9,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Boost 1.88.0 REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Widgets Charts)
 
 # === Backend Sources ===
@@ -27,7 +26,6 @@ target_include_directories(gui PRIVATE
 target_link_libraries(gui PRIVATE
     Qt6::Widgets
     Qt6::Charts
-    Boost::headers
 )
 
 # === Tests ===
@@ -36,7 +34,4 @@ add_executable(run_tests ${TEST_SOURCES} ${BACKEND_SOURCES})
 
 target_include_directories(run_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-)
-target_link_libraries(run_tests PRIVATE
-    Boost::headers
 )

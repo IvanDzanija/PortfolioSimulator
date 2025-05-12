@@ -1,18 +1,15 @@
 #ifndef PORTFOLIO_H
 #define PORTFOLIO_H
 #include "Cryptocurrency.h"
-#include <boost/multiprecision/cpp_dec_float.hpp>
 #include <unordered_map>
 
-using AssetAmount = boost::multiprecision::cpp_dec_float_50;
 using Doubles_Matrix = std::vector<std::vector<double>>;
 using Crypto_Matrix = std::vector<std::vector<Cryptocurrency>>;
 
 class Portfolio {
   public:
 	// maybe add Names and IDS in the future
-	std::unordered_map<Cryptocurrency, AssetAmount, Cryptocurrency::Hash>
-		assets;
+	std::unordered_map<Cryptocurrency, double, Cryptocurrency::Hash> assets;
 
 	// Covariance matrix
 	Doubles_Matrix aligned_log_return_matrix;
@@ -27,7 +24,7 @@ class Portfolio {
 	bool covariance_matrix_calculated = false;
 	bool aligned_metrics_calculated = false;
 
-	void add_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
+	void add_asset(const Cryptocurrency &crypto, double ammount) {
 		assets.emplace(crypto, ammount);
 		aligned_returns_calculated = false;
 		aligned_metrics_calculated = false;
@@ -37,7 +34,7 @@ class Portfolio {
 		aligned_stamp = timestamp();
 	}
 
-	void remove_asset(const Cryptocurrency &crypto, AssetAmount ammount) {
+	void remove_asset(const Cryptocurrency &crypto, double ammount) {
 		auto it = assets.find(crypto);
 		if (it != assets.end()) {
 			if (it->second >= ammount) {
