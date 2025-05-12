@@ -1,5 +1,6 @@
 # File: python/gui.py
 import sys
+import os
 from PyQt6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -9,8 +10,10 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-# Uvezi naš C++ modul naziva 'montecarlo'
-import montecarlo
+import PortfolioSimulator
+
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
 
 
 class MainWindow(QMainWindow):

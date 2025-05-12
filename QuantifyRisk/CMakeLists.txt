@@ -12,15 +12,15 @@ find_package(Boost 1.88.0 REQUIRED)
 
 # === PyQt6 ===
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-pybind11_add_module(main SHARED ${SRC_FILES})
-target_include_directories(main PRIVATE
+pybind11_add_module(PortfolioSimulator SHARED ${SRC_FILES})
+target_include_directories(PortfolioSimulator PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${pybind11_INCLUDE_DIRS}
     ${Python_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
 )
 
-target_link_libraries(main PRIVATE
+target_link_libraries(PortfolioSimulator PRIVATE
     Boost::headers
     pybind11::pybind11
 )
@@ -41,7 +41,7 @@ target_link_libraries(run_tests PRIVATE
     Boost::headers
 )
 
-set_target_properties(main PROPERTIES
+set_target_properties(PortfolioSimulator PROPERTIES
     PREFIX ""
     SUFFIX ".so"
     # Direktno izgradimo modul u python direktorij kako bi Python kod mogao učitati isti
