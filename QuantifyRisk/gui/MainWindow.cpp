@@ -68,7 +68,9 @@ MainWindow::~MainWindow() = default;
 
 void MainWindow::loadAvailableCoins() {
 	coinList->clear();
-	QDir datasetDir("datasets");
+	QString datasetPath =
+		QCoreApplication::applicationDirPath() + "/../datasets";
+	QDir datasetDir(datasetPath);
 	QStringList files =
 		datasetDir.entryList(QStringList() << "*.csv", QDir::Files);
 	for (const QString &file : files) {
@@ -92,7 +94,7 @@ void MainWindow::addCoinToPortfolio() {
 
 	try {
 		Cryptocurrency coin =
-			parser.fastReadCryptoCSV("datasets/" + filename.toStdString());
+			parser.fastReadCryptoCSV("../datasets/" + filename.toStdString());
 		portfolio.add_asset(coin, amount);
 		portfolioMap.insert(filename, amount);
 		portfolioView->addItem(QString("%1 (%2)")
