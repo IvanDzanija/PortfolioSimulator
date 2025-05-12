@@ -1,49 +1,42 @@
 # CMakeLists.txt
 cmake_minimum_required(VERSION 3.14)
-project(PyQt6_main)
+project(PortfolioSimulator)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
-find_package(pybind11 REQUIRED)
-find_package(Python COMPONENTS Interpreter Development REQUIRED)
 find_package(Boost 1.88.0 REQUIRED)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Charts)
 
-# === PyQt6 ===
-file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-pybind11_add_module(PortfolioSimulator SHARED ${SRC_FILES})
-target_include_directories(PortfolioSimulator PRIVATE
+# === Backend Sources ===
+file(GLOB_RECURSE BACKEND_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
+
+# === C++ Qt GUI App ===
+file(GLOB_RECURSE GUI_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/gui/*.cpp)
+add_executable(gui ${GUI_SOURCES} ${BACKEND_SOURCES})
+
+target_include_directories(gui PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${pybind11_INCLUDE_DIRS}
-    ${Python_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
 )
 
-target_link_libraries(PortfolioSimulator PRIVATE
+target_link_libraries(gui PRIVATE
+    Qt6::Widgets
+    Qt6::Charts
     Boost::headers
-    pybind11::pybind11
 )
 
 # === Tests ===
-list(REMOVE_ITEM SRC_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/gui_handler.cpp")
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/tests/*.cpp)
-add_executable(run_tests ${TEST_SOURCES} ${SRC_FILES})
+add_executable(run_tests ${TEST_SOURCES} ${BACKEND_SOURCES})
+
 target_include_directories(run_tests PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
-    ${pybind11_INCLUDE_DIRS}
-    ${Python_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
 )
-
 target_link_libraries(run_tests PRIVATE
-    pybind11::pybind11
     Boost::headers
-)
-
-set_target_properties(PortfolioSimulator PROPERTIES
-    PREFIX ""
-    SUFFIX ".so"
-    # Direktno izgradimo modul u python direktorij kako bi Python kod mogao učitati isti
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/gui"
 )

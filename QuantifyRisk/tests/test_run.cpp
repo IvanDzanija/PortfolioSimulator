@@ -71,17 +71,17 @@ int main(void) {
 	int steps = 100;
 	std::vector<Doubles_Matrix> monte_carlo =
 		test.monte_carlo(simulations, steps, start);
-	std::cout << "Monte Carlo:" << std::endl;
-	for (const auto &simulation : monte_carlo) {
-		for (const auto &row : simulation) {
-			for (const auto &value : row) {
-				std::cout << value << ' ';
-			}
-			std::cout << std::endl;
-			break;
-		}
-		std::cout << std::endl;
-		break;
-	}
+	//	std::cout << "Monte Carlo:" << std::endl;
+	//	for (const auto &simulation : monte_carlo) {
+	//		for (const auto &row : simulation) {
+	//			for (const auto &value : row) {
+	//				std::cout << value << ' ';
+	//			}
+	//			std::cout << std::endl;
+	//			break;
+	//		}
+	//		std::cout << std::endl;
+	//		break;
+	//	}
 	return 0;
 }
