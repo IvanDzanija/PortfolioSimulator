@@ -58,6 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 	chartView = new QChartView(this);
 	chartView->setRenderHint(QPainter::Antialiasing);
+	chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	chartView->setRubberBand(QChartView::RectangleRubberBand);
+	chartView->setDragMode(QGraphicsView::ScrollHandDrag);
 	layout->addWidget(chartView);
 
 	setCentralWidget(centralWidget);
@@ -124,8 +127,7 @@ void MainWindow::runMonteCarloSimulation() {
 	}
 }
 
-void MainWindow::plotSimulation(
-	const std::vector<std::vector<std::vector<double>>> &data) {
+void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
 
 	QChart *chart = new QChart();
 	for (const auto &sim : data) {
