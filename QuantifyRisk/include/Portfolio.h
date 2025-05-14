@@ -29,8 +29,16 @@ class Portfolio {
 		aligned_returns_calculated = false;
 		aligned_metrics_calculated = false;
 		covariance_matrix_calculated = false;
-		aligned_start = timestamp();
-		aligned_end = timestamp();
+		// if only one asset is in the portfolio we can't properly align the
+		// other since the only one is the pivot so we set the aligned_start to
+		// the timestamp of the first asset only if it is the only one
+		if (assets.size() == 1) {
+			aligned_start = crypto.hist_data.at(0).timestamp;
+			aligned_end = crypto.hist_data.back().timestamp;
+		} else {
+			aligned_start = timestamp();
+			aligned_end = timestamp();
+		}
 		aligned_stamp = timestamp();
 	}
 
@@ -45,8 +53,14 @@ class Portfolio {
 			} else {
 				std::cerr << "Not enough asset to remove" << std::endl;
 			}
-			aligned_end = timestamp();
-			aligned_start = timestamp();
+			// same as in add_asset
+			if (assets.size() == 1) {
+				aligned_start = crypto.hist_data.at(0).timestamp;
+				aligned_end = crypto.hist_data.back().timestamp;
+			} else {
+				aligned_start = timestamp();
+				aligned_end = timestamp();
+			}
 			aligned_stamp = timestamp();
 			aligned_returns_calculated = false;
 			aligned_metrics_calculated = false;

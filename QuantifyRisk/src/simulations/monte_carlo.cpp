@@ -75,10 +75,6 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 			double sigma = aligned_volatilities.at(j);
 
 			prices.at(i).at(j).at(0) = starting_prices.at(j) * weights.at(j);
-			std::cout << "Starting price for " << j << ": "
-					  << prices.at(i).at(j).at(0) << std::endl;
-			std::cout << "Starting date for " << j << ": "
-					  << timestamp_to_string(start) << std::endl;
 
 			for (size_t k = 1; k < steps; ++k) {
 				double change =

@@ -127,10 +127,11 @@ void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
 	QChart *chart = new QChart();
 	for (const auto &sim : data) {
 		QLineSeries *series = new QLineSeries();
-		for (size_t step = 0; step < sim.size(); ++step) {
+		for (size_t step = 0; step < sim.at(0).size(); ++step) {
 			double sum = 0;
-			for (double val : sim[step])
-				sum += val;
+			for (size_t i = 0; i < sim.size(); ++i) {
+				sum += sim.at(i).at(step);
+			}
 			std::cout << "Step: " << step << ", Sum: " << sum << std::endl;
 			series->append(step, sum / sim[step].size());
 		}
