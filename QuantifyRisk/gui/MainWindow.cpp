@@ -132,8 +132,7 @@ void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
 			for (size_t i = 0; i < sim.size(); ++i) {
 				sum += sim.at(i).at(step);
 			}
-			std::cout << "Step: " << step << ", Sum: " << sum << std::endl;
-			series->append(step, sum / sim[step].size());
+			series->append(step, sum);
 		}
 		chart->addSeries(series);
 	}
