@@ -1,4 +1,5 @@
 #include "Cryptocurrency.h"
+#include "DateTime_formatting.h"
 #include "Portfolio.h"
 #include "math/numerical.h"
 #include "math/stohastic.h"
@@ -17,9 +18,11 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 
 	// Gather the starting prices for all assets
 	std::vector<double> starting_prices(n);
+	std::vector<double> weights(n);
 	size_t index = 0;
 	for (const auto &iter : assets) {
 		const Cryptocurrency &crypto = iter.first;
+		weights.at(index) = iter.second;
 
 		// we check till aligned_end because start can be in the future and
 		// gives pointer past-the-end
@@ -71,7 +74,11 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 			double mu = aligned_means.at(j);
 			double sigma = aligned_volatilities.at(j);
 
-			prices.at(i).at(j).at(0) = starting_prices.at(j);
+			prices.at(i).at(j).at(0) = starting_prices.at(j) * weights.at(j);
+			std::cout << "Starting price for " << j << ": "
+					  << prices.at(i).at(j).at(0) << std::endl;
+			std::cout << "Starting date for " << j << ": "
+					  << timestamp_to_string(start) << std::endl;
 
 			for (size_t k = 1; k < steps; ++k) {
 				double change =

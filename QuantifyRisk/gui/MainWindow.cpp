@@ -1,3 +1,4 @@
+#include "ChartPreviewWindow.h"
 #include "MainWindow.h"
 #include <QDir>
 #include <QLabel>
@@ -15,7 +16,7 @@ typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), centralWidget(new QWidget(this)) {
-	setWindowTitle("Crypto Portfolio Simulator");
+	setWindowTitle("Portfolio Simulator");
 	resize(1000, 600);
 
 	auto *layout = new QVBoxLayout(centralWidget);
@@ -56,13 +57,6 @@ MainWindow::MainWindow(QWidget *parent)
 			&MainWindow::runMonteCarloSimulation);
 	layout->addWidget(simulateButton);
 
-	chartView = new QChartView(this);
-	chartView->setRenderHint(QPainter::Antialiasing);
-	chartView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	chartView->setRubberBand(QChartView::RectangleRubberBand);
-	chartView->setDragMode(QGraphicsView::ScrollHandDrag);
-	layout->addWidget(chartView);
-
 	setCentralWidget(centralWidget);
 	loadAvailableCoins();
 }
@@ -77,7 +71,8 @@ void MainWindow::loadAvailableCoins() {
 	QStringList files =
 		datasetDir.entryList(QStringList() << "*.csv", QDir::Files);
 	for (const QString &file : files) {
-		coinList->addItem(file);
+		const QString &coinName = file.mid(5, file.length() - 9);
+		coinList->addItem(coinName);
 	}
 }
 
@@ -96,8 +91,8 @@ void MainWindow::addCoinToPortfolio() {
 	}
 
 	try {
-		Cryptocurrency coin =
-			parser.fastReadCryptoCSV("../datasets/" + filename.toStdString());
+		Cryptocurrency coin = parser.fastReadCryptoCSV(
+			"../datasets/coin_" + filename.toStdString() + ".csv");
 		portfolio.add_asset(coin, amount);
 		portfolioMap.insert(filename, amount);
 		portfolioView->addItem(QString("%1 (%2)")
@@ -136,12 +131,15 @@ void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
 			double sum = 0;
 			for (double val : sim[step])
 				sum += val;
+			std::cout << "Step: " << step << ", Sum: " << sum << std::endl;
 			series->append(step, sum / sim[step].size());
 		}
 		chart->addSeries(series);
 	}
 
 	chart->createDefaultAxes();
+	chart->zoomReset();
 	chart->setTitle("Monte Carlo Simulation");
-	chartView->setChart(chart);
+	auto *preview = new ChartPreviewWindow(chart, this);
+	preview->show();
 }
