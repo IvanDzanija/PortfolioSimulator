@@ -68,6 +68,15 @@ class Portfolio {
 		}
 	}
 
+	Cryptocurrency get_asset(const std::string &name) {
+		for (auto &pair : assets) {
+			if (pair.first.get_name() == name) {
+				return pair.first;
+			}
+		}
+		throw std::runtime_error("Asset not found");
+	}
+
 	Doubles_Matrix &aligned_log_returns(timestamp start);
 	Doubles_Matrix &calculate_covariance(timestamp start);
 	int calculate_aligned_metrics(timestamp start);

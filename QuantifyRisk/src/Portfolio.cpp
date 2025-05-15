@@ -112,7 +112,6 @@ int Portfolio::calculate_aligned_metrics(timestamp start) {
 		}
 		if (n > 1) {
 			aligned_means.at(i) = sum / n;
-			std::cout << aligned_means.at(i) << std::endl;
 			aligned_volatilities.at(i) = std::sqrt(
 				(sum_sq - n * aligned_means.at(i) * aligned_means.at(i)) /
 				(n - 1));

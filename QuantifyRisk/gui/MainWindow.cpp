@@ -40,6 +40,32 @@ MainWindow::MainWindow(QWidget *parent)
 	portfolioView = new QListWidget(this);
 	layout->addWidget(portfolioView);
 
+	QPushButton *removeButton = new QPushButton("Remove Selected Asset", this);
+	connect(removeButton, &QPushButton::clicked, this, [=]() {
+		auto *item = portfolioView->currentItem();
+		if (!item)
+			return;
+
+		QString displayText = item->text();
+		QString keyToRemove;
+
+		// Try to find the matching key from portfolioMap
+		for (auto it = portfolioMap.begin(); it != portfolioMap.end(); ++it) {
+			if (displayText.startsWith(it.key())) {
+				keyToRemove = it.key();
+				break;
+			}
+		}
+		if (!keyToRemove.isEmpty()) {
+			Cryptocurrency coin =
+				portfolio.get_asset(keyToRemove.toStdString());
+			portfolio.remove_asset(coin, portfolioMap[keyToRemove]);
+			portfolioMap.remove(keyToRemove);
+			delete portfolioView->takeItem(portfolioView->currentRow());
+		}
+	});
+	layout->addWidget(removeButton);
+
 	simSpin = new QSpinBox(this);
 	simSpin->setRange(10, 10000);
 	simSpin->setValue(100);
