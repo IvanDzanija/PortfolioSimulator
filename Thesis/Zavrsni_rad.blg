@@ -2,6 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2024)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Zavrsni_rad.aux
 The style file: fer_IEEEtran_HR.bst
+I found no \citation commands---while reading file Zavrsni_rad.aux
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -15,45 +16,45 @@ I was expecting a `,' or a `}'---line 19 of file literatura.bib
  :     year = 2014,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-You've used 6 entries,
+You've used 0 entries,
             4225 wiz_defined-function locations,
-            871 strings with 8643 characters,
-and the built_in function-call counts, 4299 in all, are:
-= -- 332
-> -- 86
-< -- 30
-+ -- 50
-- -- 14
-* -- 196
-:= -- 663
-add.period$ -- 18
-call.type$ -- 6
-change.case$ -- 4
-chr.to.int$ -- 75
-cite$ -- 6
-duplicate$ -- 291
-empty$ -- 381
-format.name$ -- 19
-if$ -- 1022
+            836 strings with 7736 characters,
+and the built_in function-call counts, 96 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 10
+:= -- 29
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 3
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 51
-newline$ -- 49
-num.names$ -- 6
-pop$ -- 122
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 25
+num.names$ -- 0
+pop$ -- 0
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 342
+skip$ -- 3
 stack$ -- 0
-substring$ -- 179
-swap$ -- 231
-text.length$ -- 5
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 6
+type$ -- 0
 warning$ -- 0
-while$ -- 15
-width$ -- 7
-write$ -- 86
-(There was 1 error message)
+while$ -- 0
+width$ -- 0
+write$ -- 24
+(There were 2 error messages)
