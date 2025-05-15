@@ -41,36 +41,62 @@ MainWindow::MainWindow(QWidget *parent)
 	layout->addWidget(portfolioView);
 
 	QPushButton *removeButton = new QPushButton("Remove Selected Asset", this);
-	connect(removeButton, &QPushButton::clicked, this, [=]() {
-		auto *item = portfolioView->currentItem();
-		if (!item)
-			return;
+	QDoubleSpinBox *removeAmountInput = new QDoubleSpinBox(this);
+	removeAmountInput->setRange(0.01, 100000);
+	removeAmountInput->setValue(1.0);
+	removeAmountInput->setSingleStep(0.1);
+	layout->addWidget(new QLabel("Amount to Remove:"));
+	layout->addWidget(removeAmountInput);
+	connect(
+		removeButton, &QPushButton::clicked, this, [this, removeAmountInput]() {
+			auto *item = portfolioView->currentItem();
+			if (!item)
+				return;
 
-		QString displayText = item->text();
-		QString keyToRemove;
+			QString displayText = item->text();
+			QString keyToRemove;
 
-		// Try to find the matching key from portfolioMap
-		for (auto it = portfolioMap.begin(); it != portfolioMap.end(); ++it) {
-			if (displayText.startsWith(it.key())) {
-				keyToRemove = it.key();
-				break;
+			// Try to find the matching key from portfolioMap
+			for (auto it = portfolioMap.begin(); it != portfolioMap.end();
+				 ++it) {
+				if (displayText.startsWith(it.key())) {
+					keyToRemove = it.key();
+					break;
+				}
 			}
-		}
-		if (!keyToRemove.isEmpty()) {
-			Cryptocurrency coin =
-				portfolio.get_asset(keyToRemove.toStdString());
-			portfolio.remove_asset(coin, portfolioMap[keyToRemove]);
-			portfolioMap.remove(keyToRemove);
-			delete portfolioView->takeItem(portfolioView->currentRow());
-		}
-	});
+			if (!keyToRemove.isEmpty()) {
+				double amountToRemove = removeAmountInput->value();
+				double currentAmount = portfolioMap[keyToRemove];
+
+				if (amountToRemove > currentAmount) {
+					QMessageBox::warning(
+						this, "Invalid Amount",
+						"You can't remove more than you added.");
+					return;
+				}
+
+				Cryptocurrency coin =
+					portfolio.get_asset(keyToRemove.toStdString());
+				portfolio.remove_asset(coin, amountToRemove);
+				if (currentAmount - amountToRemove <= 0.00001) {
+					portfolioMap.remove(keyToRemove);
+					delete portfolioView->takeItem(portfolioView->currentRow());
+				} else {
+					portfolioMap[keyToRemove] -= amountToRemove;
+					item->setText(
+						QString("%1 (%2)")
+							.arg(QString::fromStdString(coin.get_name()))
+							.arg(portfolioMap[keyToRemove]));
+				}
+			}
+		});
 	layout->addWidget(removeButton);
 
 	simSpin = new QSpinBox(this);
 	simSpin->setRange(10, 10000);
 	simSpin->setValue(100);
 	stepSpin = new QSpinBox(this);
-	stepSpin->setRange(10, 1000);
+	stepSpin->setRange(10, 10000);
 	stepSpin->setValue(60);
 
 	layout->addWidget(new QLabel("Simulations:"));
