@@ -83,7 +83,7 @@ class CSV_Parser {
 				timestamp =
 					string_to_timestamp(line.substr(pos, nextComma - pos));
 			} catch (const std::exception &e) {
-				std::cerr << "Greška: " << e.what() << std::endl;
+				std::cerr << "Error: " << e.what() << std::endl;
 			}
 			pos = nextComma + 1;
 

@@ -1,7 +1,9 @@
 #include "ChartPreviewWindow.h"
+#include "DateTime_formatting.h"
 #include "MainWindow.h"
 #include <QDir>
 #include <QLabel>
+#include <QLineEdit>
 #include <QMessageBox>
 #include <QVBoxLayout>
 #include <QtCharts/QChart>
@@ -92,6 +94,11 @@ MainWindow::MainWindow(QWidget *parent)
 		});
 	layout->addWidget(removeButton);
 
+	QLineEdit *startDateInput = new QLineEdit(this);
+	startDateInput->setPlaceholderText("YYYY-MM-DD HH:MM:SS");
+	layout->addWidget(new QLabel("Start Time:"));
+	layout->addWidget(startDateInput);
+
 	simSpin = new QSpinBox(this);
 	simSpin->setRange(10, 10000);
 	simSpin->setValue(100);
@@ -137,8 +144,22 @@ void MainWindow::addCoinToPortfolio() {
 	double amount = amountInput->value();
 
 	if (portfolioMap.contains(filename)) {
-		QMessageBox::warning(this, "Duplicate",
-							 "This coin is already in the portfolio.");
+		std::cout << "Coin already in portfolio, updating amount." << std::endl;
+		portfolioMap[filename] += amount;
+		portfolio.add_asset(portfolio.get_asset(filename.toStdString()),
+							amount);
+		for (int i = 0; i < portfolioView->count(); ++i) {
+			QListWidgetItem *currentItem = portfolioView->item(i);
+			if (currentItem->text().startsWith(filename)) {
+				currentItem->setText(
+					QString("%1 (%2)")
+						.arg(QString::fromStdString(
+							portfolio.get_asset(filename.toStdString())
+								.get_name()))
+						.arg(portfolioMap[filename]));
+				break;
+			}
+		}
 		return;
 	}
 
@@ -161,10 +182,27 @@ void MainWindow::runMonteCarloSimulation() {
 							 "Add coins to your portfolio first.");
 		return;
 	}
+	QString datetimeStr = startDateInput->text();
 
-	timestamp start = std::chrono::floor<std::chrono::seconds>(
-		std::chrono::system_clock::now());
-
+	timestamp start;
+	if (datetimeStr.isEmpty()) {
+		start = std::chrono::floor<std::chrono::seconds>(
+			std::chrono::system_clock::now());
+	} else if (datetimeStr.length() != 19) {
+		QMessageBox::critical(
+			this, "Invalid Date",
+			"Please enter a valid date in the format YYYY-MM-DD HH:MM:SS.");
+		return;
+	} else {
+		try {
+			start = string_to_timestamp(datetimeStr.toStdString());
+		} catch (const std::exception &e) {
+			QMessageBox::critical(
+				this, "Invalid Date",
+				"Please enter a valid date in the format YYYY-MM-DD HH:MM:SS.");
+			return;
+		}
+	}
 	try {
 		auto result =
 			portfolio.monte_carlo(simSpin->value(), stepSpin->value(), start);

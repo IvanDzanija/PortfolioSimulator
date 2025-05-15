@@ -40,6 +40,7 @@ class MainWindow : public QMainWindow {
 	QSpinBox *simSpin;
 	QSpinBox *stepSpin;
 	QChartView *chartView;
+	QLineEdit *startDateInput;
 
 	CSV_Parser parser;
 	Portfolio portfolio;
