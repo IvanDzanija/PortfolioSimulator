@@ -12,7 +12,8 @@
 %--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
 
 % Naslov na engleskom jeziku / Title in English
-\title{Development of an application for risk assessment in investment portfolios with the help of Monte Carlo simulations}
+\title{Development of an application for risk assessment in investment
+portfolios with the help of Monte Carlo simulations}
 
 % Naslov na hrvatskom jeziku / Title in Croatian
 \naslov{Razvoj aplikacije za procjenu rizika
@@ -100,20 +101,37 @@ optimizacijski problem -> povecanje povrata i smanjenje rizika
 
 \section{Povrati}
 \label{sek:povrati}
-
-Povrat definiramo kao postotnu promjene cijene financijskog
-instrumenta kroz određeni vremenski period.
+Povrat investicije je osnovna mjera uspješnosti investicije.
+\subsection{Aritmetički povrat}
 
 \begin{definition}
 	Neka je $P_t$ cijena financijskog instrumenta u trenutku $t$ te
-	$P_0$ početna cijena istog instrumenta. Povrat $R_t$ definiramo kao:
+    $P_{t-1}$ cijena istog instrumenta u trenutku $t-1$. Aritmetički povrat
+    $R_t$ definiramo kao:
 \end{definition}
-\begin{align*}R_t = \frac{P_t}{P_0} - 1 = \frac{P_t - P_0}{P_0}
+\begin{align*}R_t = \frac{P_t}{P_{t-1}} - 1 =
+    \frac{P_t - P_{t-1}}{P_{t-1}} =
+\frac{\Delta P}{P_{t-1}}
 \end{align*}
 
-\noindent Neka buduća cijena nam neće biti poznata pri investiranju te zato povrat promatramo kao slučajnu varijablu.
-Vidimo kako je moguće imati negativan povrat ako je cijena koju promatramo
-manja od početne cijene i to je upravo situacija koji pokušavamo izbjeći.
+\noindent Neka buduća cijena nam neće biti poznata pri investiranju te
+zato povrat promatramo kao slučajnu varijablu.
+Vidimo kako je moguće imati negativan povrat ako je cijena koju
+promatramo manja od početne cijene i to je upravo situacija koji
+pokušavamo izbjeći.
+
+\subsection{Logaritamski povrat}
+\begin{definition}
+    Neka je $P_t$ cijena financijskog instrumenta u trenutku $t$ te
+    $P_{t-1}$ cijena istog instrumenta u trenutku $t-1$. Logaritamski povrat
+    $R_t$ definiramo kao:
+\end{definition}
+\begin{align*}
+    R_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(P_t) - \ln(P_{t-1})
+\end{align*}
+\noindent Logaritamski povrat u pravilu koristimo zbog njegovih pogodnih
+matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$.
+\subsection{Očekivani povrat}
 \begin{definition}
 	Očekivani povrat promatramo kao srednju vrijednost prijašnjih
 	povrata jer je upravo srednja vrijednost nepristran procjenitelj
@@ -136,9 +154,6 @@ jer će nam upravo takva mjera kvantificirati kretanje povrata.
 	\sigma_R = \sqrt{\frac{1}{N - 1} \sum_{i = 1}^{N} \left[R_i - E(R_t)\right]^2}
 \end{align*}
 \\
-Kod ovakvog jednostavnog modela rizika imamo problem što jednako tretiramo i pozitivane i negativne povrate.
-U slučajevima kada modeliramo kretanje povrata sa simetričnom distribucijom ovo
-ne mora biti problem, ali to nije uvijek slučaj.
 
 \section{Portfelj}
 Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
