@@ -203,11 +203,15 @@ void MainWindow::runMonteCarloSimulation() {
 			return;
 		}
 	}
-	std::cout << "Start time: " << start.time_since_epoch().count()
-			  << std::endl;
 	try {
-		auto result =
+		std::vector<Doubles_Matrix> result =
 			portfolio.monte_carlo(simSpin->value(), stepSpin->value(), start);
+		if (result.empty()) {
+			QMessageBox::warning(this, "Simulation Error",
+								 "No data available for the given date. Check "
+								 "console log for more info.");
+			return;
+		}
 		plotSimulation(result);
 	} catch (const std::exception &e) {
 		QMessageBox::critical(this, "Simulation Error", e.what());

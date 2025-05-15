@@ -13,6 +13,12 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 												   timestamp start) {
 
 	Doubles_Matrix covariance = calculate_covariance(start);
+	if (covariance.empty()) {
+		std::cerr << "Starting date mismatch. Some assets probably didn't "
+					 "exist as of set starting date!"
+				  << std::endl;
+		return {};
+	}
 	size_t n = covariance.size();				// number of assets
 	size_t timeframe = covariance.at(0).size(); // number of candles
 

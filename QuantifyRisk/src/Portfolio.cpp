@@ -85,6 +85,11 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
 			ret.push_back(possible);
 		}
 	}
+	if (ret.empty()) {
+		std::cerr << "No aligned log returns found for the given start date."
+				  << std::endl;
+		return aligned_log_return_matrix;
+	}
 	aligned_stamp = start;
 	aligned_log_return_matrix = math::matrix_transpose(ret);
 	return aligned_log_return_matrix;
@@ -96,6 +101,11 @@ int Portfolio::calculate_aligned_metrics(timestamp start) {
 		return 0;
 	}
 	Doubles_Matrix returns = aligned_log_returns(start);
+	if (returns.empty()) {
+		std::cerr << "No aligned log returns found for the given start date."
+				  << std::endl;
+		return -1;
+	}
 	size_t rows = returns.size();		// number of assets
 	size_t cols = returns.at(0).size(); // number of candles
 
@@ -127,6 +137,11 @@ Doubles_Matrix &Portfolio::calculate_covariance(timestamp start) {
 	}
 
 	Doubles_Matrix returns = aligned_log_returns(start);
+	if (returns.empty()) {
+		std::cerr << "No aligned log returns found for the given start date."
+				  << std::endl;
+		return covariance_matrix;
+	}
 	int info = calculate_aligned_metrics(start);
 	if (info != 0) {
 		std::cerr << "Error calculating aligned metrics" << std::endl;
