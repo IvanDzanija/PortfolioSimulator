@@ -85,25 +85,50 @@ Monte Carlo metode za predviđanje vrijednosti portfelja s primjenom
 Cholesky dekompozicije kako bi se osigurala realistična obrada
 korelacija između kriptovaluta koje su još uvijek specijalna skupina investicija
 s visokom međusobnom korelecijom.\\
-Glavni izazov u modeliranju kriptovaluta leži u njihovoj inherentnoj nestabilnosti. Dok tradicionalne financijske instrumente karakteriziraju relativno predvidljivi obrasci, kriptovalute pokazuju ekstremne fluktuacije koje zahtijevaju precizno podešavanje parametara poput driftova i volatilnosti. U ovom kontekstu, logaritamski prinosi (\textit{log returns}) koriste se zbog svojih aditivnih svojstava u vremenu i stabilnosti u statističkoj analizi. Međutim, prilagodba geometrijskog Brownovog gibanja (GBM) na višedimenzionalni slučaj zahtijeva rješavanje problema koreliranih stohastičkih procesa.
+Glavni izazov u modeliranju kriptovaluta leži u njihovoj inherentnoj
+nestabilnosti. Dok tradicionalne financijske instrumente karakteriziraju
+relativno predvidljivi obrasci, kriptovalute pokazuju ekstremne fluktuacije
+koje zahtijevaju precizno podešavanje parametara poput driftova i
+volatilnosti.\\
+U radu je razvijen C++ programski okvir koji integrira povijesne podatke
+kriptovaluta, obavlja potrebne matematičke operacije i generira simulacije.
+Generirane simulacije omogućuju analizu različitih scenarija kretanja cijena,
+a korisnik može odabrati različite portfelje i vremenske okvire.
+Sva interakcija s korisnikom odvija se putem grafičkog sučelja koje
+omogućuje jednostavno upravljanje parametrima simulacije i vizualizaciju
+rezultata.\\
+Rad je strukturiran kako slijedi: U drugom poglavlju opisuju se teorijske
+osnove teorije portfelja, Monte Carlo metode i geometrijskog Brownovog gibanja.
+Treće poglavlje detaljno opisuje implementaciju algoritama, uključujući
+postupak Cholesky dekompozicije, brzo ``parsiranje`` financijskog skupa podataka
+i optimizacije za velike skupove podataka.
+U četvrtom poglavlju analiziraju se rezultati simulacija za različite
+konfiguracije portfelja, dok se u zaključku raspravlja o primjenjivosti
+modela, mogućim i očitim praktičnim problemima i smjerovima daljnjeg istraživanja.
 
-U radu je razvijen C++ programski okvir koji integrira povijesne podatke kriptovaluta, računa kovarijacijske matrice i generira korelirane šokove korištenjem Cholesky dekompozicije. Ova metoda omogućuje transformaciju nezavisnih normalnih varijabli u korelirane, čime se postiže realnija simulacija zajedničkog kretanja cijena. Pritom je naglasak stavljen na numeričku stabilnost, uključujući ograničavanje eksponenata radi izbjegavanja prekoračenja (\textit{overflow}) i provjeru pozitivne definitnosti matrica.
-
-Rezultati simulacija pokazuju kako kombinacija visokog drifta i volatilnosti može dovesti do prividno paradoksalnih scenarija: iako pojedinačne valute imaju pozitivne trendove, zbog međusobnih korelacija portfelj kao cjelina može pokazivati smanjene prinosi. Ovo naglašava važnost uključivanja korelacija u model, kao i kritičnu ulogu validacije parametara.
-
-Rad je strukturiran kako slijedi: U drugom poglavlju opisuju se teorijske osnove Monte Carlo metode i geometrijskog Brownovog gibanja. Treće poglavlje detaljira implementaciju algoritama, uključujući postupak Cholesky dekompozicije i optimizacije za velike skupove podataka. U četvrtom poglavlju analiziraju se rezultati simulacija za različite konfiguracije portfelja, dok se u zaključku raspravlja o primjenjivosti modela i smjerovima daljnjeg istraživanja.
-
-Ovaj pristup ne samo što pruža alat za upravljanje rizikom već otvara
-vrata za istraživanje adaptivnih modela koji dinamički prilagođavaju težine portfelja temeljem stohastičkih prognoza.
+Ovakav rad može poslužiti kao osnova za daljnje istraživanje i razvoj
+naprednijih modela koji će omogućiti bolje razumijevanje i upravljanje
+rizicima povezanima s kriptovalutama, ali i ostalim financijskim instrumentima.
 %-------------------------------------------------------------------------------
 \chapter{Teorija portfelja}
 \label{pog:teorija_portelja}
+Teorija portfelja, čiji su začetnici Harry Markowitz i James Tobin,
+daje strogu matematičku definiciju financijskim pojmovima.
+Ključni optimizacijski problem teorije portfelja je
+\textit{dualni cilj}: maksimizacija očekivanog povrata
+uz istovremeno minimiziranje rizika.
 
-Teorija portfelja daje strogu matematičku definiciju
-financijskim pojmovima i predstavlja temelj matematičnog
-modeliranja investicija i drugih financijskih instrumenata.
-Trebam navesti jos zacetnika i pocetak teorije portfelja te formulirati
-optimizacijski problem -> povecanje povrata i smanjenje rizika
+\section{Portfelj}
+\label{sek:portfelj}
+Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
+pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
+\begin{definition}
+	Vektor $\mathbf{w}$ predstavlja udjele investicija u portfelju.
+\end{definition}
+\begin{align*}
+	\mathbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ \dots \\ w_N \end{pmatrix},
+	\indent \sum_{i = 1}^{N} w_i = 1
+\end{align*}
 
 \section{Povrati}
 \label{sek:povrati}
@@ -127,17 +152,21 @@ promatramo manja od početne cijene i to je upravo situacija koji
 pokušavamo izbjeći.
 
 \subsection{Logaritamski povrat}
+Logaritamski povrat $r_t$ definiramo preko prirodnog logaritma omjera cijena.
+
 \begin{definition}
     Neka je $P_t$ cijena financijskog instrumenta u trenutku $t$ te
     $P_{t-1}$ cijena istog instrumenta u trenutku $t-1$. Logaritamski povrat
-    $R_t$ definiramo kao:
+    $r_t$ definiramo kao:
 \end{definition}
 \begin{align*}
-    R_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(P_t) - \ln(P_{t-1})
+    r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(P_t) - \ln(P_{t-1})
 \end{align*}
 \noindent Logaritamski povrat u pravilu koristimo zbog njegovih pogodnih
-matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$.
-\subsection{Očekivani povrat}
+matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$
+te svojstvo aditivnosti $r_{0,T} = \sum_{t=1}^T r_t$.
+\subsection{Očekivani povrat }
+\label{sek:ocekivani_povrat}
 \begin{definition}
 	Očekivani povrat promatramo kao srednju vrijednost prijašnjih
 	povrata jer je upravo srednja vrijednost nepristran procjenitelj
@@ -146,6 +175,14 @@ matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$.
 \begin{align*}
 	E(R_t) =\frac{1}{N} \sum_{i = 1}^{N} R_i
 \end{align*}
+\begin{definition}
+Očekivani povrat portfelja je linearna kombinacija očekivanih povrata pojedinačnih asseta:
+\end{definition}
+\begin{align*}
+\mathbb{E}[R_p] =
+    \mathbf{w}^\intercal \boldsymbol{\mu} = \sum_{i=1}^n w_i \mu_i
+\end{align*}
+\indent gdje je $\boldsymbol{\mu} = (\mu_1, \dots, \mu_n)^\intercal$ vektor očekivanih povrata.
 
 \section{Volatilnost}
 Drugi dio optimizacijskog problema teorije portfelja je smanjenje rizika.
@@ -159,36 +196,72 @@ jer će nam upravo takva mjera kvantificirati kretanje povrata.
 \begin{align*}
 	\sigma_R = \sqrt{\frac{1}{N - 1} \sum_{i = 1}^{N} \left[R_i - E(R_t)\right]^2}
 \end{align*}
-\\
-
-\section{Portfelj}
-Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
-pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
 \begin{definition}
-	Vektor $\mathbf{w}$ predstavlja udjele investicija u portfelju.
+Volatilnost portfelja mjeri se standardnom devijacijom povrata i dana je kvadratnim korijenom varijance:
 \end{definition}
 \begin{align*}
-	\mathbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ ... \\ w_N \end{pmatrix},
-	\indent \sum_{i = 1}^{N} w_i = 1
+\sigma_p = \sqrt{\mathbf{w}^\intercal \boldsymbol{\Sigma} \mathbf{w}}
 \end{align*}
+\indent gdje je $\boldsymbol{\Sigma}$ matrica kovarijance s elementima $\Sigma_{ij} = \text{Cov}(r_i, r_j)$.
 
-\begin{definition}
-	Povrat portfelja je ponderirani prosjek povrata investicija u portfelju:
-\end{definition}
+\section{Geometrijsko Brownovo gibanje}
+\label{sek:gbm}
+Geometrijsko Brownovo gibanje (GBM) je jedan od standardnih
+stohastičkih procesa za modeliranje kretanja cijena financijskih instrumenata.
+Diferencijalna jednadžba GBM-a je:
 \begin{align*}
-	R_p = \sum_{i = 1}^{N} w_i R_i
+    dS_t = \mu S_t dt + \sigma S_t dW\left(t\right)
 \end{align*}
-\indent Vidimo kako je povrat portfelja zapravo otežana suma povrata svih investicija.
+\indent gdje je $W\left(t\right)$ Wienerov proces.
+Eksplicitno rješenje GBM-a daje formulu za cijenu u trenutku $t$:
 
-\begin{definition}
-	Volatilnost portfelja definiramo:
-\end{definition}
 \begin{align*}
-	\sqrt{Var(R_p)} = \sqrt{\mathbf{w^\intercal}\boldsymbol{\Sigma} \mathbf{w}} \\
+S_t = S_0 \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)t +
+    \sigma W_t\right]
 \end{align*}
-\indent \quad \quad $\mathbf{w}$ je ranije definirani vektor udjela investicija\\
-\indent \quad \quad $\boldsymbol{\Sigma}$ je matrica kovarijance slučajnog vektora $\mathbf{w}$\\
 
+\section{Monte Carlo simulacije}
+\label{sek:monte_carlo}
+Monte Carlo metoda je numerička tehnika koja koristi slučajno uzorkovanje za rješavanje determinističkih problema. Primjerice, vrijednost $\pi$ može se procijeniti simulacijom nasumičnih točaka u jediničnom kvadratu i računanjem udjela koji padaju unutar jediničnog kruga.
+
+U kontekstu financija, Monte Carlo simulacije koriste se za generiranje vjerojatnosnih scenarija budućih cijena. Za portfelj od $n$ asseta, koraci su:
+\begin{enumerate}
+\item Generiraj nezavisne šokove $Z_i \sim N(0,1)$
+\item Transformiraj u korelirane šokove $\mathbf{Y} = L\mathbf{Z}$ gdje je $L$ Cholesky faktor matrice $\boldsymbol{\Sigma}$
+\item Ažuriraj cijene po GBM formuli za svaki asset:
+\begin{align*}
+S_t^{(i)} = S_0^{(i)} \exp\left(\left(\mu_i - \frac{\sigma_i^2}{2}\right)\Delta t + \sigma_i Y_i \sqrt{\Delta t}\right)
+\end{align*}
+\item Izračunaj vrijednost portfelja $V_t = \sum_{i=1}^n w_i S_t^{(i)}$
+\end{enumerate}
+
+\section{Cholesky dekompozicija}
+\label{sek:cholesky}
+Neka je $\boldsymbol{\Sigma}$ simetrična pozitivno definitna matrica kovarijance. Cholesky dekompozicija je faktorizacija oblika:
+\begin{align*}
+\boldsymbol{\Sigma} = LL^\intercal
+\end{align*}
+gdje je $L$ donjetrokutasta matrica. Ova faktorizacija omogućuje generiranje koreliranih normalnih varijabli iz nekoreliranih.
+
+\begin{theorem}
+Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ varijabli. Tada vektor $\mathbf{Y} = L\mathbf{Z}$ ima kovarijacijsku matricu $\boldsymbol{\Sigma}$.
+\end{theorem}
+\begin{proof}
+\begin{align*}
+\text{Cov}(\mathbf{Y}) &= \mathbb{E}[L\mathbf{Z}(L\mathbf{Z})^\intercal] = L\mathbb{E}[\mathbf{Z}\mathbf{Z}^\intercal]L^\intercal \
+&= L \cdot I \cdot L^\intercal = LL^\intercal = \boldsymbol{\Sigma}
+\end{align*}
+\end{proof}
+
+\section{Optimizacija portfelja}
+Klasični Markowitz-ov model formuliramo kao problem minimizacije varijance uz zadani očekivani povrat:
+\begin{align*}
+\min_{\mathbf{w}} \mathbf{w}^\intercal \boldsymbol{\Sigma} \mathbf{w} \
+\text{uz uvjete: } \mathbf{w}^\intercal \boldsymbol{\mu} = \mu_p, \quad \mathbf{w}^\intercal \mathbf{1} = 1
+\end{align*}
+Rješenje ovog kvadratskog programa daje \textit{efikasnu granicu} - skup portfelja s minimalnim rizikom za zadani povrat.
+
+Monte Carlo simulacije proširuju ovaj okvir omogućujući analizu distribucije budućih povrata i rizika u nelineranim scenarijima. Kombinacijom Cholesky dekompozicije i GBM-a moguće je modelirati kompleksne interakcije u portfeljima kriptovaluta s visokom točnošću.
 
 
 % Rasprava

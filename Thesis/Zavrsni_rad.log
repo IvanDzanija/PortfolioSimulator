@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  15 MAY 2025 23:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  16 MAY 2025 01:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -801,7 +801,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/loc
 al/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc}]
-<zadatak.pdf, id=65, 598.235pt x 845.1575pt>
+<zadatak.pdf, id=81, 598.235pt x 845.1575pt>
 File: zadatak.pdf Graphic file (type pdf)
 <use zadatak.pdf>
 Package pdftex.def Info: zadatak.pdf  used on input line 49.
@@ -810,7 +810,7 @@ File: zadatak.pdf Graphic file (type pdf)
 <use zadatak.pdf>
 Package pdftex.def Info: zadatak.pdf  used on input line 49.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<zadatak.pdf, id=68, page=1, 598.235pt x 845.1575pt>
+<zadatak.pdf, id=84, page=1, 598.235pt x 845.1575pt>
 File: zadatak.pdf Graphic file (type pdf)
 <use zadatak.pdf, page 1>
 Package pdftex.def Info: zadatak.pdf , page1 used on input line 49.
@@ -866,211 +866,256 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.91 
-      [2
+l.108 
+       [2
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.99 \chapter
-             {Teorija portfelja} [3]
+l.113 \chapter
+              {Teorija portfelja} [3]
 Poglavlje 2..
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
-e 108.
+e 121.
 LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
-(Font)              scaled to size 16.0pt on input line 108.
-[4
+(Font)              scaled to size 16.0pt on input line 121.
 
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit.en
-c}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm.
-enc}]
-Underfull \hbox (badness 10000) in paragraph at lines 161--163
-
- []
-
-
-Overfull \hbox (10.69785pt too wide) in paragraph at lines 165--168
+Overfull \hbox (10.69785pt too wide) in paragraph at lines 123--126
 \T1/stix2/m/n/12 Investicijske por-t-fe-lje ma-te-ma-ti£ki pri-ka-zu-jemo kao l
 i-ne-arnu kom-bi-na-ciju po-je-di-nih inves-
  []
 
-[5{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathex.
-enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathr
-m-bold.enc}]
+[4
+
+{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathrm-bo
+ld.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ma
+thrm.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-
+mathex.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix
+2-mathit.enc}]
 
 LaTeX Font Warning: Font shape `LS2/stix2ex/b/n' in size <12> not available
 (Font)              Font shape `LS2/stix2ex/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2ex/b/n' in size <8> not available
 (Font)              Font shape `LS2/stix2ex/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2ex/b/n' in size <6> not available
 (Font)              Font shape `LS2/stix2ex/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS1/stix2bb/b/n' in size <12> not available
 (Font)              Font shape `LS1/stix2bb/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS1/stix2bb/b/n' in size <8> not available
 (Font)              Font shape `LS1/stix2bb/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS1/stix2bb/b/n' in size <6> not available
 (Font)              Font shape `LS1/stix2bb/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS1/stix2bb/b/it' in size <12> not available
 (Font)              Font shape `LS1/stix2bb/m/it' tried instead on input line 1
-88.
+84.
 
 
 LaTeX Font Warning: Font shape `LS1/stix2bb/b/it' in size <8> not available
 (Font)              Font shape `LS1/stix2bb/m/it' tried instead on input line 1
-88.
+84.
 
 
 LaTeX Font Warning: Font shape `LS1/stix2bb/b/it' in size <6> not available
 (Font)              Font shape `LS1/stix2bb/m/it' tried instead on input line 1
-88.
+84.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2cal/b/n' in size <12> not available
 (Font)              Font shape `LS2/stix2cal/m/n' tried instead on input line 1
-88.
+84.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2cal/b/n' in size <8> not available
 (Font)              Font shape `LS2/stix2cal/m/n' tried instead on input line 1
-88.
+84.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2cal/b/n' in size <6> not available
 (Font)              Font shape `LS2/stix2cal/m/n' tried instead on input line 1
-88.
+84.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2tt/b/n' in size <12> not available
 (Font)              Font shape `LS2/stix2tt/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2tt/b/n' in size <8> not available
 (Font)              Font shape `LS2/stix2tt/m/n' tried instead on input line 18
-8.
+4.
 
 
 LaTeX Font Warning: Font shape `LS2/stix2tt/b/n' in size <6> not available
 (Font)              Font shape `LS2/stix2tt/m/n' tried instead on input line 18
-8.
+4.
+
+[5{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.
+enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-maths
+cr.enc}{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ma
+thit-bold.enc}] [6]
+
+! LaTeX Error: Environment theorem undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.246 \begin{theorem}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 188--191
+! LaTeX Error: \begin{document} ended by \end{theorem}.
 
- []
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.248 \end{theorem}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-[6{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr
-.enc}]
+
+! LaTeX Error: Environment proof undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.249 \begin{proof}
+                   
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{document} ended by \end{proof}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.254 \end{proof}
+                 
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[7] [8]
 Poglavlje 3..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 199.
+(blindtext)                 on input line 272.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 199.
+(blindtext)                 on input line 272.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 199.
+(blindtext)                 on input line 272.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 199.
+(blindtext)                 on input line 272.
 
-[7
+[9
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 199.
+(blindtext)                 on input line 272.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 199.
+(blindtext)                 on input line 272.
 
-[8]
+[10]
 Poglavlje 4..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 205.
+(blindtext)                 on input line 278.
 
-(./Zavrsni_rad.bbl [9
+(./Zavrsni_rad.bbl [11
 
 ]
 
 LaTeX Warning: Empty `thebibliography' environment on input line 27.
 
-) [10
+) [12
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 219.
+(blindtext)                 on input line 292.
 
-[11
+[13
 
-] [12
+] [14
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.241 \chapter{The Code}
+l.314 \chapter{The Code}
                         
 Privitak A.
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 244.
+(blindtext)                 on input line 317.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 244.
+(blindtext)                 on input line 317.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 244.
+(blindtext)                 on input line 317.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 244.
+(blindtext)                 on input line 317.
 
-[13
+[15
 
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 244.
+(blindtext)                 on input line 317.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 244.
+(blindtext)                 on input line 317.
 
-[14] (./Zavrsni_rad.aux)
+[16] (./Zavrsni_rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1188,16 +1233,16 @@ Zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: EB8004F2B5477C5188730181DDD9854B;1540.
+(rerunfilecheck)             Checksum: 99CBAE01340993A536B5D1C54D14AFFE;2261.
  ) 
 Here is how much of TeX's memory you used:
- 17939 strings out of 474116
- 279340 string characters out of 5743683
- 1934187 words of memory out of 5000000
- 39961 multiletter control sequences out of 15000+600000
- 632437 words of font info for 150 fonts, out of 8000000 for 9000
+ 17970 strings out of 474116
+ 279807 string characters out of 5743683
+ 1935187 words of memory out of 5000000
+ 39980 multiletter control sequences out of 15000+600000
+ 646659 words of font info for 152 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,17n,131p,644b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,17n,131p,505b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
 ld.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSa
 ns-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-typ
@@ -1205,10 +1250,10 @@ e1/STIX2Math.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-t
 ype1/STIX2Text-Bold.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/
 stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb>
-Output written on Zavrsni_rad.pdf (17 pages, 728880 bytes).
+Output written on Zavrsni_rad.pdf (19 pages, 740858 bytes).
 PDF statistics:
- 229 PDF objects out of 1000 (max. 8388607)
- 184 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 275 PDF objects out of 1000 (max. 8388607)
+ 225 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 165 words of extra memory for PDF output out of 10000 (max. 10000000)
 
