@@ -91,6 +91,7 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
 }
 
 int Portfolio::calculate_aligned_metrics(timestamp start) {
+	// Metrics are daily not yearly!
 	if (aligned_metrics_calculated && aligned_stamp == start) {
 		return 0;
 	}
@@ -111,6 +112,7 @@ int Portfolio::calculate_aligned_metrics(timestamp start) {
 		}
 		if (n > 1) {
 			aligned_means.at(i) = sum / n;
+			std::cout << aligned_means.at(i) << std::endl;
 			aligned_volatilities.at(i) = std::sqrt(
 				(sum_sq - n * aligned_means.at(i) * aligned_means.at(i)) /
 				(n - 1));
