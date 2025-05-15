@@ -94,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent)
 		});
 	layout->addWidget(removeButton);
 
-	QLineEdit *startDateInput = new QLineEdit(this);
+	startDateInput = new QLineEdit(this);
 	startDateInput->setPlaceholderText("YYYY-MM-DD HH:MM:SS");
 	layout->addWidget(new QLabel("Start Time:"));
 	layout->addWidget(startDateInput);
@@ -203,6 +203,8 @@ void MainWindow::runMonteCarloSimulation() {
 			return;
 		}
 	}
+	std::cout << "Start time: " << start.time_since_epoch().count()
+			  << std::endl;
 	try {
 		auto result =
 			portfolio.monte_carlo(simSpin->value(), stepSpin->value(), start);
