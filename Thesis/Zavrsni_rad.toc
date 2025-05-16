@@ -12,7 +12,6 @@
 \contentsline {section}{\numberline {2.4.}Geometrijsko Brownovo gibanje}{6}{section.2.4}%
 \contentsline {section}{\numberline {2.5.}Monte Carlo simulacije}{7}{section.2.5}%
 \contentsline {section}{\numberline {2.6.}Cholesky dekompozicija}{7}{section.2.6}%
-\contentsline {section}{\numberline {2.7.}Optimizacija portfelja}{8}{section.2.7}%
 \contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{9}{chapter.3}%
 \contentsline {chapter}{\numberline {4.}Zaključak}{11}{chapter.4}%
 \contentsline {chapter}{Literatura}{12}{chapter*.2}%

@@ -5,8 +5,26 @@
 
 \usepackage{blindtext}
 
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{hyperref}
+
 \newtheorem{definition}{Definicija}
 \renewcommand{\thedefinition}{\arabic{definition}.}
+
+\newtheorem{theorem}{Teorem}
+\renewcommand{\thetheorem}{\arabic{theorem}.}
+
+\newtheorem{proof}{Dokaz}
+\renewcommand{\theproof}{\arabic{proof}.}
+
+\newenvironment{proof*}
+{\begin{proof}\renewcommand{\theproof}{}}
+  {\end{proof}}
+
+
 
 
 %--- PODACI O RADU / THESIS INFORMATION ----------------------------------------
@@ -212,7 +230,7 @@ Diferencijalna jednadžba GBM-a je:
 \begin{align*}
     dS_t = \mu S_t dt + \sigma S_t dW\left(t\right)
 \end{align*}
-\indent gdje je $W\left(t\right)$ Wienerov proces.
+\indent gdje je $W\left(t\right)$ Wienerov proces.\\
 Eksplicitno rješenje GBM-a daje formulu za cijenu u trenutku $t$:
 
 \begin{align*}
@@ -220,19 +238,31 @@ S_t = S_0 \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)t +
     \sigma W_t\right]
 \end{align*}
 \indent gdje je $S_0$ početna cijena, $\mu$ drift, $\sigma$ volatilnost i $W_t$
-Wienerov proces.
+Wienerov proces.\\
 Detaljno objašnjene o GBM-u i njegovim svojstvima te kompletan derivacijski
 postupak možete pronaći u \cite{GMBIzvod}.
 
 \section{Monte Carlo simulacije}
 \label{sek:monte_carlo}
-Monte Carlo metoda je numerička tehnika koja koristi slučajno uzorkovanje za rješavanje determinističkih problema. Primjerice, vrijednost $\pi$ može se procijeniti simulacijom nasumičnih točaka u jediničnom kvadratu i računanjem udjela koji padaju unutar jediničnog kruga.
+Monte Carlo metoda je numerička metoda koja koristi slučajno
+uzorkovanje za rješavanje problema.
+Jedan iznimno intuitivan i elegantan primjer je određivanje
+vrijednost broja $\pi$.
+Ideja je generiranje što većeg broja točaka unutar jediničnog
+kvadrata koji u sebi sadrži jedinični krug te određivanje
+omjera broja točaka unutar kruga i ukupnog broja točaka te onda
+preko omjera površina kvadrata i kruga dobijemo procjenu vrijednosti
+broja $\pi$.
 
-U kontekstu financija, Monte Carlo simulacije koriste se za generiranje vjerojatnosnih scenarija budućih cijena. Za portfelj od $n$ asseta, koraci su:
+U kontekstu financija, Monte Carlo simulacije koriste se za
+generiranje vjerojatnosnih scenarija budućih cijena.
+Za portfelj od $n$ instrumenata, koraci su:
 \begin{enumerate}
 \item Generiraj nezavisne šokove $Z_i \sim N(0,1)$
-\item Transformiraj u korelirane šokove $\mathbf{Y} = L\mathbf{Z}$ gdje je $L$ Cholesky faktor matrice $\boldsymbol{\Sigma}$
-\item Ažuriraj cijene po GBM formuli za svaki asset:
+\item Transformiraj u korelirane šokove $\mathbf{Y} = L\mathbf{Z}$
+    gdje je $L$ donje trokutasta matrica Cholesky
+        dekompozicije $\boldsymbol{\Sigma}$
+\item Ažuriraj cijene simulacije po GBM formuli za svaki instrument:
 \begin{align*}
 S_t^{(i)} = S_0^{(i)} \exp\left(\left(\mu_i - \frac{\sigma_i^2}{2}\right)\Delta t + \sigma_i Y_i \sqrt{\Delta t}\right)
 \end{align*}
@@ -241,31 +271,33 @@ S_t^{(i)} = S_0^{(i)} \exp\left(\left(\mu_i - \frac{\sigma_i^2}{2}\right)\Delta 
 
 \section{Cholesky dekompozicija}
 \label{sek:cholesky}
-Neka je $\boldsymbol{\Sigma}$ simetrična pozitivno definitna matrica kovarijance. Cholesky dekompozicija je faktorizacija oblika:
-\begin{align*}
-\boldsymbol{\Sigma} = LL^\intercal
-\end{align*}
-gdje je $L$ donjetrokutasta matrica. Ova faktorizacija omogućuje generiranje koreliranih normalnih varijabli iz nekoreliranih.
+Cholesky dekompozicija je numerička metoda koja se koristi za
+dekompoziciju simetričnih pozitivno definitnih matrica. I upravo
+je matrica kovarijance $\boldsymbol{\Sigma}$ simetrična pozitivno
+definitna matrica.
+\begin{definition}
+    \label{def:cholesky}
+    Neka je $\boldsymbol{\Sigma}$ simetrična pozitivno definitna
+    matrica kovarijance. Tada postoji jedinstvena donja trokutasta
+    matrica $L$ takva da:
+    \begin{align*}
+        \boldsymbol{\Sigma} = LL^\intercal
+    \end{align*}
+    \indent gdje je $L$ donja trokutasta matrica.
+\end{definition}
+Ova faktorizacija omogućuje generiranje koreliranih normalnih varijabli iz nekoreliranih.
 
 \begin{theorem}
 Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ varijabli. Tada vektor $\mathbf{Y} = L\mathbf{Z}$ ima kovarijacijsku matricu $\boldsymbol{\Sigma}$.
 \end{theorem}
 \begin{proof}
 \begin{align*}
-\text{Cov}(\mathbf{Y}) &= \mathbb{E}[L\mathbf{Z}(L\mathbf{Z})^\intercal] = L\mathbb{E}[\mathbf{Z}\mathbf{Z}^\intercal]L^\intercal \
-&= L \cdot I \cdot L^\intercal = LL^\intercal = \boldsymbol{\Sigma}
+\text{Cov}(\mathbf{Y}) = \mathbb{E}[L\mathbf{Z}(L\mathbf{Z})^\intercal]
+    = L\mathbb{E}[\mathbf{Z}\mathbf{Z}^\intercal]L^\intercal
+    = L \cdot I \cdot L^\intercal = LL^\intercal = \boldsymbol{\Sigma}
 \end{align*}
 \end{proof}
 
-\section{Optimizacija portfelja}
-Klasični Markowitz-ov model formuliramo kao problem minimizacije varijance uz zadani očekivani povrat:
-\begin{align*}
-\min_{\mathbf{w}} \mathbf{w}^\intercal \boldsymbol{\Sigma} \mathbf{w} \
-\text{uz uvjete: } \mathbf{w}^\intercal \boldsymbol{\mu} = \mu_p, \quad \mathbf{w}^\intercal \mathbf{1} = 1
-\end{align*}
-Rješenje ovog kvadratskog programa daje \textit{efikasnu granicu} - skup portfelja s minimalnim rizikom za zadani povrat.
-
-Monte Carlo simulacije proširuju ovaj okvir omogućujući analizu distribucije budućih povrata i rizika u nelineranim scenarijima. Kombinacijom Cholesky dekompozicije i GBM-a moguće je modelirati kompleksne interakcije u portfeljima kriptovaluta s visokom točnošću.
 
 
 % Rasprava
