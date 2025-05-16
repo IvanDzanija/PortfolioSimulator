@@ -10,51 +10,44 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 150 items from 100.
 Database file #1: literatura.bib
-I was expecting a `,' or a `}'---line 19 of file literatura.bib
- :     
- :     year = 2014,
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
-Warning--empty journal in 4
 You've used 1 entry,
             4225 wiz_defined-function locations,
-            839 strings with 7819 characters,
+            840 strings with 7883 characters,
 and the built_in function-call counts, 512 in all, are:
 = -- 31
 > -- 9
-< -- 1
+< -- 0
 + -- 4
 - -- 2
-* -- 29
-:= -- 103
+* -- 24
+:= -- 99
 add.period$ -- 3
 call.type$ -- 1
 change.case$ -- 1
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 36
-empty$ -- 38
+cite$ -- 1
+duplicate$ -- 34
+empty$ -- 43
 format.name$ -- 3
-if$ -- 98
+if$ -- 101
 int.to.chr$ -- 0
 int.to.str$ -- 1
-missing$ -- 7
+missing$ -- 8
 newline$ -- 28
 num.names$ -- 1
-pop$ -- 18
+pop$ -- 23
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 35
+skip$ -- 37
 stack$ -- 0
 substring$ -- 1
-swap$ -- 21
-text.length$ -- 1
+swap$ -- 20
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 1
-warning$ -- 1
+warning$ -- 0
 while$ -- 1
 width$ -- 2
 write$ -- 32
-(There was 1 error message)
