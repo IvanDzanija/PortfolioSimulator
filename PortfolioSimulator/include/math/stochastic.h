@@ -1,5 +1,5 @@
-#ifndef STOHASTIC_H
-#define STOHASTIC_H
+#ifndef STOCHASTIC_H
+#define STOCHASTIC_H
 
 #include <cmath>
 #include <vector>
@@ -41,4 +41,4 @@ std::vector<double> correlated_shocks(const std::vector<std::vector<T>> &L,
 }
 } // namespace math
 
-#endif // STOHASTIC_H
+#endif // STOCHASTIC_H

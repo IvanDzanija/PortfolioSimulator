@@ -2,7 +2,7 @@
 #include "DateTime_formatting.h"
 #include "Portfolio.h"
 #include "math/numerical.h"
-#include "math/stohastic.h"
+#include "math/stochastic.h"
 #include <algorithm>
 #include <chrono>
 #include <cmath>

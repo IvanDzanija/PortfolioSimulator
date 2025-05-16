@@ -1,5 +1,5 @@
 [project]
-name = "quantifyrisk"
+name = "PortfolioSimulator"
 version = "0.1.0"
 description = "C++ application for portfolio modeling"
 authors = [{ name = "Ivan Džanija" }]

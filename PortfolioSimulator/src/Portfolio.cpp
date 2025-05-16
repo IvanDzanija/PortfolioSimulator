@@ -1,6 +1,7 @@
 #include "DateTime_formatting.h"
 #include "Portfolio.h"
 #include "math/numerical.h"
+#include "math/stochastic.h"
 #include <algorithm>
 
 Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
