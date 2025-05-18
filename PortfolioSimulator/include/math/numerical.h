@@ -1,9 +1,11 @@
 #ifndef MATH_H
 #define MATH_H
+#include <climits>
 #include <cmath>
 #include <stdexcept>
 #include <vector>
 
+template <typename T> constexpr T EPSILON = static_cast<T>(1e-12);
 namespace math {
 
 template <typename T>
@@ -12,50 +14,178 @@ matrix_transpose(const std::vector<std::vector<T>> &matrix) {
 	// O(n^2)
 	// Transpose a matrix
 	size_t rows = matrix.size();
-	size_t cols = matrix[0].size();
+	size_t cols = matrix.at(0).size();
 
 	std::vector<std::vector<T>> transposed(cols, std::vector<T>(rows, 0));
 
 	for (size_t i = 0; i < rows; ++i) {
 		for (size_t j = 0; j < cols; ++j) {
-			transposed[j][i] = matrix[i][j];
+			transposed.at(j).at(i) = matrix.at(i).at(j);
 		}
 	}
 	return transposed;
 }
 
 template <typename T>
-std::vector<std::vector<T>>
-cholesky_decomposition(const std::vector<std::vector<T>> &matrix) {
+int cholesky_decomposition(const std::vector<std::vector<T>> &matrix,
+						   std::vector<std::vector<T>> &L) {
 	// O(n^3 / 3)
 	// Works only for symmetric positive-definite matrices
 	size_t n = matrix.size();
-	if (n == 0 || matrix[0].size() != n) {
+	if (n == 0 || matrix.at(0).size() != n) {
 		throw std::invalid_argument("Matrix must be square and non-empty!");
+		return -1;
 	}
-
-	std::vector<std::vector<T>> L(n, std::vector<T>(n, 0));
 
 	for (size_t i = 0; i < n; ++i) {
 		for (size_t j = 0; j <= i; ++j) {
 			T sum = 0;
 			for (size_t k = 0; k < j; ++k) {
-				sum += L[i][k] * L[j][k];
+				sum += L.at(i).at(k) * L.at(j).at(k);
 			}
 			if (i == j) {
-				if (matrix[i][i] - sum <= 0) {
+				if (matrix.at(i).at(i) - sum <= 0) {
 					throw std::runtime_error(
 						"Matrix is not positive definite!");
+					return -1;
 				}
-				L[i][j] = std::sqrt(matrix[i][i] - sum);
+				L.at(i).at(j) = std::sqrt(matrix.at(i).at(i) - sum);
 			} else {
-				L[i][j] = (matrix[i][j] - sum) / L[j][j];
+				L.at(i).at(j) = (matrix.at(i).at(j) - sum) / L.at(j).at(j);
 			}
 		}
 	}
-	return L;
+	return 0;
+}
+template <typename T> double vector_norm(const std::vector<T> &v) {
+	double sum = 0;
+	for (const auto &val : v) {
+		sum += val * val;
+	}
+	return std::sqrt(sum);
 }
 
+template <typename T> std::vector<T> normalized(const std::vector<T> &v) {
+	std::vector<T> normalized(v.size());
+	double norm = vector_norm(v);
+	if (norm < EPSILON<T>) {
+		throw std::invalid_argument("Cannot normalize a zero vector!");
+		return {};
+	}
+	for (size_t i = 0; i < v.size(); ++i) {
+		normalized.at(i) = v.at(i) / norm;
+	}
+	return normalized;
+}
+
+template <typename T>
+std::vector<T> scalar_multiply(const std::vector<T> &v, T scalar) {
+	std::vector<T> result(v.size());
+	for (size_t i = 0; i < v.size(); ++i) {
+		result.at(i) = v.at(i) * scalar;
+	}
+	return result;
+}
+
+template <typename T>
+std::vector<T> vector_add(const std::vector<T> &v1, const std::vector<T> &v2) {
+	if (v1.size() != v2.size()) {
+		throw std::invalid_argument("Vectors must be of the same size!");
+		return {};
+	}
+	std::vector<T> result(v1.size());
+	for (size_t i = 0; i < v1.size(); ++i) {
+		result.at(i) = v1.at(i) + v2.at(i);
+	}
+	return result;
+}
+
+template <typename T>
+std::vector<T> vector_subtract(const std::vector<T> &v1,
+							   const std::vector<T> &v2) {
+	if (v1.size() != v2.size()) {
+		throw std::invalid_argument("Vectors must be of the same size!");
+		return {};
+	}
+	std::vector<T> result(v1.size());
+	for (size_t i = 0; i < v1.size(); ++i) {
+		result.at(i) = v1.at(i) - v2.at(i);
+	}
+	return result;
+}
+
+template <typename T>
+std::vector<T> vector_multiply(const std::vector<T> &v1,
+							   const std::vector<T> &v2) {
+	if (v1.size() != v2.size()) {
+		throw std::invalid_argument("Vectors must be of the same size!");
+		return {};
+	}
+	std::vector<T> result(v1.size());
+	for (size_t i = 0; i < v1.size(); ++i) {
+		result.at(i) = v1.at(i) * v2.at(i);
+	}
+	return result;
+}
+
+template <typename T>
+int QR_decomposition(const std::vector<std::vector<T>> &matrix,
+					 std::vector<std::vector<T>> &Q,
+					 std::vector<std::vector<T>> &R) {
+
+	std::vector<std::vector<T>> A = matrix;
+	size_t n = A.size();
+	size_t m = A.at(0).size();
+	if (n == 0 || m == 0 || n != m) {
+		throw std::invalid_argument("Matrix must be square and non-empty!");
+		return -1;
+	}
+
+	std::vector<std::vector<std::vector<T>>> P(
+		n, std::vector<std::vector<T>>(n, std::vector<T>(n, 0)));
+
+	for (size_t k = 0; k < n; ++k) {
+		std::vector<T> a1(n - k, 0);
+		std::vector<T> b1(n - k, 0);
+		for (size_t i = k; i < n; ++i) {
+			a1.at(i - k) = A.at(i).at(k);
+			b1.at(i - k) = static_cast<T>(0.0);
+		}
+		double norm = vector_norm(a1);
+		int sign = (a1.at(0) < static_cast<T>(0.0)) ? 1 : -1;
+
+		std::vector<T> u =
+			vector_subtract(a1, scalar_multiply(b1, norm * sign));
+		std::vector<T> v = matrix_transpose(normalized(u));
+
+		std::vector<std::vector<T>> I(n - k, std::vector<T>(n - k, 0));
+		for (size_t i = 0; i < n - k; ++i) {
+			I.at(i).at(i) = 1;
+		}
+
+		std::vector<std::vector<T>> PTemp = matrix_subtract(
+			I, scalar_multiply(vector_multiply(v, matrix_transpose(v)),
+							   static_cast<T>(2.0)));
+
+		std::vector<std::vector<T>> currentP(n, std::vector<T>(n, 0));
+		for (size_t i = k; i < n; ++i) {
+			currentP.at(i).at(i) = 1;
+			for (size_t j = k; j < n; ++j) {
+				currentP.at(i).at(j) = PTemp.at(i - k).at(j - k);
+			}
+		}
+	}
+	return 0;
+}
+
+template <typename T>
+int eigen_pairs(std::vector<std::vector<T>> &A,
+				std::vector<std::pair<T, std::vector<T>>> &result) {
+
+	size_t n = A.size();
+
+	return 0;
+}
 } // namespace math
 
 #endif // MATH_H
