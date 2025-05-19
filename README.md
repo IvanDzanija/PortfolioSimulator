@@ -1,2 +1,2 @@
-# bachelor-thesis
+# PortfolioSimulator
 Bachelor's thesis 
