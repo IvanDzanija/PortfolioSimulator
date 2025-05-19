@@ -21,7 +21,50 @@ Doubles_Matrix covariance_test(Portfolio &test, timestamp start) {
 Doubles_Matrix cholesky_test(Portfolio &test, timestamp start) {
     // Test the Cholesky decomposition function
     Doubles_Matrix cov = test.calculate_covariance(start);
-    Doubles_Matrix cholesky;
+    Doubles_Matrix cholesky(cov.size(), std::vector<double>(cov.size(), 0.0));
     math::cholesky_decomposition(cov, cholesky);
     return cholesky;
+}
+
+int QR_decomposition_test(Portfolio &test, timestamp start) {
+    // Test the QR decomposition function
+    Doubles_Matrix cov = test.calculate_covariance(start);
+    Doubles_Matrix Q, R;
+    int info = math::QR_decomposition(cov, Q, R);
+    if (info != 0) {
+        std::cerr << "Error in QR decomposition" << std::endl;
+        return info;
+    }
+    std::cout << "Q matrix:" << std::endl;
+    for (auto &row : Q) {
+        for (auto &val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "R matrix:" << std::endl;
+    for (auto &row : R) {
+        for (auto &val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << "A matrix:" << std::endl;
+    for (auto &row : cov) {
+        for (auto &val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "Q * R:" << std::endl;
+    Doubles_Matrix QR = math::matrix_multiply(Q, R);
+    for (auto &row : QR) {
+        for (auto &val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
 }
