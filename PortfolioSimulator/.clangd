@@ -1,7 +1,5 @@
 CompileFlags:
   Add:
-    - -Wno-unknown-attributes
-    - -Wno-attribute-ignored
     - -fopenmp
     - -I/opt/homebrew/opt/libomp/include
     - -I/opt/homebrew/opt/llvm/include

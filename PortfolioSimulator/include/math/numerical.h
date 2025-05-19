@@ -192,6 +192,22 @@ matrix_subtract(const std::vector<std::vector<T>> &A,
     return result;
 }
 
+template <typename T> void vector_print(const std::vector<T> &v) {
+    for (const auto &val : v) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
+}
+template <typename T>
+void matrix_print(const std::vector<std::vector<T>> &matrix) {
+    for (const auto &row : matrix) {
+        for (const auto &val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 template <typename T>
 int QR_decomposition(const std::vector<std::vector<T>> &matrix,
                      std::vector<std::vector<T>> &Q,
@@ -208,32 +224,27 @@ int QR_decomposition(const std::vector<std::vector<T>> &matrix,
     std::vector<std::vector<std::vector<T>>> P(
         n - 1, std::vector<std::vector<T>>(n, std::vector<T>(n, 0)));
 
-    for (size_t k = 0; k < n; ++k) {
-        std::vector<T> a1(n - k, 0);
-        std::vector<T> b1(n - k, 0);
+    for (size_t k = 0; k < n - 1; ++k) {
+        std::vector<T> a1(n - k);
+        std::vector<T> b1(n - k, static_cast<T>(0.0));
         for (size_t i = k; i < n; ++i) {
             a1.at(i - k) = A.at(i).at(k);
-            b1.at(i - k) = static_cast<T>(0.0);
         }
+        b1.at(0) = static_cast<T>(1.0);
+
         double norm = vector_norm(a1);
         int sign = (a1.at(0) < static_cast<T>(0.0)) ? 1 : -1;
 
         std::vector<T> u =
             vector_subtract(a1, scalar_multiply(b1, norm * sign));
 
-        // Normalize u
         std::vector<T> uNorm = normalized(u);
-
-        std::cout << uNorm.size() << std::endl;
-        for (auto &val : uNorm) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
 
         std::vector<std::vector<T>> uTemp(n - k, std::vector<T>(1, 0));
         for (size_t i = 0; i < n - k; ++i) {
             uTemp.at(i).at(0) = uNorm.at(i);
         }
+
         std::vector<std::vector<T>> v = matrix_transpose(uTemp);
 
         std::vector<std::vector<T>> I(n - k, std::vector<T>(n - k, 0));
@@ -241,32 +252,34 @@ int QR_decomposition(const std::vector<std::vector<T>> &matrix,
             I.at(i).at(i) = 1;
         }
 
-        std::vector<std::vector<T>> PTemp = matrix_subtract(
-            I, matrix_scalar_multiply(matrix_multiply(v, matrix_transpose(v)),
-                                      static_cast<T>(2.0)));
+        std::vector<std::vector<T>> PTemp =
+            matrix_subtract(I, matrix_scalar_multiply(matrix_multiply(uTemp, v),
+                                                      static_cast<T>(2.0)));
 
         std::vector<std::vector<T>> currentP(n, std::vector<T>(n, 0));
-        for (size_t i = k; i < n; ++i) {
+        for (size_t i = 0; i < n; ++i) {
             currentP.at(i).at(i) = 1;
+        }
+        for (size_t i = k; i < n; ++i) {
             for (size_t j = k; j < n; ++j) {
                 currentP.at(i).at(j) = PTemp.at(i - k).at(j - k);
             }
         }
         P.at(k) = currentP;
         A = matrix_multiply(currentP, A);
-
-        // Compute Q and R
-        Q = P.at(0);
-        for (size_t i = 1; i <= k; ++i) {
-            Q = matrix_multiply(Q, matrix_transpose(P.at(i)));
-        }
-
-        R = currentP;
-        for (size_t i = P.size() - 2; i >= 0; --i) {
-            R = matrix_multiply(R, P.at(i));
-        }
-        R = matrix_multiply(R, A);
     }
+
+    // Compute Q and R
+    Q = P.at(0);
+    for (auto it = std::next(P.begin()); it != P.end(); it = std::next(it)) {
+        Q = matrix_multiply(Q, matrix_transpose(*it));
+    }
+
+    R = *P.rbegin();
+    for (auto it = std::next(P.rbegin()); it != P.rend(); it = std::next(it)) {
+        R = matrix_multiply(R, *it);
+    }
+    R = matrix_multiply(R, matrix);
     return 0;
 }
 
