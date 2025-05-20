@@ -1,13 +1,16 @@
-#ifndef MATH_H
-#define MATH_H
+#ifndef NUMERICAL_H
+#define NUMERICAL_H
+#include <chrono>
 #include <climits>
 #include <cmath>
 #include <iostream>
 #include <omp.h>
+#include <random>
 #include <stdexcept>
 #include <vector>
 
-template <typename T> constexpr T EPSILON = static_cast<T>(1e-12);
+const size_t MAX_ITERATIONS = 1000;
+template <typename T> constexpr T EPSILON = static_cast<T>(1e-6);
 namespace math {
 
 template <typename T>
@@ -70,7 +73,7 @@ template <typename T> double vector_norm(const std::vector<T> &v) {
 template <typename T> std::vector<T> normalized(const std::vector<T> &v) {
     std::vector<T> normalized(v.size());
     double norm = vector_norm(v);
-    if (norm < EPSILON<T>) {
+    if (norm <= EPSILON<T>) {
         throw std::invalid_argument("Cannot normalize a zero vector!");
         return {};
     }
@@ -207,6 +210,46 @@ void matrix_print(const std::vector<std::vector<T>> &matrix) {
         std::cout << std::endl;
     }
 }
+template <typename T>
+bool isUpperTriangular(const std::vector<std::vector<T>> &mat) {
+    size_t n = mat.size();
+    bool isUpper = true;
+
+#pragma omp parallel for shared(isUpper)
+    for (size_t i = 1; i < n; ++i) {
+        if (!isUpper)
+            continue; // early stop from outer thread check
+        for (size_t j = 0; j < i; ++j) {
+            if (mat.at(i).at(j) <= EPSILON<T>) {
+#pragma omp atomic write
+                isUpper = false;
+                break;
+            }
+        }
+    }
+
+    return isUpper;
+}
+template <typename T>
+bool isLowerTriangular(const std::vector<std::vector<T>> &mat) {
+    size_t n = mat.size();
+    bool isLower = true;
+
+#pragma omp parallel for shared(isLower)
+    for (size_t i = 0; i < n - 1; ++i) {
+        if (!isLower)
+            continue;
+        for (size_t j = i + 1; j < n; ++j) {
+            if (mat.at(i).at(j) <= EPSILON<T>) {
+#pragma omp atomic write
+                isLower = false;
+                break;
+            }
+        }
+    }
+
+    return isLower;
+}
 
 template <typename T>
 int QR_decomposition(const std::vector<std::vector<T>> &matrix,
@@ -283,14 +326,150 @@ int QR_decomposition(const std::vector<std::vector<T>> &matrix,
     return 0;
 }
 
+template <typename T> int normalize(std::vector<T> &v) {
+    double norm = vector_norm(v);
+    if (norm <= EPSILON<T>) {
+        throw std::invalid_argument("Cannot normalize a zero vector!");
+        return -1;
+    }
+    for (size_t i = 0; i < v.size(); ++i) {
+        v.at(i) /= norm;
+    }
+    return 0;
+}
+
 template <typename T>
-int eigen_pairs(std::vector<std::vector<T>> &A,
+int matrix_inverse(const std::vector<std::vector<T>> &input,
+                   std::vector<std::vector<T>> &output) {
+    int n = input.size();
+    std::vector<std::vector<T>> A = input;
+    std::vector<std::vector<T>> I(n, std::vector<double>(n, 0.0));
+
+    for (size_t i = 0; i < n; ++i)
+        I.at(i).at(i) = 1.0;
+
+    for (int i = 0; i < n; ++i) {
+        // Partial pivoting
+        int maxRow = i;
+        for (int k = i + 1; k < n; ++k) {
+            if (std::abs(A[k][i]) > std::abs(A[maxRow][i])) {
+                maxRow = k;
+            }
+        }
+        if (std::abs(A[maxRow][i]) < 1e-12) {
+            throw std::runtime_error("Matrix is singular or nearly singular.");
+        }
+
+        // Swap rows in A and I
+        std::swap(A[i], A[maxRow]);
+        std::swap(I[i], I[maxRow]);
+
+        // Normalize row i
+        double diag = A[i][i];
+        for (int j = 0; j < n; ++j) {
+            A[i][j] /= diag;
+            I[i][j] /= diag;
+        }
+
+#pragma omp parallel for
+        for (int k = 0; k < n; ++k) {
+            if (k == i)
+                continue;
+            double factor = A[k][i];
+            for (int j = 0; j < n; ++j) {
+                A[k][j] -= factor * A[i][j];
+                I[k][j] -= factor * I[i][j];
+            }
+        }
+    }
+    output = I;
+    return 0;
+}
+
+template <typename T>
+int eigen_pairs(std::vector<std::vector<T>> &matrix,
                 std::vector<std::pair<T, std::vector<T>>> &result) {
 
+    std::vector<std::vector<T>> A = matrix;
     size_t n = A.size();
+    size_t m = A.at(0).size();
+    if (n == 0 || m == 0 || n != m) {
+        throw std::invalid_argument("Matrix must be square and non-empty!");
+        return -1;
+    }
+
+    // Matrix has to also be symmetric since this is the only guarantee that
+    // eigenvalues are real
+
+    std::vector<std::pair<T, std::vector<T>>> results(
+        n, std::pair<T, std::vector<T>>(1, std::vector<T>(n, 0)));
+
+    std::vector<std::vector<T>> Q(n, std::vector<T>(n, 0));
+    std::vector<std::vector<T>> R(n, std::vector<T>(n, 0));
+
+    size_t iterations = 0;
+    while (iterations < MAX_ITERATIONS) {
+        if (QR_decomposition(A, Q, R)) {
+            throw std::runtime_error("QR decomposition failed!");
+            return -1;
+        }
+        A = matrix_multiply(R, Q);
+
+        if (isUpperTriangular(A)) {
+            break;
+        }
+        ++iterations;
+    }
+    if (iterations == MAX_ITERATIONS) {
+        matrix_print(A);
+    }
+    for (size_t i = 0; i < n; ++i) {
+        results.at(i).first = A.at(i).at(i);
+    }
+    sort(results.begin(), results.end(), std::greater<>());
+
+    for (size_t i = 0; i < n; ++i) {
+        std::mt19937 rnd(
+            std::chrono::steady_clock::now().time_since_epoch().count());
+        std::mt19937 gen(rnd());
+        std::uniform_int_distribution<size_t> dist(1, 10);
+
+        std::vector<T> eigenvector = &results.at(i).second;
+        std::vector<T> prev_eigenvector(n, 0);
+        std::vector<std::vector<T>> temp(n, std::vector<T>(n, 0));
+        std::vector<std::vector<T>> identity(n, std::vector<T>(n, 0));
+        for (size_t j = 0; j < n; ++j) {
+            eigenvector.at(j) = dist(gen);
+            identity.at(j).at(j) = 1;
+        }
+
+        iterations = 0;
+        T delta = static_cast<T>(1e6);
+        T deltaT = static_cast<T>(1e-9);
+        while (iterations < MAX_ITERATIONS && delta > deltaT) {
+            prev_eigenvector = eigenvector;
+            temp = matrix_subtract(
+                A, matrix_scalar_multiply(identity, results.at(i).first));
+
+            if (matrix_inverse(temp, temp) != 0) {
+                throw std::runtime_error("Matrix inversion failed!");
+                return -1;
+            }
+            auto extra_slow = matrix_multiply(temp, prev_eigenvector);
+            for (size_t j = 0; j < n; ++j) {
+                eigenvector.at(j) = extra_slow.at(j).at(0);
+            }
+            if (normalize(eigenvector) != 0) {
+                throw std::runtime_error("Normalization failed!");
+                return -1;
+            }
+            delta = vector_norm(vector_subtract(eigenvector, prev_eigenvector));
+            ++iterations;
+        }
+    }
 
     return 0;
 }
 } // namespace math
 
-#endif // MATH_H
+#endif // NUMERICAL_H
