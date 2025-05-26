@@ -27,7 +27,6 @@ Doubles_Matrix cholesky_test(Portfolio &test, timestamp start) {
 }
 
 int QR_decomposition_test(Portfolio &test, timestamp start) {
-    // Test the QR decomposition function
     Doubles_Matrix cov = test.calculate_covariance(start);
     Doubles_Matrix Q, R;
     int info = math::QR_decomposition(cov, Q, R);
@@ -35,36 +34,53 @@ int QR_decomposition_test(Portfolio &test, timestamp start) {
         std::cerr << "Error in QR decomposition" << std::endl;
         return info;
     }
-    std::cout << "Q matrix:" << std::endl;
-    for (auto &row : Q) {
-        for (auto &val : row) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "R matrix:" << std::endl;
-    for (auto &row : R) {
-        for (auto &val : row) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << "A matrix:" << std::endl;
-    for (auto &row : cov) {
-        for (auto &val : row) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "Q * R:" << std::endl;
-    Doubles_Matrix QR = math::matrix_multiply(Q, R);
-    for (auto &row : QR) {
-        for (auto &val : row) {
-            std::cout << val << " ";
-        }
-        std::cout << std::endl;
-    }
+    //    std::cout << "Q matrix:" << std::endl;
+    //    for (auto &row : Q) {
+    //        for (auto &val : row) {
+    //            std::cout << val << " ";
+    //        }
+    //        std::cout << std::endl;
+    //    }
+    //    std::cout << "R matrix:" << std::endl;
+    //    for (auto &row : R) {
+    //        for (auto &val : row) {
+    //            std::cout << val << " ";
+    //        }
+    //        std::cout << std::endl;
+    //    }
+    //
+    //    std::cout << "A matrix:" << std::endl;
+    //    for (auto &row : cov) {
+    //        for (auto &val : row) {
+    //            std::cout << val << " ";
+    //        }
+    //        std::cout << std::endl;
+    //    }
+    //    std::cout << "Q * R:" << std::endl;
+    //    Doubles_Matrix QR = math::matrix_multiply(Q, R);
+    //    for (auto &row : QR) {
+    //        for (auto &val : row) {
+    //            std::cout << val << " ";
+    //        }
+    //        std::cout << std::endl;
+    //    }
 
     return 0;
+}
+
+std::vector<std::pair<double, std::vector<double>>>
+eigen_test(Portfolio &test, timestamp start) {
+    Doubles_Matrix cov = test.calculate_covariance(start);
+    Doubles_Matrix eigenvectors;
+    std::vector<double> eigenvalues;
+    int info = math::eigen_decomposition(cov, eigenvalues, eigenvectors);
+    if (info != 0) {
+        std::cerr << "Error in eigen decomposition" << std::endl;
+        return {};
+    }
+    std::vector<std::pair<double, std::vector<double>>> result;
+    for (size_t i = 0; i < eigenvalues.size(); ++i) {
+        result.emplace_back(eigenvalues[i], eigenvectors[i]);
+    }
+    return result;
 }
