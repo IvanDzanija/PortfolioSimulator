@@ -173,6 +173,7 @@ matrix_multiply(const std::vector<std::vector<T>> &A,
     }
     return result;
 }
+
 template <typename T>
 std::vector<std::vector<T>>
 matrix_subtract(const std::vector<std::vector<T>> &A,
@@ -218,9 +219,9 @@ bool isUpperTriangular(const std::vector<std::vector<T>> &mat) {
 #pragma omp parallel for shared(isUpper)
     for (size_t i = 1; i < n; ++i) {
         if (!isUpper)
-            continue; // early stop from outer thread check
+            continue;
         for (size_t j = 0; j < i; ++j) {
-            if (mat.at(i).at(j) <= EPSILON<T>) {
+            if (mat.at(i).at(j) >= EPSILON<T>) {
 #pragma omp atomic write
                 isUpper = false;
                 break;
@@ -249,6 +250,25 @@ bool isLowerTriangular(const std::vector<std::vector<T>> &mat) {
     }
 
     return isLower;
+}
+
+template <typename T>
+std::vector<std::vector<T>> vector_to_matrix_vert(const std::vector<T> &vec) {
+    size_t n = vec.size();
+    std::vector<std::vector<T>> ret(n, std::vector<T>(1));
+    for (size_t i = 0; i < n; ++i) {
+        ret.at(i).at(0) = vec.at(i);
+    }
+    return ret;
+}
+template <typename T>
+std::vector<std::vector<T>> vector_to_matrix_horz(const std::vector<T> &vec) {
+    size_t n = vec.size();
+    std::vector<std::vector<T>> ret(1, std::vector<T>(n));
+    for (size_t i = 0; i < n; ++i) {
+        ret.at(0).at(i) = vec.at(i);
+    }
+    return ret;
 }
 
 template <typename T>
@@ -352,20 +372,19 @@ int matrix_inverse(const std::vector<std::vector<T>> &input,
         // Partial pivoting
         int maxRow = i;
         for (int k = i + 1; k < n; ++k) {
-            if (std::abs(A[k][i]) > std::abs(A[maxRow][i])) {
+            if (std::abs(A.at(k).at(i)) > std::abs(A.at(maxRow).at(i))) {
                 maxRow = k;
             }
         }
         if (std::abs(A[maxRow][i]) < 1e-12) {
-            throw std::runtime_error("Matrix is singular or nearly singular.");
+            std::cout << "Matrix is singular or nearly singular." << std::endl;
         }
 
-        // Swap rows in A and I
-        std::swap(A[i], A[maxRow]);
-        std::swap(I[i], I[maxRow]);
+        std::swap(A.at(i), A.at(maxRow));
+        std::swap(I.at(i), I.at(maxRow));
 
         // Normalize row i
-        double diag = A[i][i];
+        double diag = A.at(i).at(i);
         for (int j = 0; j < n; ++j) {
             A[i][j] /= diag;
             I[i][j] /= diag;
@@ -383,6 +402,22 @@ int matrix_inverse(const std::vector<std::vector<T>> &input,
         }
     }
     output = I;
+    return 0;
+}
+template <typename T> int set_to_identity(std::vector<std::vector<T>> &matrix) {
+    size_t n = matrix.size();
+    if (n == 0) {
+        std::cout << "Matrix is empty!" << std::endl;
+        return 1;
+    }
+    size_t m = matrix.at(0).size();
+    if (n != m) {
+        std::cout << "Matrix is not square!" << std::endl;
+        return 1;
+    }
+    for (size_t i = 0; i < n; ++i) {
+        matrix.at(i).at(i) = 1;
+    }
     return 0;
 }
 
@@ -408,11 +443,18 @@ int eigen_pairs(std::vector<std::vector<T>> &matrix,
     std::vector<std::vector<T>> R(n, std::vector<T>(n, 0));
 
     size_t iterations = 0;
-    while (iterations < MAX_ITERATIONS) {
+    std::vector<std::vector<T>> bigQ(n, std::vector<T>(n, 0));
+    int info = set_to_identity(bigQ);
+    while (iterations < MAX_ITERATIONS * MAX_ITERATIONS) {
         if (QR_decomposition(A, Q, R)) {
             throw std::runtime_error("QR decomposition failed!");
             return -1;
         }
+        bigQ = matrix_multiply(bigQ, Q);
+        std::cout << "BIGQ" << std::endl;
+        matrix_print(bigQ);
+        std::cout << "Q:" << std::endl;
+        matrix_print(Q);
         A = matrix_multiply(R, Q);
 
         if (isUpperTriangular(A)) {
@@ -420,12 +462,15 @@ int eigen_pairs(std::vector<std::vector<T>> &matrix,
         }
         ++iterations;
     }
-    if (iterations == MAX_ITERATIONS) {
-        matrix_print(A);
-    }
+    matrix_print(bigQ);
+    // if (iterations == MAX_ITERATIONS) {
+    //     matrix_print(A);
+    // }
     for (size_t i = 0; i < n; ++i) {
         results.at(i).first = A.at(i).at(i);
+        std::cout << results.at(i).first << std::endl;
     }
+
     sort(results.begin(), results.end(), std::greater<>());
 
     for (size_t i = 0; i < n; ++i) {
@@ -434,7 +479,7 @@ int eigen_pairs(std::vector<std::vector<T>> &matrix,
         std::mt19937 gen(rnd());
         std::uniform_int_distribution<size_t> dist(1, 10);
 
-        std::vector<T> eigenvector = &results.at(i).second;
+        std::vector<T> eigenvector = results.at(i).second;
         std::vector<T> prev_eigenvector(n, 0);
         std::vector<std::vector<T>> temp(n, std::vector<T>(n, 0));
         std::vector<std::vector<T>> identity(n, std::vector<T>(n, 0));
@@ -455,7 +500,9 @@ int eigen_pairs(std::vector<std::vector<T>> &matrix,
                 throw std::runtime_error("Matrix inversion failed!");
                 return -1;
             }
-            auto extra_slow = matrix_multiply(temp, prev_eigenvector);
+
+            auto extra_slow =
+                matrix_multiply(temp, vector_to_matrix_horz(prev_eigenvector));
             for (size_t j = 0; j < n; ++j) {
                 eigenvector.at(j) = extra_slow.at(j).at(0);
             }

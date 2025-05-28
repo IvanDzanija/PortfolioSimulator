@@ -70,17 +70,16 @@ int QR_decomposition_test(Portfolio &test, timestamp start) {
 
 std::vector<std::pair<double, std::vector<double>>>
 eigen_test(Portfolio &test, timestamp start) {
-    Doubles_Matrix cov = test.calculate_covariance(start);
+    // Doubles_Matrix cov = test.calculate_covariance(start);
+    Doubles_Matrix cov = {{6, 5.5, -1}, {5.5, 1, -2}, {-1, -2, -3}};
     Doubles_Matrix eigenvectors;
     std::vector<double> eigenvalues;
-    int info = math::eigen_decomposition(cov, eigenvalues, eigenvectors);
+
+    std::vector<std::pair<double, std::vector<double>>> eig_pairs;
+    int info = math::eigen_pairs(cov, eig_pairs);
     if (info != 0) {
         std::cerr << "Error in eigen decomposition" << std::endl;
         return {};
     }
-    std::vector<std::pair<double, std::vector<double>>> result;
-    for (size_t i = 0; i < eigenvalues.size(); ++i) {
-        result.emplace_back(eigenvalues[i], eigenvectors[i]);
-    }
-    return result;
+    return eig_pairs;
 }
