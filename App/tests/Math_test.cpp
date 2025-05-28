@@ -72,10 +72,12 @@ std::vector<std::pair<double, std::vector<double>>>
 eigen_test(Portfolio &test, timestamp start) {
     // Doubles_Matrix cov = test.calculate_covariance(start);
     Doubles_Matrix cov = {{6, 5.5, -1}, {5.5, 1, -2}, {-1, -2, -3}};
-    Doubles_Matrix eigenvectors;
-    std::vector<double> eigenvalues;
+    size_t n = cov.size();
 
-    std::vector<std::pair<double, std::vector<double>>> eig_pairs;
+    std::vector<std::pair<double, std::vector<double>>> eig_pairs(
+        n,
+        std::pair<double, std::vector<double>>(1, std::vector<double>(n, 0)));
+
     int info = math::eigen_pairs(cov, eig_pairs);
     if (info != 0) {
         std::cerr << "Error in eigen decomposition" << std::endl;
