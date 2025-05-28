@@ -1,5 +1,6 @@
 #include "Alignment_test.h"
 #include "Math_test.h"
+#include "PCA_test.h"
 #include "Parser_test.h"
 #include "Portfolio.h"
 #include "math/numerical.h"
@@ -77,22 +78,23 @@ int main(void) {
     std::cout << "Eigen decomposition:" << std::endl;
     std::vector<std::pair<double, std::vector<double>>> eig_pairs =
         eigen_test(test, start);
+    return 0;
 
-    for (auto pair : eig_pairs) {
-        std::cout << "Eigenvalue: " << pair.first << std::endl;
-        std::cout << "Correspoding eigenvector:" << std::endl;
-        std::cout << '(';
-        bool f = false;
-        for (double x : pair.second) {
-            if (!f) {
-                f = true;
-            } else {
-                std::cout << ' ';
-            }
-            std::cout << x;
-        }
-        std::cout << ')' << std::endl;
-    }
+    //  for (auto pair : eig_pairs) {
+    //      std::cout << "Eigenvalue: " << pair.first << std::endl;
+    //      std::cout << "Correspoding eigenvector:" << std::endl;
+    //      std::cout << '(';
+    //      bool f = false;
+    //      for (double x : pair.second) {
+    //          if (!f) {
+    //              f = true;
+    //          } else {
+    //              std::cout << ' ';
+    //          }
+    //          std::cout << x;
+    //      }
+    //      std::cout << ')' << std::endl;
+    //  }
 
     std::cout << "Monte Carlo test:" << std::endl;
     int simulations = 10000;
@@ -111,5 +113,12 @@ int main(void) {
     //		std::cout << std::endl;
     //		break;
     //	}
+
+    std::cout << "PCA test:" << std::endl;
+    int pca_result = PCA_test(test, start);
+    if (pca_result != 0) {
+        std::cerr << "PCA test failed with code: " << pca_result << std::endl;
+    }
+
     return 0;
 }

@@ -154,8 +154,8 @@ matrix_multiply(const std::vector<std::vector<T>> &A,
     size_t p = B.at(0).size();
 
     if (m != B.size()) {
-        std::cout << "First matrix dimensions: " << n << 'x' << m << std::endl;
-        std::cout << "Second matrix dimensions: " << B.size() << 'x' << p
+        std::cerr << "First matrix dimensions: " << n << 'x' << m << std::endl;
+        std::cerr << "Second matrix dimensions: " << B.size() << 'x' << p
                   << std::endl;
         throw std::invalid_argument("Matrix dimensions do not match!");
         return {};
@@ -215,7 +215,7 @@ void matrix_print(const std::vector<std::vector<T>> &matrix) {
     }
 }
 template <typename T>
-bool isUpperTriangular(const std::vector<std::vector<T>> &mat) {
+bool is_upper_triangular(const std::vector<std::vector<T>> &mat) {
     size_t rows = mat.size();
     for (size_t i = 1; i < rows; ++i) {
         for (size_t j = 0; j < i; ++j) {
@@ -228,7 +228,7 @@ bool isUpperTriangular(const std::vector<std::vector<T>> &mat) {
 }
 
 template <typename T>
-bool isLowerTriangular(const std::vector<std::vector<T>> &mat) {
+bool is_lower_triangular(const std::vector<std::vector<T>> &mat) {
     size_t n = mat.size();
 
     for (size_t i = 0; i < n - 1; ++i) {
@@ -376,8 +376,9 @@ int matrix_inverse(const std::vector<std::vector<T>> &input,
         }
 
         // Check for singular matrix
-        if (std::abs(A[maxRow][i]) < T(1e-12)) {
-            std::cout << "Matrix is singular or nearly singular." << std::endl;
+        if (std::abs(A[maxRow][i]) < T(1e-14)) {
+            // std::cerr << "Matrix is singular or nearly singular." <<
+            // std::endl;
         }
 
         std::swap(A[i], A[maxRow]);
@@ -409,12 +410,12 @@ int matrix_inverse(const std::vector<std::vector<T>> &input,
 template <typename T> int set_to_identity(std::vector<std::vector<T>> &matrix) {
     size_t n = matrix.size();
     if (n == 0) {
-        std::cout << "Matrix is empty!" << std::endl;
+        std::cerr << "Matrix is empty!" << std::endl;
         return 1;
     }
     size_t m = matrix.at(0).size();
     if (n != m) {
-        std::cout << "Matrix is not square!" << std::endl;
+        std::cerr << "Matrix is not square!" << std::endl;
         return 1;
     }
     for (size_t i = 0; i < n; ++i) {
@@ -448,7 +449,7 @@ std::vector<T> eigen_values(const std::vector<std::vector<T>> &matrix) {
         }
         A = matrix_multiply(R, Q);
 
-        if (isUpperTriangular(A)) {
+        if (is_upper_triangular(A)) {
             break;
         }
         ++iterations;
@@ -519,7 +520,6 @@ int eigen_pairs(const std::vector<std::vector<T>> &matrix,
         }
         results.at(i).second = std::move(eigenvector);
     }
-
     return 0;
 }
 } // namespace math

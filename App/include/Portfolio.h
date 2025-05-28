@@ -82,7 +82,8 @@ class Portfolio {
     int calculate_aligned_metrics(timestamp start);
     std::vector<Doubles_Matrix> monte_carlo(int simulations, int steps,
                                             timestamp start);
-    int PCA(Doubles_Matrix &covariance_matrix);
+    double PCA(timestamp start, int num_components,
+               std::vector<std::pair<double, std::vector<double>>> &components);
 };
 
 #endif // PORTFOLIO_H
