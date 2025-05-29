@@ -1,6 +1,6 @@
 # PortfolioSimulator
 
-**Advanced Cryptocurrency Portfolio Simulation Toolkit** C++/Qt aplikacija za
+**Cryptocurrency Portfolio Simulation Toolkit** C++/Qt aplikacija za
 Monte Carlo simulaciju i analizu rizika portfelja kriptovaluta koristeći
 geometrijsko Brownovo gibanje i Cholesky dekompoziciju.
 
