@@ -78,7 +78,6 @@ int main(void) {
     std::cout << "Eigen decomposition:" << std::endl;
     std::vector<std::pair<double, std::vector<double>>> eig_pairs =
         eigen_test(test, start);
-    return 0;
 
     //  for (auto pair : eig_pairs) {
     //      std::cout << "Eigenvalue: " << pair.first << std::endl;

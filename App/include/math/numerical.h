@@ -477,19 +477,16 @@ int eigen_pairs(const std::vector<std::vector<T>> &matrix,
         results.at(i).first = eig_vals.at(i);
     }
 
+    std::vector<T> eigenvector(n);
+    std::vector<T> prev_eigenvector(n);
+    std::vector<std::vector<T>> temp(n, std::vector<T>(n));
+    std::vector<std::vector<T>> identity(n, std::vector<T>(n));
+
     size_t iterations = 0;
     for (size_t i = 0; i < n; ++i) {
-        std::mt19937 rnd(
-            std::chrono::steady_clock::now().time_since_epoch().count());
-        std::mt19937 gen(rnd());
-        std::uniform_int_distribution<size_t> dist(1, 10);
 
-        std::vector<T> eigenvector(n);
-        std::vector<T> prev_eigenvector(n);
-        std::vector<std::vector<T>> temp(n, std::vector<T>(n));
-        std::vector<std::vector<T>> identity(n, std::vector<T>(n));
         for (size_t j = 0; j < n; ++j) {
-            eigenvector.at(j) = dist(gen);
+            eigenvector.at(j) = static_cast<T>(1.0);
             identity.at(j).at(j) = 1;
         }
 
@@ -518,7 +515,7 @@ int eigen_pairs(const std::vector<std::vector<T>> &matrix,
             delta = vector_norm(vector_subtract(eigenvector, prev_eigenvector));
             ++iterations;
         }
-        results.at(i).second = std::move(eigenvector);
+        results.at(i).second = eigenvector;
     }
     return 0;
 }
