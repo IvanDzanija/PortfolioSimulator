@@ -2,10 +2,16 @@
 #include "DateTime_formatting.h"
 #include "MainWindow.h"
 #include <QDir>
+#include <QGroupBox>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
+#include <QTextEdit>
 #include <QVBoxLayout>
+#include <QtCharts/QBarCategoryAxis>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
 #include <QtCharts/QChart>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -19,36 +25,39 @@ typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), centralWidget(new QWidget(this)) {
     setWindowTitle("Portfolio Simulator");
-    resize(1000, 600);
+    resize(1200, 800);
 
-    auto *layout = new QVBoxLayout(centralWidget);
+    auto *mainLayout = new QHBoxLayout(centralWidget);
+
+    // Left panel for portfolio management
+    auto *leftPanel = new QVBoxLayout();
 
     coinList = new QListWidget(this);
-    layout->addWidget(new QLabel("Available Coins:"));
-    layout->addWidget(coinList);
+    leftPanel->addWidget(new QLabel("Available Coins:"));
+    leftPanel->addWidget(coinList);
 
     amountInput = new QDoubleSpinBox(this);
     amountInput->setRange(0.01, 10000);
     amountInput->setValue(1.0);
-    layout->addWidget(new QLabel("Amount to Add:"));
-    layout->addWidget(amountInput);
+    leftPanel->addWidget(new QLabel("Amount to Add:"));
+    leftPanel->addWidget(amountInput);
 
     QPushButton *addButton = new QPushButton("Add to Portfolio", this);
     connect(addButton, &QPushButton::clicked, this,
             &MainWindow::addCoinToPortfolio);
-    layout->addWidget(addButton);
+    leftPanel->addWidget(addButton);
 
-    layout->addWidget(new QLabel("Current Portfolio:"));
+    leftPanel->addWidget(new QLabel("Current Portfolio:"));
     portfolioView = new QListWidget(this);
-    layout->addWidget(portfolioView);
+    leftPanel->addWidget(portfolioView);
 
     QPushButton *removeButton = new QPushButton("Remove Selected Asset", this);
     QDoubleSpinBox *removeAmountInput = new QDoubleSpinBox(this);
     removeAmountInput->setRange(0.01, 100000);
     removeAmountInput->setValue(1.0);
     removeAmountInput->setSingleStep(0.1);
-    layout->addWidget(new QLabel("Amount to Remove:"));
-    layout->addWidget(removeAmountInput);
+    leftPanel->addWidget(new QLabel("Amount to Remove:"));
+    leftPanel->addWidget(removeAmountInput);
     connect(
         removeButton, &QPushButton::clicked, this, [this, removeAmountInput]() {
             auto *item = portfolioView->currentItem();
@@ -92,12 +101,19 @@ MainWindow::MainWindow(QWidget *parent)
                 }
             }
         });
-    layout->addWidget(removeButton);
+    leftPanel->addWidget(removeButton);
+
+    // Right panel for simulations and PCA
+    auto *rightPanel = new QVBoxLayout();
+
+    // Monte Carlo Section
+    auto *monteCarloGroup = new QGroupBox("Monte Carlo Simulation");
+    auto *monteCarloLayout = new QVBoxLayout(monteCarloGroup);
 
     startDateInput = new QLineEdit(this);
     startDateInput->setPlaceholderText("YYYY-MM-DD HH:MM:SS");
-    layout->addWidget(new QLabel("Start Time:"));
-    layout->addWidget(startDateInput);
+    monteCarloLayout->addWidget(new QLabel("Start Time:"));
+    monteCarloLayout->addWidget(startDateInput);
 
     simSpin = new QSpinBox(this);
     simSpin->setRange(10, 10000);
@@ -106,15 +122,66 @@ MainWindow::MainWindow(QWidget *parent)
     stepSpin->setRange(10, 10000);
     stepSpin->setValue(60);
 
-    layout->addWidget(new QLabel("Simulations:"));
-    layout->addWidget(simSpin);
-    layout->addWidget(new QLabel("Steps:"));
-    layout->addWidget(stepSpin);
+    monteCarloLayout->addWidget(new QLabel("Simulations:"));
+    monteCarloLayout->addWidget(simSpin);
+    monteCarloLayout->addWidget(new QLabel("Steps:"));
+    monteCarloLayout->addWidget(stepSpin);
 
     QPushButton *simulateButton = new QPushButton("Run Monte Carlo", this);
     connect(simulateButton, &QPushButton::clicked, this,
             &MainWindow::runMonteCarloSimulation);
-    layout->addWidget(simulateButton);
+    monteCarloLayout->addWidget(simulateButton);
+
+    rightPanel->addWidget(monteCarloGroup);
+
+    // PCA Analysis Section
+    auto *pcaGroup = new QGroupBox("PCA Analysis");
+    auto *pcaLayout = new QVBoxLayout(pcaGroup);
+
+    // Number of principal components input
+    componentsSpin = new QSpinBox(this);
+    componentsSpin->setRange(1, 20);
+    componentsSpin->setValue(3);
+    pcaLayout->addWidget(new QLabel("Number of Principal Components:"));
+    pcaLayout->addWidget(componentsSpin);
+
+    // PCA start date (separate from Monte Carlo)
+    pcaStartDateInput = new QLineEdit(this);
+    pcaStartDateInput->setPlaceholderText("YYYY-MM-DD HH:MM:SS");
+    pcaLayout->addWidget(new QLabel("PCA Analysis Start Time:"));
+    pcaLayout->addWidget(pcaStartDateInput);
+
+    // Data points for PCA
+    pcaDataPointsSpin = new QSpinBox(this);
+    pcaDataPointsSpin->setRange(50, 5000);
+    pcaDataPointsSpin->setValue(500);
+    pcaLayout->addWidget(new QLabel("Data Points for Analysis:"));
+    pcaLayout->addWidget(pcaDataPointsSpin);
+
+    QPushButton *pcaButton = new QPushButton("Run PCA Analysis", this);
+    connect(pcaButton, &QPushButton::clicked, this,
+            &MainWindow::runPCAAnalysis);
+    pcaLayout->addWidget(pcaButton);
+
+    // Text area for PCA results
+    pcaResultsText = new QTextEdit(this);
+    pcaResultsText->setMaximumHeight(150);
+    pcaResultsText->setReadOnly(true);
+    pcaLayout->addWidget(new QLabel("Variability Explained:"));
+    pcaLayout->addWidget(pcaResultsText);
+
+    rightPanel->addWidget(pcaGroup);
+
+    // Add panels to main layout
+    auto *leftWidget = new QWidget();
+    leftWidget->setLayout(leftPanel);
+    leftWidget->setMaximumWidth(350);
+
+    auto *rightWidget = new QWidget();
+    rightWidget->setLayout(rightPanel);
+
+    mainLayout->addWidget(leftWidget);
+    mainLayout->addWidget(rightWidget);
 
     setCentralWidget(centralWidget);
     loadAvailableCoins();
@@ -218,8 +285,151 @@ void MainWindow::runMonteCarloSimulation() {
     }
 }
 
-void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
+void MainWindow::runPCAAnalysis() {
+    if (portfolioMap.isEmpty()) {
+        QMessageBox::warning(this, "Empty Portfolio",
+                             "Add coins to your portfolio first.");
+        return;
+    }
 
+    QString datetimeStr = pcaStartDateInput->text();
+    timestamp start;
+
+    if (datetimeStr.isEmpty()) {
+        start = std::chrono::floor<std::chrono::seconds>(
+            std::chrono::system_clock::now());
+    } else if (datetimeStr.length() != 19) {
+        QMessageBox::critical(
+            this, "Invalid Date",
+            "Please enter a valid date in the format YYYY-MM-DD HH:MM:SS.");
+        return;
+    } else {
+        try {
+            start = string_to_timestamp(datetimeStr.toStdString());
+        } catch (const std::exception &e) {
+            QMessageBox::critical(
+                this, "Invalid Date",
+                "Please enter a valid date in the format YYYY-MM-DD HH:MM:SS.");
+            return;
+        }
+    }
+
+    try {
+        // Assuming your PCA method returns a struct or container with:
+        // - eigenvectors matrix
+        // - variability explained vector
+        std::vector<std::pair<double, std::vector<double>>> components;
+        std::vector<std::string> labels = portfolio.get_asset_names();
+
+        double total_variance;
+        double variance_explained;
+        int info = portfolio.PCA(start, componentsSpin->value(), components,
+                                 total_variance, variance_explained);
+
+        if (info != 0) {
+            QMessageBox::critical(
+                this, "PCA Analysis Error",
+                "PCA analysis failed. Check console log for more info.");
+            return;
+        }
+
+        // Display variability explained
+        displayPCAResults(components, labels, total_variance);
+
+        // Plot eigenvectors
+        std::vector<std::vector<double>> eigenvectors;
+        for (const auto &component : components) {
+            eigenvectors.push_back(component.second);
+        }
+        plotEigenvectors(eigenvectors, labels);
+
+    } catch (const std::exception &e) {
+        QMessageBox::critical(this, "PCA Analysis Error", e.what());
+    }
+}
+
+void MainWindow::displayPCAResults(
+    const std::vector<std::pair<double, std::vector<double>>> &components,
+    const std::vector<std::string> &labels, double total_variability) {
+    // Clear previous results
+    pcaResultsText->clear();
+
+    QString resultsText;
+    resultsText += "PCA Analysis Results:\n";
+    resultsText += "====================\n\n";
+
+    // Assuming pcaResults has a method to get variability explained
+    // Adjust this based on your actual PCA result structure
+
+    for (size_t i = 0; i < components.size(); ++i) {
+        double percentage = (components[i].first / total_variability) * 100.0;
+        total_variability += percentage;
+        resultsText += QString("PC%1: %2% of variance\n")
+                           .arg(i + 1)
+                           .arg(QString::number(percentage, 'f', 2));
+    }
+
+    resultsText += QString("\nCumulative variance explained: %1%\n")
+                       .arg(QString::number(total_variability, 'f', 2));
+
+    resultsText +=
+        QString("Number of components: %1\n").arg(componentsSpin->value());
+    resultsText += QString("Portfolio assets: %1\n").arg(portfolioMap.size());
+
+    pcaResultsText->setPlainText(resultsText);
+}
+
+void MainWindow::plotEigenvectors(
+    const std::vector<std::vector<double>> &eigenvectors,
+    const std::vector<std::string> &labels) {
+    // Create chart for eigenvectors visualization
+    QChart *chart = new QChart();
+    chart->setTitle("Principal Component Eigenvectors");
+
+    // Assuming pcaResults has methods to get eigenvectors
+    int numComponents = std::min(componentsSpin->value(),
+                                 static_cast<int>(eigenvectors.size()));
+
+    // Create a bar chart showing the weights of each asset in each principal
+    // component
+    QBarSeries *series = new QBarSeries();
+
+    // Get asset names for categories
+    QStringList assetNames;
+    for (auto it = portfolioMap.begin(); it != portfolioMap.end(); ++it) {
+        assetNames << it.key();
+    }
+
+    // Create bar sets for each principal component
+    for (int pc = 0; pc < numComponents; ++pc) {
+        QBarSet *barSet = new QBarSet(QString("PC%1").arg(pc + 1));
+
+        // Add eigenvector values for each asset
+        for (size_t asset = 0; asset < eigenvectors[pc].size(); ++asset) {
+            *barSet << eigenvectors[pc][asset];
+        }
+
+        series->append(barSet);
+    }
+
+    chart->addSeries(series);
+
+    // Create category axis for assets
+    QBarCategoryAxis *categoryAxis = new QBarCategoryAxis();
+    categoryAxis->append(assetNames);
+    chart->setAxisX(categoryAxis, series);
+
+    // Create value axis
+    QValueAxis *valueAxis = new QValueAxis();
+    valueAxis->setTitleText("Eigenvector Weight");
+    chart->setAxisY(valueAxis, series);
+
+    // Show the chart in a preview window
+    auto *preview = new ChartPreviewWindow(chart, this);
+    preview->show();
+}
+
+void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
     QChart *chart = new QChart();
     for (const auto &sim : data) {
         QLineSeries *series = new QLineSeries();

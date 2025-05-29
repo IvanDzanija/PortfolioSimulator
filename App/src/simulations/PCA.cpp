@@ -1,11 +1,12 @@
 #include "Portfolio.h"
 #include "math/numerical.h"
 
-double Portfolio::PCA(
+int Portfolio::PCA(
     timestamp start, int num_components,
-    std::vector<std::pair<double, std::vector<double>>> &components) {
+    std::vector<std::pair<double, std::vector<double>>> &components,
+    double &total_variance, double &variance_explained) {
     if (num_components == -1) {
-        num_components = assets.size();
+        num_components = _assets.size();
         components.clear();
         components.resize(
             num_components,
@@ -13,7 +14,7 @@ double Portfolio::PCA(
     } else if (num_components < -1) {
         std::cerr << "Number of components must be positive!" << std::endl;
         return -1;
-    } else if (num_components > static_cast<int>(assets.size())) {
+    } else if (num_components > static_cast<int>(_assets.size())) {
         std::cerr << "Number of components exceeds the number of assets!"
                   << std::endl;
         return -1;
@@ -38,13 +39,10 @@ double Portfolio::PCA(
     std::vector<std::pair<double, std::vector<double>>> eig(
         n, std::pair<double, std::vector<double>>(1, std::vector<double>(n)));
     if (math::eigen_pairs(covariance, eig)) {
-        throw std::runtime_error(
-            "Eigen decomposition failed! The covariance matrix might not be "
-            "symmetric or positive-definite.");
+        std::cerr << "Eigen pairs calculation failed!" << std::endl;
+        return -1;
     }
 
-    double total_variance = 0.0;
-    double variance_explained = 0.0;
     for (size_t i = 0; i < n; ++i) {
         double current_eigenvalue = eig.at(i).first;
         total_variance += current_eigenvalue;
@@ -53,6 +51,5 @@ double Portfolio::PCA(
             variance_explained += current_eigenvalue;
         }
     }
-
-    return variance_explained / total_variance;
+    return 0;
 }
