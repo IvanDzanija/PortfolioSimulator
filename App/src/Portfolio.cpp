@@ -10,9 +10,9 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
     }
 
     Doubles_Matrix ret;
-    std::vector<size_t> last_positions(assets.size() - 1, 0);
+    std::vector<size_t> last_positions(_assets.size() - 1, 0);
     timestamp skip_to{};
-    const Cryptocurrency &pivot = assets.begin()->first;
+    const Cryptocurrency &pivot = _assets.begin()->first;
     for (size_t index = 0; index < pivot.hist_data.size(); ++index) {
         const Candle &candle_pivot = pivot.hist_data.at(index);
         timestamp stamp = candle_pivot.time;
@@ -36,16 +36,16 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
         }
 
         // create a vector with full size and fill in the pivot
-        std::vector<double> possible(assets.size());
+        std::vector<double> possible(_assets.size());
         possible.at(0) = candle_pivot.log_return;
 
-        // loop over all the assets
+        // loop over all the _assets
         // vector last_positions is used to skip the candles that are
         // already processed
         size_t asset_index = 0;
-        bool skip_assets = false;
-        for (auto iter = std::next(assets.begin());
-             !skip_assets && iter != assets.end(); iter = std::next(iter)) {
+        bool skip__assets = false;
+        for (auto iter = std::next(_assets.begin());
+             !skip__assets && iter != _assets.end(); iter = std::next(iter)) {
 
             for (size_t i = last_positions.at(asset_index);
                  i < iter->first.hist_data.size(); ++i) {
@@ -54,9 +54,9 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
                 if (candle.time > stamp) {
                     skip_to = candle.time;
                     last_positions.at(asset_index) = i + 1;
-                    // this skips all the other assets since this date is no
+                    // this skips all the other _assets since this date is no
                     // good
-                    skip_assets = true;
+                    skip__assets = true;
                     break;
                 } else if (candle.time == stamp) {
                     possible.at(asset_index + 1) = candle.log_return;
@@ -78,11 +78,11 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
                     continue;
                 }
             }
-            if (skip_assets) {
+            if (skip__assets) {
                 break;
             }
         }
-        if (asset_index + 1 == assets.size()) {
+        if (asset_index + 1 == _assets.size()) {
             ret.push_back(possible);
         }
     }
@@ -107,7 +107,7 @@ int Portfolio::calculate_aligned_metrics(timestamp start) {
                   << std::endl;
         return -1;
     }
-    size_t rows = returns.size();       // number of assets
+    size_t rows = returns.size();       // number of _assets
     size_t cols = returns.at(0).size(); // number of candles
 
     aligned_means.resize(rows);
@@ -148,7 +148,7 @@ Doubles_Matrix &Portfolio::calculate_covariance(timestamp start) {
         std::cerr << "Error calculating aligned metrics" << std::endl;
         return covariance_matrix;
     }
-    int rows = returns.size(); // number of assets
+    int rows = returns.size(); // number of _assets
     Doubles_Matrix covariance(rows, std::vector<double>(rows));
 
     for (int i = 0; i < rows; ++i) {

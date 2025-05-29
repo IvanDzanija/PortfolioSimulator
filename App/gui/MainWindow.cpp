@@ -315,22 +315,35 @@ void MainWindow::runPCAAnalysis() {
     }
 
     try {
-        // Assuming your PCA method returns a struct or container with:
-        // - eigenvectors matrix
-        // - variability explained vector
         std::vector<std::pair<double, std::vector<double>>> components;
         std::vector<std::string> labels = portfolio.get_asset_names();
 
         double total_variance;
         double variance_explained;
-        int info = portfolio.PCA(start, componentsSpin->value(), components,
+        int components_count;
+        if (componentsSpin->value() == 0) {
+            components_count = -1; // Default to all components
+        } else {
+            components_count = componentsSpin->value();
+        }
+        int info = portfolio.PCA(start, components_count, components,
                                  total_variance, variance_explained);
+        std::cout << "PCA analysis completed with " << components.size()
+                  << " components." << std::endl;
 
         if (info != 0) {
             QMessageBox::critical(
                 this, "PCA Analysis Error",
                 "PCA analysis failed. Check console log for more info.");
             return;
+        } else {
+            QMessageBox::information(
+                this, "PCA Analysis",
+                QString("PCA analysis completed successfully.\n"
+                        "Total Variance: %1\n"
+                        "Variance Explained: %2")
+                    .arg(total_variance)
+                    .arg(variance_explained));
         }
 
         // Display variability explained
@@ -361,16 +374,19 @@ void MainWindow::displayPCAResults(
     // Assuming pcaResults has a method to get variability explained
     // Adjust this based on your actual PCA result structure
 
+    double cumulative_variance = 0.0;
     for (size_t i = 0; i < components.size(); ++i) {
+        cumulative_variance += components[i].first;
         double percentage = (components[i].first / total_variability) * 100.0;
-        total_variability += percentage;
         resultsText += QString("PC%1: %2% of variance\n")
                            .arg(i + 1)
                            .arg(QString::number(percentage, 'f', 2));
     }
 
-    resultsText += QString("\nCumulative variance explained: %1%\n")
-                       .arg(QString::number(total_variability, 'f', 2));
+    resultsText +=
+        QString("\nCumulative variance explained: %1%\n")
+            .arg(QString::number(cumulative_variance / total_variability * 100,
+                                 'f', 2));
 
     resultsText +=
         QString("Number of components: %1\n").arg(componentsSpin->value());

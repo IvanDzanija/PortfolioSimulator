@@ -7,8 +7,15 @@ int PCA_test(Portfolio &portfolio, timestamp start) {
     std::vector<std::pair<double, std::vector<double>>> components;
 
     auto s = std::chrono::high_resolution_clock::now();
-    double variance_explained =
-        portfolio.PCA(start, num_components, components);
+    double total_variance = 0.0;
+    double variance_explained = 0.0;
+    int info = portfolio.PCA(start, num_components, components, total_variance,
+                             variance_explained);
+    if (info != 0) {
+        std::cerr << "PCA analysis failed with error code: " << info
+                  << std::endl;
+        return info;
+    }
 
     auto e = std::chrono::high_resolution_clock::now();
 
@@ -19,11 +26,6 @@ int PCA_test(Portfolio &portfolio, timestamp start) {
     std::cout << "Variance explained by PCA: " << variance_explained * 100.0
               << "%" << std::endl;
 
-    double total_variance = std::accumulate(
-        components.begin(), components.end(), 0.0,
-        [](double sum, const std::pair<double, std::vector<double>> &p) {
-            return sum + p.first;
-        });
     double variance = 0.0;
     for (size_t i = 0; i < components.size(); ++i) {
         variance += components[i].first;

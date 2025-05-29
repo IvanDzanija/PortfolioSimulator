@@ -26,7 +26,7 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
     std::vector<double> starting_prices(n);
     std::vector<double> weights(n);
     size_t index = 0;
-    for (const auto &iter : assets) {
+    for (const auto &iter : _assets) {
         const Cryptocurrency &crypto = iter.first;
         weights.at(index) = iter.second;
 
