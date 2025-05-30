@@ -11,6 +11,27 @@
 \usepackage{microtype}
 \usepackage{hyperref}
 
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=10pt,
+  tabsize=2,
+  showspaces=false,
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  frame=single,
+}
+
 \newtheorem{definition}{Definicija}
 \renewcommand{\thedefinition}{\arabic{definition}.}
 
@@ -20,9 +41,15 @@
 \newtheorem{proof}{Dokaz}
 \renewcommand{\theproof}{\arabic{proof}.}
 
+\newtheorem{algorithm}{Algoritam}
+\renewcommand{\thealgorithm}{\arabic{algorithm}.}
+
+
 \newenvironment{proof*}
 {\begin{proof}\renewcommand{\theproof}{}}
   {\end{proof}}
+
+
 
 
 
@@ -128,7 +155,7 @@ Ovakav rad može poslužiti kao osnova za daljnje istraživanje i razvoj
 naprednijih modela koji će omogućiti bolje razumijevanje i upravljanje
 rizicima povezanima s kriptovalutama, ali i ostalim financijskim instrumentima.
 %-------------------------------------------------------------------------------
-\chapter{Teorija portfelja}
+\chapter{Teorija portfelja i matematičke osnove}
 \label{pog:teorija_portelja}
 Teorija portfelja, čiji su začetnici Harry Markowitz i James Tobin,
 daje strogu matematičku definiciju financijskim pojmovima.
@@ -285,7 +312,8 @@ definitna matrica.
     \end{align*}
     \indent gdje je $L$ donja trokutasta matrica.
 \end{definition}
-Ova faktorizacija omogućuje generiranje koreliranih normalnih varijabli iz nekoreliranih.
+Ova faktorizacija omogućuje generiranje vektora koreliranih slučajnih varijabli
+iz vektora nezavisnih slučajnih varijabli.
 
 \begin{theorem}
 Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ varijabli. Tada vektor $\mathbf{Y} = L\mathbf{Z}$ ima kovarijacijsku matricu $\boldsymbol{\Sigma}$.
@@ -297,6 +325,264 @@ Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ vari
     = L \cdot I \cdot L^\intercal = LL^\intercal = \boldsymbol{\Sigma}
 \end{align*}
 \end{proof}
+
+\section{PCA dekompozicija}
+\label{sek:pca}
+PCA (Principal Component Analysis) je tehnika koja se koristi za
+redukciju dimenzionalnosti podataka i identifikaciju glavnih komponenti koje
+objašnjavaju što veći dio ukupne varijance podataka.
+\begin{definition}
+    Neka je $\boldsymbol{\Sigma}$ kovarijacijska matrica slučajnog
+    vektora $\mathbf{X} = (X_1, X_2, \dots, X_n)^\intercal$.
+    Svojstvena dekompozicija matrice
+    $\boldsymbol{\Sigma}$ daje:
+\end{definition}
+\begin{align*}
+    \boldsymbol{\Sigma} = \boldsymbol{V} \boldsymbol{\Lambda} \boldsymbol{V}^\intercal
+\end{align*}
+\indent gdje je $\boldsymbol{V}$ ortogonalna matrica vlastitih vektora, a
+$\boldsymbol{\Lambda}$
+dijagonalna matrica vlastitih vrijednosti.\\
+
+\noindent Ovaj rezultat sljedi iz spektralnog teorema \ref{##TREBA DODATI REFERENCE##}.
+Sada možemo definirati PCA dekompoziciju.
+\begin{definition}
+    PCA dekompozicija slučajnog vektora $\mathbf{X}$ daje novi vektor
+    $\mathbf{Y} = (Y_1, Y_2, \dots, Y_n)^\intercal$ gdje su $Y_i$
+    glavne komponente slučajnog vektora $\mathbf{X}$.
+\indent Glavne komponente su linearne kombinacije originalnih varijabli
+    $\mathbf{X}$ i definiraju se kao:
+    \begin{align*}
+        \mathbf{Y} = \boldsymbol{V}^\intercal \mathbf{X}
+    \end{align*}
+    \indent gdje je $\boldsymbol{V}$ matrica vlastitih vektora kovarijacijske
+    matrice $\boldsymbol{\Sigma}$, a $Y_i$ su glavne komponente.
+\end{definition}
+
+
+
+
+%--- IMPLEMENTACIJA / IMPLEMENTATION -------------------------------------------
+\chapter{Implementacija aplikacije}
+\label{pog:implementacija}
+Ovaj dio rada opisuje implementaciju aplikacije za simulaciju
+portfelja kriptovaluta. Aplikacija je napisana u C++ programskom
+jeziku i koristi isključivo standardnu biblioteku C++ za matematičke
+operacije i modeliranje. Za interakciju s korisnikom koristi se
+grafičko sučelje(implementirano sa Qt bibliotekom za C++) koje
+omogućuje vizualizaciju rezultata. Prikaz modela rada aplikacije
+je dan na slici \ref{fig:model_aplikacije}.
+\\
+
+%--- ALGORITMI / ALGORITHMS ----------------------------------------------------
+\section{Algoritmi i komponente}
+\label{sek:algoritmi_i_komponente}
+Aplikacija se sastoji od nekoliko ključnih komponenti:
+\begin{itemize}
+    \item \textbf{Parsiranje podataka:} Učitavanje i obrada povijesnih
+    podataka o cijenama kriptovaluta.
+
+    \item \textbf{Model kriptovaluta:} Implementacija modela kriptovaluta.
+
+    \item \textbf{Model portfelja:} Definiranje portfelja kriptovaluta.
+
+    \item \textbf{Matematički okvir:} Implementacija matematičkih
+    operacija potrebnih za simulaciju i modeliranje portfelja. Npr.
+        (Množenje matrica, vektora, operacije nad vektorima i matricama te
+        razne matrične dekompozicije).
+
+    \item \textbf{Monte Carlo simulacija:} Generiranje simulacija
+    budućih cijena portfelja kriptovaluta.
+
+    \item \textbf{PCA dekompozicija:} Implementacija PCA dekompozicije
+    za redukciju dimenzionalnosti podataka i identifikaciju glavnih
+    komponenti.
+
+    \item \textbf{Vizualizacija rezultata:} Prikaz rezultata simulacija
+    kroz grafičko sučelje.
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{model_aplikacije.png}
+    \caption{Model rada aplikacije}
+    \label{fig:model_aplikacije}
+\end{figure}
+
+\section{Parsiranje podataka}
+\label{sek:parsiranje_podataka}
+Efikasno parsiranje povijesnih podataka o cijenama kriptovaluta
+je prvi korak u simulaciji i stavaranju modela portfelja.
+Podatci se učitavaju iz CSV datoteka koje sadrže povijesne cijene
+kriptovaluta. Povijesni podatci su preuzeti sa \cite{1}.
+Podatci se parsiraju u \emph{candle} strukturu koja sadrži
+otvorenu, zatvorenu, najvišu i najnižu cijenu te volumen
+kriptovalute za svaki vremenski interval.
+\begin{lstlisting}
+struct Candle {
+  public:
+    // OHLC
+    double open, high, low, close;
+    double volume, marketcap;
+    timestamp time;
+    double log_return;
+
+    // Constructors, getters, setters, etc.
+};
+\end{lstlisting}
+
+\section{Model kriptovalute}
+\label{sek:model_kriptovalute}
+Model kriptovalute je implementiran kao klasa koja
+sadrži povijesne podatke o cijenama kriptovalute
+i metode za izračunavanje povrata, volatilnosti
+i driftova.
+\begin{lstlisting}
+class Cryptocurrency {
+  public:
+    std::string name, tick;
+    std::vector<Candle> hist_data;
+    bool metrics_calculated = false;
+
+    // Drift = sum(return_i) / n;
+    // Volatility = sqrt((1/n - 1) * sum((return_i - Drift)^2)
+    double drift, volatility;
+
+    // Constructors, getters, setters, etc.
+
+    void calculate_metrics();
+    void reevaluate_metrics();
+    void individual_monte_carlo(int sim_count, int forecast_days);
+};
+\end{lstlisting}
+
+\section{Model portfelja}
+\label{sek:model_portfelja}
+Model portfelja je implementiran kao klasa koja
+sadrži vektor kriptovaluta i njihove udjele u portfelju.
+\begin{lstlisting}
+class Portfolio {
+  private:
+    std::vector<std::string> _asset_names;
+    std::unordered_map<Cryptocurrency, double, Cryptocurrency::Hash> _assets;
+
+  public:
+    // Covariance matrix
+    Doubles_Matrix aligned_log_return_matrix;
+    Doubles_Matrix covariance_matrix;
+    std::vector<double> aligned_means;
+    std::vector<double> aligned_volatilities;
+
+    timestamp aligned_start = timestamp();
+    timestamp aligned_end = timestamp();
+    timestamp aligned_stamp = timestamp();
+    bool aligned_returns_calculated = false;
+    bool covariance_matrix_calculated = false;
+    bool aligned_metrics_calculated = false;
+
+    void add_asset(const Cryptocurrency &crypto, double ammount);
+
+    void remove_asset(const Cryptocurrency &crypto, double ammount);
+
+    Cryptocurrency get_asset(const std::string &name) const;
+
+    std::vector<std::string> &get_asset_names();
+
+    Doubles_Matrix &aligned_log_returns(timestamp start);
+    Doubles_Matrix &calculate_covariance(timestamp start);
+    int calculate_aligned_metrics(timestamp start);
+    std::vector<Doubles_Matrix> monte_carlo(int simulations, int steps,
+                                            timestamp start);
+    int PCA(timestamp start, int num_components,
+            std::vector<std::pair<double, std::vector<double>>> &components,
+            double &total_variance, double &variance_explained);
+};
+\end{lstlisting}
+
+\section{Matematički okvir}
+\label{sek:matematicki_okvir}
+Matematički okvir aplikacije implementira osnovne matematičke
+operacije nad vektorima i matricama, kao što su množenje
+matrica i vektora te razne matrične dekompozicije. Sve metode koriste
+samo standardnu biblioteku C++.
+
+\begin{lstlisting}
+template <typename T>
+std::vector<std::vector<T>>
+matrix_transpose(const std::vector<std::vector<T>> &matrix);
+
+template <typename T>
+int cholesky_decomposition(const std::vector<std::vector<T>> &matrix,
+                           std::vector<std::vector<T>> &L);
+template <typename T> double vector_norm(const std::vector<T> &v);
+
+template <typename T> std::vector<T> normalized(const std::vector<T> &v);
+
+template <typename T>
+std::vector<T> scalar_multiply(const std::vector<T> &v, T scalar);
+
+template <typename T>
+std::vector<std::vector<T>>
+matrix_scalar_multiply(const std::vector<std::vector<T>> &matrix, T scalar);
+
+template <typename T>
+std::vector<T> vector_add(const std::vector<T> &v1, const std::vector<T> &v2);
+
+template <typename T>
+std::vector<T> vector_subtract(const std::vector<T> &v1,
+                               const std::vector<T> &v2);
+
+template <typename T>
+std::vector<T> vector_multiply(const std::vector<T> &v1,
+                               const std::vector<T> &v2);
+
+template <typename T>
+std::vector<std::vector<T>>
+matrix_multiply(const std::vector<std::vector<T>> &A,
+                const std::vector<std::vector<T>> &B);
+
+template <typename T>
+std::vector<std::vector<T>>
+matrix_subtract(const std::vector<std::vector<T>> &A,
+                const std::vector<std::vector<T>> &B);
+
+
+
+template <typename T>
+int QR_decomposition(const std::vector<std::vector<T>> &matrix,
+                     std::vector<std::vector<T>> &Q,
+                     std::vector<std::vector<T>> &R);
+
+template <typename T> int normalize(std::vector<T> &v);
+
+template <typename T>
+int matrix_inverse(const std::vector<std::vector<T>> &input,
+                   std::vector<std::vector<T>> &output) {
+
+template <typename T>
+std::vector<T> eigen_values(const std::vector<std::vector<T>> &matrix);
+
+template <typename T>
+int eigen_pairs(const std::vector<std::vector<T>> &matrix,
+                std::vector<std::pair<T, std::vector<T>>> &results);
+\end{lstlisting}
+
+\section{Monte Carlo simulacija}
+\label{sek:monte_carlo_simulacija}
+Monte Carlo simulacija je implementirana kao metoda klase
+\texttt{Portfolio} koja generira simulacije budućih cijena portfelja
+kriptovaluta. Simulacije koriste model geometrijskog Brownovog gibanja
+za generiranje budućih cijena te Cholesky dekompoziciju za
+osiguranje uzoračke korelacije između kriptovaluta.
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,28 +1,36 @@
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {1.}Uvod}{2}{chapter.1}%
-\contentsline {chapter}{\numberline {2.}Teorija portfelja}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1.}Portfelj}{4}{section.2.1}%
-\contentsline {section}{\numberline {2.2.}Povrati}{4}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1.}Aritmetički povrat}{4}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2.}Logaritamski povrat}{5}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3.}Očekivani povrat }{5}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3.}Volatilnost}{6}{section.2.3}%
-\contentsline {section}{\numberline {2.4.}Geometrijsko Brownovo gibanje}{6}{section.2.4}%
-\contentsline {section}{\numberline {2.5.}Monte Carlo simulacije}{7}{section.2.5}%
-\contentsline {section}{\numberline {2.6.}Cholesky dekompozicija}{7}{section.2.6}%
-\contentsline {chapter}{\numberline {3.}Rezultati i rasprava}{9}{chapter.3}%
-\contentsline {chapter}{\numberline {4.}Zaključak}{11}{chapter.4}%
-\contentsline {chapter}{Literatura}{12}{chapter*.2}%
+\contentsline {chapter}{\numberline {1.}Uvod}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2.}Teorija portfelja i matematičke osnove}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1.}Portfelj}{5}{section.2.1}%
+\contentsline {section}{\numberline {2.2.}Povrati}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1.}Aritmetički povrat}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2.}Logaritamski povrat}{6}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3.}Očekivani povrat }{6}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3.}Volatilnost}{7}{section.2.3}%
+\contentsline {section}{\numberline {2.4.}Geometrijsko Brownovo gibanje}{7}{section.2.4}%
+\contentsline {section}{\numberline {2.5.}Monte Carlo simulacije}{8}{section.2.5}%
+\contentsline {section}{\numberline {2.6.}Cholesky dekompozicija}{8}{section.2.6}%
+\contentsline {section}{\numberline {2.7.}PCA dekompozicija}{9}{section.2.7}%
+\contentsline {chapter}{\numberline {3.}Implementacija aplikacije}{11}{chapter.3}%
+\contentsline {section}{\numberline {3.1.}Algoritmi i komponente}{11}{section.3.1}%
+\contentsline {section}{\numberline {3.2.}Parsiranje podataka}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.3.}Model kriptovalute}{13}{section.3.3}%
+\contentsline {section}{\numberline {3.4.}Model portfelja}{13}{section.3.4}%
+\contentsline {section}{\numberline {3.5.}Matematički okvir}{15}{section.3.5}%
+\contentsline {section}{\numberline {3.6.}Monte Carlo simulacija}{17}{section.3.6}%
+\contentsline {chapter}{\numberline {4.}Rezultati i rasprava}{18}{chapter.4}%
+\contentsline {chapter}{\numberline {5.}Zaključak}{20}{chapter.5}%
+\contentsline {chapter}{Literatura}{21}{chapter*.3}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{13}{chapter*.3}%
+\contentsline {chapter}{Sa\v {z}etak}{22}{chapter*.4}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{14}{chapter*.4}%
+\contentsline {chapter}{Abstract}{23}{chapter*.5}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {A:}The Code}{15}{chapter.1}%
+\contentsline {chapter}{\numberline {A:}The Code}{24}{chapter.1}%
