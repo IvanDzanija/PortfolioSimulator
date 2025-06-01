@@ -71,10 +71,7 @@ int QR_decomposition_test(Portfolio &test, timestamp start) {
 std::vector<std::pair<double, std::vector<double>>>
 eigen_test(Portfolio &test, timestamp start) {
     // std::vector<std::vector<double>> cov = {
-    // {6.0, 5.5, -1.0},
-    // {5.5, 1.0, -2.0},
-    // {-1.0, -2.0, -3.0}
-    //};
+    //     {6.0, 5.5, -1.0}, {5.5, 1.0, -2.0}, {-1.0, -2.0, -3.0}};
     Doubles_Matrix cov = test.calculate_covariance(start);
     size_t n = cov.size();
 

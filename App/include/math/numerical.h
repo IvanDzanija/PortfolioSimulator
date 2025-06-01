@@ -1,6 +1,5 @@
 #ifndef NUMERICAL_H
 #define NUMERICAL_H
-#include <chrono>
 #include <climits>
 #include <cmath>
 #include <iostream>
@@ -450,6 +449,7 @@ std::vector<T> eigen_values(const std::vector<std::vector<T>> &matrix) {
         A = matrix_multiply(R, Q);
 
         if (is_upper_triangular(A)) {
+            // matrix_print(A);
             break;
         }
         ++iterations;
