@@ -4,15 +4,17 @@
 
 
 \usepackage{blindtext}
-
 \usepackage{mathrsfs}
 \usepackage[shortlabels]{enumitem}
 \usepackage{mathtools}
 \usepackage{microtype}
 \usepackage{hyperref}
-
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{caption}
+\usepackage{chngcntr}
+
+\newcounter{lstlisting}
 
 \lstset{
   language=C++,
@@ -49,6 +51,7 @@
 {\begin{proof}\renewcommand{\theproof}{}}
   {\end{proof}}
 
+\renewcommand{\lstlistingname}{Kod}
 
 
 
@@ -504,9 +507,20 @@ class Portfolio {
 Matematički okvir aplikacije implementira osnovne matematičke
 operacije nad vektorima i matricama, kao što su množenje
 matrica i vektora te razne matrične dekompozicije. Sve metode koriste
-samo standardnu biblioteku C++.
+samo standardnu biblioteku C++. Cholesky dekompozicija je implementirana
+kao metoda koja prima kovarijacijsku matricu i matricu $L$ u koju se sprema
+donja trokutasta matrica dekompozicije te metoda vraća \texttt{int} koji
+označava uspješnost dekompozicije.
+Algoritam radi točno prema koracima matematične notacije.
+Znamo da je matrica kovarijance uvijek simetična i
+pozitivno definitna, pa je Cholesky dekompozicija uvijek moguća.
+QR dekompozicija je implementirana kao metoda koja prima ulaznu matricu
+te matrice $Q$ i $R$ u koje se spremaju rezultati dekompozicije.
+Implemetacija QR dekompozicije koristi Householderove refleksije za
+dekompoziciju matrice.
 
-\begin{lstlisting}
+
+\begin{lstlisting}[caption={Metode implementirane u matematičkom okviru}, label={lst:cpp_example}]
 template <typename T>
 std::vector<std::vector<T>>
 matrix_transpose(const std::vector<std::vector<T>> &matrix);
@@ -578,7 +592,23 @@ Implementacija Monte Carlo simulacija prvo koristi metodu za izračuvanje
 kovarijacijske matrice portfelja iz povijesnih podataka kriptovaluta.
 Također se može postaviti početni datum simulacije, broj simulacija i
 broj koraka simulacije.
-Zatim
+Zatim se generiraju nezavisne slučajne varijable(\textasciitilde \textit{N(0,1)}) koje se
+transformiraju u korelirane šokove pomoću Cholesky dekompozicije.
+Zatim se ažuriraju cijene simulacije koristeći geometrijsko Brownovo gibanje
+prema formuli:
+\ref{sek:gbm}. Primjer rezultata simulacije je dan na slici
+\ref{fig:monte_carlo_example}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.5\textwidth]{Figures/monte_carlo_example.png}
+    \caption{Primjer Monte Carlo simulacije portfelja kriptovaluta (100
+    simulacija, 60 dana)}
+    \label{fig:monte_carlo_example}
+\end{figure}
+
+
+
+
 \begin{lstlisting}
 \end{lstlisting}
 
