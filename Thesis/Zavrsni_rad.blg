@@ -10,46 +10,48 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 150 items from 100.
 Database file #1: literatura.bib
+Warning--string name "zagreb" is undefined
+--line 6 of file literatura.bib
 Warning--empty journal in GMBIzvod
-You've used 1 entry,
+You've used 2 entries,
             4225 wiz_defined-function locations,
-            841 strings with 7835 characters,
-and the built_in function-call counts, 467 in all, are:
-= -- 25
-> -- 9
+            846 strings with 7980 characters,
+and the built_in function-call counts, 839 in all, are:
+= -- 60
+> -- 13
 < -- 0
-+ -- 4
-- -- 2
-* -- 25
-:= -- 94
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 1
++ -- 6
+- -- 3
+* -- 37
+:= -- 171
+add.period$ -- 6
+call.type$ -- 2
+change.case$ -- 2
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 33
-empty$ -- 37
-format.name$ -- 3
-if$ -- 88
+cite$ -- 3
+duplicate$ -- 62
+empty$ -- 69
+format.name$ -- 4
+if$ -- 174
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 6
-newline$ -- 28
-num.names$ -- 1
-pop$ -- 19
+int.to.str$ -- 2
+missing$ -- 13
+newline$ -- 31
+num.names$ -- 2
+pop$ -- 30
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 31
+skip$ -- 62
 stack$ -- 0
-substring$ -- 1
-swap$ -- 16
+substring$ -- 2
+swap$ -- 36
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1
+type$ -- 2
 warning$ -- 1
-while$ -- 1
-width$ -- 2
-write$ -- 31
-(There was 1 warning)
+while$ -- 2
+width$ -- 3
+write$ -- 40
+(There were 2 warnings)

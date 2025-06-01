@@ -14,7 +14,6 @@
 \usepackage{caption}
 \usepackage{chngcntr}
 
-\newcounter{lstlisting}
 
 \lstset{
   language=C++,
@@ -51,8 +50,6 @@
 {\begin{proof}\renewcommand{\theproof}{}}
   {\end{proof}}
 
-\renewcommand{\lstlistingname}{Kod}
-
 
 
 
@@ -86,6 +83,8 @@ u investicijskim portfeljima uz pomoć Monte Carlo simulacija}
 
 
 \begin{document}
+\renewcommand{\lstlistingname}{Kod}
+\renewcommand{\thelstlisting}{\thesection\arabic{lstlisting}}
 
 % Naslovnica se automatski generira / Titlepage is automatically generated
 \maketitle
@@ -507,18 +506,7 @@ class Portfolio {
 Matematički okvir aplikacije implementira osnovne matematičke
 operacije nad vektorima i matricama, kao što su množenje
 matrica i vektora te razne matrične dekompozicije. Sve metode koriste
-samo standardnu biblioteku C++. Cholesky dekompozicija je implementirana
-kao metoda koja prima kovarijacijsku matricu i matricu $L$ u koju se sprema
-donja trokutasta matrica dekompozicije te metoda vraća \texttt{int} koji
-označava uspješnost dekompozicije.
-Algoritam radi točno prema koracima matematične notacije.
-Znamo da je matrica kovarijance uvijek simetična i
-pozitivno definitna, pa je Cholesky dekompozicija uvijek moguća.
-QR dekompozicija je implementirana kao metoda koja prima ulaznu matricu
-te matrice $Q$ i $R$ u koje se spremaju rezultati dekompozicije.
-Implemetacija QR dekompozicije koristi Householderove refleksije za
-dekompoziciju matrice.
-
+samo standardnu biblioteku C++.
 
 \begin{lstlisting}[caption={Metode implementirane u matematičkom okviru}, label={lst:cpp_example}]
 template <typename T>
@@ -580,6 +568,37 @@ template <typename T>
 int eigen_pairs(const std::vector<std::vector<T>> &matrix,
                 std::vector<std::pair<T, std::vector<T>>> &results);
 \end{lstlisting}
+
+\subsection{Cholesky dekompozicija}
+Cholesky dekompozicija je implementirana
+kao metoda koja prima kovarijacijsku matricu i matricu $L$ u koju se sprema
+donja trokutasta matrica dekompozicije te metoda vraća \texttt{int} koji
+označava uspješnost dekompozicije.
+Algoritam radi točno prema koracima matematične notacije.
+Znamo da je matrica kovarijance uvijek simetična i
+pozitivno definitna, pa je Cholesky dekompozicija uvijek moguća.
+
+\subsection{QR dekompozicija}
+QR dekompozicija je implementirana kao metoda koja prima ulaznu matricu
+te matrice $Q$ i $R$ u koje se spremaju rezultati dekompozicije.
+Implemetacija QR dekompozicije koristi Householderove refleksije za
+dekompoziciju matrice. Ideja Householderove refleksije je pronaći
+refleksiju koja će transformirati prvi stupac matrice u vektor
+$\begin{pmatrix} \|x\| \\ 0 \\ \dots \\ 0 \end{pmatrix}$.
+Nakon što se prvi stupac transformira, iterativno se primjenjuju
+Householderove refleksije na preostale stupce matrice.
+
+
+\subsection{Svojstvena dekompozicija}
+Svojstvena dekompozicija je implementirana kao metoda koja prima
+kovarijacijsku matricu te par vlastitih vrijednosti i vlastitih vektora u koje
+se spremaju rezultati dekompozicije.
+Za izračun vlastitih vrijednosti koristi se QR dekompozicija
+koja se iterativno primjenjuje na matricu dok ne dobijemo
+gornju trokutastu matricu.
+
+
+
 
 \section{Monte Carlo simulacija}
 \label{sek:monte_carlo_simulacija}

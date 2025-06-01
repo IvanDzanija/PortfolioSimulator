@@ -19,18 +19,21 @@
 \contentsline {section}{\numberline {3.3.}Model kriptovalute}{13}{section.3.3}%
 \contentsline {section}{\numberline {3.4.}Model portfelja}{13}{section.3.4}%
 \contentsline {section}{\numberline {3.5.}Matematički okvir}{15}{section.3.5}%
-\contentsline {section}{\numberline {3.6.}Monte Carlo simulacija}{17}{section.3.6}%
-\contentsline {chapter}{\numberline {4.}Rezultati i rasprava}{19}{chapter.4}%
-\contentsline {chapter}{\numberline {5.}Zaključak}{21}{chapter.5}%
-\contentsline {chapter}{Literatura}{22}{chapter*.4}%
+\contentsline {subsection}{\numberline {3.5.1.}Cholesky dekompozicija}{17}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2.}QR dekompozicija}{17}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3.}Svojstvena dekompozicija}{17}{subsection.3.5.3}%
+\contentsline {section}{\numberline {3.6.}Monte Carlo simulacija}{18}{section.3.6}%
+\contentsline {chapter}{\numberline {4.}Rezultati i rasprava}{20}{chapter.4}%
+\contentsline {chapter}{\numberline {5.}Zaključak}{22}{chapter.5}%
+\contentsline {chapter}{Literatura}{23}{chapter*.4}%
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{Sa\v {z}etak}{23}{chapter*.5}%
+\contentsline {chapter}{Sa\v {z}etak}{24}{chapter*.5}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{Abstract}{24}{chapter*.6}%
+\contentsline {chapter}{Abstract}{25}{chapter*.6}%
 \babel@toc {croatian}{}\relax 
 \babel@toc {english}{}\relax 
 \babel@toc {croatian}{}\relax 
-\contentsline {chapter}{\numberline {A:}The Code}{25}{chapter.1}%
+\contentsline {chapter}{\numberline {A:}The Code}{26}{chapter.1}%
