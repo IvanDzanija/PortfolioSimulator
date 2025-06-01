@@ -15,7 +15,7 @@
 \contentsline {section}{\numberline {2.7.}PCA dekompozicija}{9}{section.2.7}%
 \contentsline {chapter}{\numberline {3.}Implementacija aplikacije}{11}{chapter.3}%
 \contentsline {section}{\numberline {3.1.}Podatci}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2.}Algoritmi i komponente}{12}{section.3.2}%
+\contentsline {section}{\numberline {3.2.}Algoritmi i komponente}{13}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1.}Parsiranje podataka}{13}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2.}Model kriptovalute}{14}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3.}Model portfelja}{15}{subsection.3.2.3}%

@@ -453,11 +453,6 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2te
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text-italic.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text-italic.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
-INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/ts1-stix2text.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc
 INPUT ./Figures/model_aplikacije.png
 INPUT ./Figures/model_aplikacije.png
 INPUT ./Figures/model_aplikacije.png
@@ -465,6 +460,11 @@ INPUT ./Figures/model_aplikacije.png
 INPUT ./Figures/model_aplikacije.png
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text-bold.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/ts1-stix2text.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
