@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  1 JUN 2025 14:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  1 JUN 2025 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -993,7 +993,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.27 ...\numberline {5.}Zaključak}{22}{chapter.5}
+l.30 ...\numberline {5.}Zaključak}{25}{chapter.5}
                                                   % [1
 
 
@@ -1135,32 +1135,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 370--378
  []
 
 LaTeX Font Info:    Trying to load font information for TS1+stix2 on input line
- 384.
+ 393.
 (/usr/local/texlive/2024/texmf-dist/tex/latex/stix2-type1/ts1stix2.fd
 File: ts1stix2.fd 2018/04/02 v2.0.0-latex stix2 TS1 font definitions
 )
 Package microtype Info: Character `textflorin ' is missing
 (microtype)             in font `TS1/stix2/m/n/12'.
 (microtype)             Ignoring protrusion settings for this character.
+ [11
 
+{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}]
 
-LaTeX Warning: File `model_aplikacije.png' not found on input line 409.
-
-
-! Package pdftex.def Error: File `model_aplikacije.png' not found: using draft 
-setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.409 ...idth=0.8\textwidth]{model_aplikacije.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+[12]
+<Figures/model_aplikacije.png, id=258, 3892.5425pt x 1777.64125pt>
+File: Figures/model_aplikacije.png Graphic file (type png)
+<use Figures/model_aplikacije.png>
+Package pdftex.def Info: Figures/model_aplikacije.png  used on input line 449.
+(pdftex.def)             Requested size: 352.81552pt x 161.12004pt.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 468.
+ [13 <./Figures/model_aplikacije.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 4
-09.
+68.
+
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
@@ -1168,111 +1165,129 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `cmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [11
-
-{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-ts1.enc}]
- [12{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.en
-c}] [13]
-[14]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 511.
- [15] [16] [17]
-<Figures/monte_carlo_example.png, id=409, 1470.49374pt x 836.12375pt>
+ [14{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.en
+c}] [15] [16]
+[17]
+LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
+e
+(Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
+e 617.
+LaTeX Font Info:    Font shape `T1/opensans-TLF/b/n' will be
+(Font)              scaled to size 12.0pt on input line 617.
+ [18]
+<Figures/monte_carlo_example.png, id=419, 1470.49374pt x 836.12375pt>
 File: Figures/monte_carlo_example.png Graphic file (type png)
 <use Figures/monte_carlo_example.png>
-Package pdftex.def Info: Figures/monte_carlo_example.png  used on input line 62
-6.
+Package pdftex.def Info: Figures/monte_carlo_example.png  used on input line 67
+4.
 (pdftex.def)             Requested size: 661.5266pt x 376.15015pt.
 
-Overfull \hbox (220.50887pt too wide) in paragraph at lines 626--628
+Overfull \hbox (220.50887pt too wide) in paragraph at lines 674--676
  [][] 
  []
 
-[18] [19 <./Figures/monte_carlo_example.png>]
+<Figures/pca_example.png, id=422, 1475.5125pt x 839.135pt>
+File: Figures/pca_example.png Graphic file (type png)
+<use Figures/pca_example.png>
+Package pdftex.def Info: Figures/pca_example.png  used on input line 695.
+(pdftex.def)             Requested size: 661.5266pt x 376.2116pt.
+
+Overfull \hbox (220.50887pt too wide) in paragraph at lines 695--696
+ [][] 
+ []
+
+[19]
+<Figures/gui.png, id=429, 1475.5125pt x 840.13875pt>
+File: Figures/gui.png Graphic file (type png)
+<use Figures/gui.png>
+Package pdftex.def Info: Figures/gui.png  used on input line 716.
+(pdftex.def)             Requested size: 352.81552pt x 200.88107pt.
+ [20 <./Figures/monte_carlo_example.png>] [21 <./Figures/pca_example.png>]
+[22 <./Figures/gui.png>]
 Poglavlje 4..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 658.
+(blindtext)                 on input line 740.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 658.
+(blindtext)                 on input line 740.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 658.
+(blindtext)                 on input line 740.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 658.
+(blindtext)                 on input line 740.
 
-[20
+[23
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 658.
+(blindtext)                 on input line 740.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 658.
+(blindtext)                 on input line 740.
 
-[21]
+[24]
 Poglavlje 5..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 664.
+(blindtext)                 on input line 746.
 
-(./Zavrsni_rad.bbl [22
+(./Zavrsni_rad.bbl [25
 
-]) [23
+]) [26
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 678.
+(blindtext)                 on input line 760.
 
-[24
+[27
 
-] [25
+] [28
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.700 \chapter{The Code}
+l.782 \chapter{The Code}
                         
 Privitak A.
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 703.
+(blindtext)                 on input line 785.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 703.
+(blindtext)                 on input line 785.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 703.
+(blindtext)                 on input line 785.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 703.
+(blindtext)                 on input line 785.
 
-[26
+[29
 
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 703.
+(blindtext)                 on input line 785.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 703.
+(blindtext)                 on input line 785.
 
-[27] (./Zavrsni_rad.aux)
+[30] (./Zavrsni_rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1406,34 +1421,28 @@ ls2stix2tt.fd    2018/04/02 v2.0.0-latex stix2 typewriter LS2 font definitions
  zadatak.pdf    Graphic file (type pdf)
  zadatak.pdf    Graphic file (type pdf)
 ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
+Figures/model_aplikacije.png
   t1cmtt.fd    2023/04/13 v2.5m Standard LaTeX font definitions
 Figures/monte_carlo_example.png
+Figures/pca_example.png
+Figures/gui.png
 Zavrsni_rad.bbl
  ***********
 
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Zavrsni_rad.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Zavrsni_rad.out':
-(rerunfilecheck)             Before: 9470E251F0E9DA16D7DAAC673AF7F7BD;3952
-(rerunfilecheck)             After:  860C12477AE438917AC3D27DC7342C97;4095.
+Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
+(rerunfilecheck)             Checksum: DEE3E2ACBC6D7068A9D4A5D292E97627;3904.
  ) 
 Here is how much of TeX's memory you used:
- 23227 strings out of 474116
- 367845 string characters out of 5743683
- 2005187 words of memory out of 5000000
- 44891 multiletter control sequences out of 15000+600000
- 687980 words of font info for 224 fonts, out of 8000000 for 9000
+ 23253 strings out of 474116
+ 368251 string characters out of 5743683
+ 1999187 words of memory out of 5000000
+ 44901 multiletter control sequences out of 15000+600000
+ 689415 words of font info for 230 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,17n,131p,1008b,2152s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 87i,17n,131p,1008b,2105s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
 ld.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSa
 ns-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-typ
@@ -1443,10 +1452,10 @@ stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
 fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fo
 nts/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (30 pages, 2497926 bytes).
+Output written on Zavrsni_rad.pdf (33 pages, 6719156 bytes).
 PDF statistics:
- 559 PDF objects out of 1000 (max. 8388607)
- 489 compressed objects within 5 object streams
- 201 named destinations out of 1000 (max. 500000)
- 24314 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 587 PDF objects out of 1000 (max. 8388607)
+ 507 compressed objects within 6 object streams
+ 208 named destinations out of 1000 (max. 500000)
+ 24841 words of extra memory for PDF output out of 24883 (max. 10000000)
 

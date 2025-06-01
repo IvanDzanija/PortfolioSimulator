@@ -376,6 +376,46 @@ omogućuje vizualizaciju rezultata. Prikaz modela rada aplikacije
 je dan na slici \ref{fig:model_aplikacije}.
 \\
 
+\section{Podatci}
+\label{sek:podaci}
+Podatci korišteni u aplikaciji su povijesne vrijednosti
+kriptovaluta preuzete sa stranice \cite{1}.
+Podatci su u CSV formatu i sadrže informacije o otvorenoj, zatvorenoj,
+najvišoj i najnižoj cijeni te volumenu kriptovalute i ukupnom tržišnom
+kapitalu za svaki vremenski interval. Za potrebe aplikacije,
+ovaka pristup je dovoljan jer se fokusiramo na analizu i
+implementaciju modela portfelja i potrebnih matematičkih operacija.
+U budućnosti bi se mogla implementirati i dohvaćanje podataka
+u realnom vremenu preko nekog javno dostupnog API-ja. Time bi
+aplikacija postala korisna i za praćenje portfelja u realnom vremenu.\\
+U trenutnim podatcima nalaze se povijesne vrijednosti za 23 različite kriptovalute.
+\begin{itemize}
+    \item Aave (AAVE)
+    \item Bitcoin (BTC)
+    \item Ethereum (ETH)
+    \item Binance Coin (BNB)
+    \item Crypto.com Coin (CRO)
+    \item Cardano (ADA)
+    \item Solana (SOL)
+    \item Ripple (XRP)
+    \item Polkadot (DOT)
+    \item Dogecoin (DOGE)
+    \item Litecoin (LTC)
+    \item Chainlink (LINK)
+    \item Uniswap (UNI)
+    \item Bitcoin Wrapped (WBTC)
+    \item Stellar (XLM)
+    \item TRON (TRX)
+    \item Cosmos (ATOM)
+    \item Monero (XMR)
+    \item Thether (USDT)
+    \item USD Coin (USDC)
+    \item Eos (EOS)
+    \item Iota (IOTA)
+    \item NEM (XEM)
+\end{itemize}
+
+
 %--- ALGORITMI / ALGORITHMS ----------------------------------------------------
 \section{Algoritmi i komponente}
 \label{sek:algoritmi_i_komponente}
@@ -406,12 +446,12 @@ Aplikacija se sastoji od nekoliko ključnih komponenti:
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.8\textwidth]{model_aplikacije.png}
+    \includegraphics[width=0.8\textwidth]{Figures/model_aplikacije.png}
     \caption{Model rada aplikacije}
     \label{fig:model_aplikacije}
 \end{figure}
 
-\section{Parsiranje podataka}
+\subsection{Parsiranje podataka}
 \label{sek:parsiranje_podataka}
 Efikasno parsiranje povijesnih podataka o cijenama kriptovaluta
 je prvi korak u simulaciji i stavaranju modela portfelja.
@@ -419,8 +459,13 @@ Podatci se učitavaju iz CSV datoteka koje sadrže povijesne cijene
 kriptovaluta. Povijesni podatci su preuzeti sa \cite{1}.
 Podatci se parsiraju u \emph{candle} strukturu koja sadrži
 otvorenu, zatvorenu, najvišu i najnižu cijenu te volumen
-kriptovalute za svaki vremenski interval.
-\begin{lstlisting}
+kriptovalute za svaki vremenski interval. Također se pri parsiranju
+računaju i logaritamski povrati za svaki vremenski interval te se izvršava
+poravnanje vremenskih oznaka svih kriptovaluta. U pravilu se kriptovaluta može
+i trguje 24/7, ali je problem bio što neke kriptovalute nisu postojale ili
+nisu imale podatke za sve dane svih ostalih kriptovaluta.
+\begin{lstlisting}[caption={Struktura \emph{candle} koja sadrži povijesne
+podatke o cijenama kriptovaluta}, label={lst:candle}]
 struct Candle {
   public:
     // OHLC
@@ -433,13 +478,13 @@ struct Candle {
 };
 \end{lstlisting}
 
-\section{Model kriptovalute}
+\subsection{Model kriptovalute}
 \label{sek:model_kriptovalute}
 Model kriptovalute je implementiran kao klasa koja
 sadrži povijesne podatke o cijenama kriptovalute
 i metode za izračunavanje povrata, volatilnosti
 i driftova.
-\begin{lstlisting}
+\begin{lstlisting}[caption={Model kriptovalute}, label={lst:kriptovaluta}]
 class Cryptocurrency {
   public:
     std::string name, tick;
@@ -458,11 +503,11 @@ class Cryptocurrency {
 };
 \end{lstlisting}
 
-\section{Model portfelja}
+\subsection{Model portfelja}
 \label{sek:model_portfelja}
 Model portfelja je implementiran kao klasa koja
 sadrži vektor kriptovaluta i njihove udjele u portfelju.
-\begin{lstlisting}
+\begin{lstlisting}[caption={Model portfelja}, label={lst:portfelj}]
 class Portfolio {
   private:
     std::vector<std::string> _asset_names;
@@ -501,7 +546,7 @@ class Portfolio {
 };
 \end{lstlisting}
 
-\section{Matematički okvir}
+\subsection{Matematički okvir}
 \label{sek:matematicki_okvir}
 Matematički okvir aplikacije implementira osnovne matematičke
 operacije nad vektorima i matricama, kao što su množenje
@@ -569,7 +614,8 @@ int eigen_pairs(const std::vector<std::vector<T>> &matrix,
                 std::vector<std::pair<T, std::vector<T>>> &results);
 \end{lstlisting}
 
-\subsection{Cholesky dekompozicija}
+\subsubsection{Cholesky dekompozicija}
+\label{sek:cholesky_dekompozicija}
 Cholesky dekompozicija je implementirana
 kao metoda koja prima kovarijacijsku matricu i matricu $L$ u koju se sprema
 donja trokutasta matrica dekompozicije te metoda vraća \texttt{int} koji
@@ -578,7 +624,8 @@ Algoritam radi točno prema koracima matematične notacije.
 Znamo da je matrica kovarijance uvijek simetična i
 pozitivno definitna, pa je Cholesky dekompozicija uvijek moguća.
 
-\subsection{QR dekompozicija}
+\subsubsection{QR dekompozicija}
+\label{sek:qr_dekompozicija}
 QR dekompozicija je implementirana kao metoda koja prima ulaznu matricu
 te matrice $Q$ i $R$ u koje se spremaju rezultati dekompozicije.
 Implemetacija QR dekompozicije koristi Householderove refleksije za
@@ -589,7 +636,8 @@ Nakon što se prvi stupac transformira, iterativno se primjenjuju
 Householderove refleksije na preostale stupce matrice.
 
 
-\subsection{Svojstvena dekompozicija}
+\subsubsection{Svojstvena dekompozicija}
+\label{sek:svojstvena_dekompozicija}
 Svojstvena dekompozicija je implementirana kao metoda koja prima
 kovarijacijsku matricu te par vlastitih vrijednosti i vlastitih vektora u koje
 se spremaju rezultati dekompozicije.
@@ -604,7 +652,7 @@ i trebale napraviti.
 
 
 
-\section{Monte Carlo simulacija}
+\subsection{Monte Carlo simulacija}
 \label{sek:monte_carlo_simulacija}
 Monte Carlo simulacija je implementirana kao metoda klase
 \texttt{Portfolio} koja generira simulacije budućih cijena portfelja
@@ -629,12 +677,46 @@ prema formuli:
     \label{fig:monte_carlo_example}
 \end{figure}
 
-\section{PCA dekompozicija}
+\subsection{PCA dekompozicija}
 \label{sek:pca_dekompozicija}
 PCA dekompozicija je također implementirana kao metoda klase
 \texttt{Portfolio} koja prima ulaznu kovarijacijsku matricu,
 broj glavnih komponenti i vektor u koji se spremaju glavne komponente
-poredane po količini varijance koju objašnjavaju.
+poredane po količini varijance koju objašnjavaju te ukupnu varijancu (u ovom
+slučaju to je suma svih vlastitih vrijednosti) i varijancu objašnjenu glavnim
+komponentama. Metoda vrati \texttt{int} koji označava uspješnost dekompozicije.
+Za izračun glavnih komponenti koristi se svojstvena dekompozicija koja
+daje vlastite vrijednosti i vlastite vektore kovarijacijske matrice te je
+objašnjena u \ref{sek:svojstvena_dekompozicija}.
+primjer rezultata PCA dekompozicije je dan na slici
+\ref{fig:pca_example}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1.5\textwidth]{Figures/pca_example.png}
+    \caption{Primjer PCA dekompozicije portfelja kriptovaluta (3 glavne komponente)}
+    \label{fig:pca_example}
+\end{figure}
+
+\subsection{Vizualizacija rezultata}
+\label{sek:vizualizacija_rezultata}
+Za vizualizaciju rezultata i interakciju s korisnikom koristi se
+grafičko sučelje implementirano u C++ koristeći Qt biblioteku.
+Grafičko sučelje omogućuje korisniku da odabere kriptovalute koje želi
+staviti u portfelj, postavi udjele kriptovaluta u portfelju,
+odabere vremenski period simulacije i broj simulacija.
+Rezultati simulacija se prikazuju u obliku grafova koji
+se otvaraju u novom prozoru aplikacije i prikazuju teoretsko kretanje
+vrijednosti portfelja u budućnosti. Korisnik također može odabrati
+broj glavnih komponenti te izvrši PCA dekompoziciju portfelja. Prikaz
+rezultata PCA dekompozicije je također u obliku grafova koji
+se otvara u novom prozoru aplikacije i prikazuje glavne komponente
+portfelja te varijancu koju objašnjavaju.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/gui.png}
+    \caption{Grafičko sučelje aplikacije za simulaciju portfelja kriptovaluta}
+    \label{fig:portfolio_gui}
+\end{figure}
 
 
 
