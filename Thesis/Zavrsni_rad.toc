@@ -23,6 +23,7 @@
 \contentsline {subsection}{\numberline {3.5.2.}QR dekompozicija}{17}{subsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.5.3.}Svojstvena dekompozicija}{17}{subsection.3.5.3}%
 \contentsline {section}{\numberline {3.6.}Monte Carlo simulacija}{18}{section.3.6}%
+\contentsline {section}{\numberline {3.7.}PCA dekompozicija}{18}{section.3.7}%
 \contentsline {chapter}{\numberline {4.}Rezultati i rasprava}{20}{chapter.4}%
 \contentsline {chapter}{\numberline {5.}Zaključak}{22}{chapter.5}%
 \contentsline {chapter}{Literatura}{23}{chapter*.4}%

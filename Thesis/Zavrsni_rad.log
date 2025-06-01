@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  1 JUN 2025 11:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  1 JUN 2025 14:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1181,10 +1181,10 @@ nput line 511.
 File: Figures/monte_carlo_example.png Graphic file (type png)
 <use Figures/monte_carlo_example.png>
 Package pdftex.def Info: Figures/monte_carlo_example.png  used on input line 62
-2.
+6.
 (pdftex.def)             Requested size: 661.5266pt x 376.15015pt.
 
-Overfull \hbox (220.50887pt too wide) in paragraph at lines 622--624
+Overfull \hbox (220.50887pt too wide) in paragraph at lines 626--628
  [][] 
  []
 
@@ -1192,36 +1192,36 @@ Overfull \hbox (220.50887pt too wide) in paragraph at lines 622--624
 Poglavlje 4..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 651.
+(blindtext)                 on input line 658.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 651.
+(blindtext)                 on input line 658.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 651.
+(blindtext)                 on input line 658.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 651.
+(blindtext)                 on input line 658.
 
 [20
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 651.
+(blindtext)                 on input line 658.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 651.
+(blindtext)                 on input line 658.
 
 [21]
 Poglavlje 5..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 657.
+(blindtext)                 on input line 664.
 
 (./Zavrsni_rad.bbl [22
 
@@ -1230,7 +1230,7 @@ Package blindtext Warning: croatian not defined, using English instead.
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 671.
+(blindtext)                 on input line 678.
 
 [24
 
@@ -1241,24 +1241,24 @@ pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.693 \chapter{The Code}
+l.700 \chapter{The Code}
                         
 Privitak A.
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 696.
+(blindtext)                 on input line 703.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 696.
+(blindtext)                 on input line 703.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 696.
+(blindtext)                 on input line 703.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 696.
+(blindtext)                 on input line 703.
 
 [26
 
@@ -1266,11 +1266,11 @@ Package blindtext Warning: croatian not defined, using English instead.
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 696.
+(blindtext)                 on input line 703.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 696.
+(blindtext)                 on input line 703.
 
 [27] (./Zavrsni_rad.aux)
  ***********
@@ -1414,14 +1414,23 @@ Zavrsni_rad.bbl
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 9470E251F0E9DA16D7DAAC673AF7F7BD;3952.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `Zavrsni_rad.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Zavrsni_rad.out':
+(rerunfilecheck)             Before: 9470E251F0E9DA16D7DAAC673AF7F7BD;3952
+(rerunfilecheck)             After:  860C12477AE438917AC3D27DC7342C97;4095.
  ) 
 Here is how much of TeX's memory you used:
- 23226 strings out of 474116
- 367826 string characters out of 5743683
+ 23227 strings out of 474116
+ 367845 string characters out of 5743683
  2005187 words of memory out of 5000000
- 44890 multiletter control sequences out of 15000+600000
+ 44891 multiletter control sequences out of 15000+600000
  687980 words of font info for 224 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1008b,2152s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1434,7 +1443,7 @@ stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
 fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fo
 nts/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (30 pages, 2497631 bytes).
+Output written on Zavrsni_rad.pdf (30 pages, 2497926 bytes).
 PDF statistics:
  559 PDF objects out of 1000 (max. 8388607)
  489 compressed objects within 5 object streams

@@ -595,7 +595,11 @@ kovarijacijsku matricu te par vlastitih vrijednosti i vlastitih vektora u koje
 se spremaju rezultati dekompozicije.
 Za izračun vlastitih vrijednosti koristi se QR dekompozicija
 koja se iterativno primjenjuje na matricu dok ne dobijemo
-gornju trokutastu matricu.
+gornje trokutastu matricu (u slučaju simetrične ulazne matrice dobijamo
+dijagonalnu matricu). Zatim se vlastiti vektori dobivaju
+posebno za svaku vlastitu vrijednost. Ovakva implementacija nije
+najefikasnija i sigurno među prvim optimizacijama koje bi se mogle
+i trebale napraviti.
 
 
 
@@ -625,11 +629,14 @@ prema formuli:
     \label{fig:monte_carlo_example}
 \end{figure}
 
+\section{PCA dekompozicija}
+\label{sek:pca_dekompozicija}
+PCA dekompozicija je također implementirana kao metoda klase
+\texttt{Portfolio} koja prima ulaznu kovarijacijsku matricu,
+broj glavnih komponenti i vektor u koji se spremaju glavne komponente
+poredane po količini varijance koju objašnjavaju.
 
 
-
-\begin{lstlisting}
-\end{lstlisting}
 
 
 
