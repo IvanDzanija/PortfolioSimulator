@@ -8,7 +8,6 @@
 class CSV_Parser {
   public:
     Cryptocurrency fastReadCryptoCSV(const std::string &filename) {
-        auto start = std::chrono::high_resolution_clock::now();
         // Get file size for preallocation
         std::filesystem::path p(filename);
         size_t fileSize = std::filesystem::file_size(p);
@@ -119,11 +118,6 @@ class CSV_Parser {
             data.hist_data.emplace_back(open, high, low, close, volume,
                                         marketcap, timestamp);
         }
-        auto end = std::chrono::high_resolution_clock::now();
-        auto duration =
-            std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-        std::cout << "CSV parsing took: " << duration.count() << " ms"
-                  << std::endl;
         file.close();
         delete[] buffer;
         return data;
