@@ -24,13 +24,34 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{Investments}
+Z.~Bodie, A.~Kane, i A.~J. Marcus, \emph{Investments}.\hskip 1em plus 0.5em
+  minus 0.4em\relax McGraw-Hill, 2014.
+
 \bibitem{GMBIzvod}
 J.~Campana i C.~Grenon, ``Deriving the black-scholes formula from brownian
   motion'', 2021.
+
+\bibitem{NumerickaMatematika}
+J.~P. Milišić i A.~Žgaljić Keko, \emph{Uvod u numeričku matematiku za
+  inženjere}.\hskip 1em plus 0.5em minus 0.4em\relax Element, 2014.
+
+\bibitem{NumerickaLinearna}
+A.~A. Aljinović, N.~Elezović, i D.~Žubrinić, \emph{Linearna algebra}.\hskip
+  1em plus 0.5em minus 0.4em\relax Element, 2017.
+
+\bibitem{kaggledataset}
+S.~Rajkumar, ``Cryptocurrency historical prices'',
+  \url{https://www.kaggle.com/datasets/sudalairajkumar/cryptocurrencypricehistory/data}.
 
 \bibitem{1}
 K.~L. Pavasović, ``Metode neglatke optimizacije u teoriji portfelja'',
   Diplomski rad, Sveučilište u Zagrebu, Prirodoslovno-matematički fakultet,
   2022.
+
+\bibitem{HouseholderSketch}
+A.~Kwok, ``Detailed explanation of qr decomposition by householder
+  transformation'',
+  \url{https://kwokanthony.medium.com/detailed-explanation-with-example-on-qr-decomposition-by-householder-transformation-5e964d7f7656}.
 
 \end{thebibliography}

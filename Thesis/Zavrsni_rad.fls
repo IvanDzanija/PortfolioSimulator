@@ -183,6 +183,8 @@ INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/tools/xspace.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/tools/xspace.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
+INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/mathtools/mathtools.sty
@@ -446,11 +448,11 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/stix2-math
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/stix2-mathsfit-bold.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/stix2-mathsfit-bold.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/stix2-mathsfit-bold.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text.tfm
+INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathscr.enc
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathit-bold.enc
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text.tfm
-INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text-italic.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/public/stix2-type1/t1-stix2text-italic.tfm
 INPUT ./Figures/model_aplikacije.png
@@ -474,6 +476,11 @@ INPUT /usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.en
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Bold-T1-TLF.tfm
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/vf/ascender/opensans/OpenSans-Bold-T1-TLF.vf
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/tfm/ascender/opensans/OpenSans-Bold-T1-TLF--base.tfm
+INPUT ./Figures/householder.png
+INPUT ./Figures/householder.png
+INPUT ./Figures/householder.png
+INPUT ./Figures/householder.png
+INPUT ./Figures/householder.png
 INPUT ./Figures/monte_carlo_example.png
 INPUT ./Figures/monte_carlo_example.png
 INPUT ./Figures/monte_carlo_example.png

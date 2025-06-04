@@ -12,6 +12,7 @@ int main(void) {
     std::cout << "Running tests..." << std::endl;
 
     Portfolio test = parser_test();
+    return 0;
     // std::cout << "Parser test:" << std::endl;
     // for (auto x : test.assets) {
     // 	std::cout << "Coin name: " << x.first.name << std::endl;

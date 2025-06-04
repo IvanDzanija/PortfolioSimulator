@@ -5,6 +5,7 @@
 
 \usepackage{blindtext}
 \usepackage{mathrsfs}
+\usepackage{float}
 \usepackage[shortlabels]{enumitem}
 \usepackage{mathtools}
 \usepackage{microtype}
@@ -114,7 +115,9 @@ u investicijskim portfeljima uz pomoć Monte Carlo simulacija}
 \label{pog:uvod}
 
 Modeliranje ponašanja portfelja je jedna od ključnih metoda pri odabiru
-investicijskih ulaganja ili sigurnih financijskih rezervi.
+investicijskog pristupa. Od odabira pojedinačnih dionica, raznih
+derivata, sigurnih obveznica ili investicijkih fondova sve do mogućnosti
+čuvanja novčanih rezervi.\\
 U posljednjem desetljeću, kriptovalute su postale sveprisutna
 komponenta financijskih tržišta, karakterizirana visokom volatilnošću,
 nelinearnim ovisnostima i globalnom dostupnošću što kroz iznimno pouzdane izvore
@@ -122,21 +125,32 @@ nelinearnim ovisnostima i globalnom dostupnošću što kroz iznimno pouzdane izv
 Upravljanje rizikom u takvom okruženju zahtijeva napredne alate za
 modeliranje budućih scenarija.
 Jedan od takvih alata u standarnim financijskim modelima je Monte Carlo
-simulacija.
+simulacija.\\
 Monte Carlo simulacija, kao statistička metoda temeljena na ponovljenom
 uzorkovanju slučajnih varijabli i često korištena metoda u modeliranju
-ostalih financijskih instrumenata, nameće se kao ključni pristup za
-analizu portfelja kriptovaluta.\\
+ostalih financijskih instrumenata, nameće se kao potencijalno uspješan
+pristup za analizu portfelja kriptovaluta.\\
 U ovom radu fokusira se na implementaciji
 Monte Carlo metode za predviđanje vrijednosti portfelja s primjenom
 Cholesky dekompozicije kako bi se osigurala realistična obrada
 korelacija između kriptovaluta koje su još uvijek specijalna skupina investicija
 s visokom međusobnom korelecijom.\\
+Osim Monte Carlo simulacija za predviđanje budućih cijena portfelja,
+implementira se i PCA (Principal Component Analysis) dekompozicija
+kao jedna od jednostavnih metoda za smanjenje volatilnosti portfelja
+upravo postignutu kroz smanjenje dimenzionalnosti podataka i identifikaciju
+glavnih komponenti koje objašnjavaju najveći dio varijance podataka.\\
 Glavni izazov u modeliranju kriptovaluta leži u njihovoj inherentnoj
 nestabilnosti. Dok tradicionalne financijske instrumente karakteriziraju
 relativno predvidljivi obrasci, kriptovalute pokazuju ekstremne fluktuacije
 koje zahtijevaju precizno podešavanje parametara poput driftova i
-volatilnosti.\\
+volatilnosti. Osim velike i teško predvidive volatilnosti dodatan problem
+predstavlja kratak period postojanja tog financijskog instrumenta.
+Većina kriptovaluta postoji tek nekoliko godina, a neke su čak i
+nestale samo nekoliko mjeseci nakon što su se pojavile. Period manji od
+10 godina je u financijskom svijetu vrlo kratak pogotovo ako uzmemo u obzir
+da nije bilo prevelikih promjena ili kriza na financijskim tržištima
+u vremenu postojanja kriptovaluta.\\
 U radu je razvijen C++ programski okvir koji integrira povijesne podatke
 kriptovaluta, obavlja potrebne matematičke operacije i generira simulacije.
 Generirane simulacije omogućuju analizu različitih scenarija kretanja cijena,
@@ -145,17 +159,24 @@ Sva interakcija s korisnikom odvija se putem grafičkog sučelja koje
 omogućuje jednostavno upravljanje parametrima simulacije i vizualizaciju
 rezultata.\\
 Rad je strukturiran kako slijedi: U drugom poglavlju opisuju se teorijske
-osnove teorije portfelja, Monte Carlo metode i geometrijskog Brownovog gibanja.
-Treće poglavlje detaljno opisuje implementaciju algoritama, uključujući
-postupak Cholesky dekompozicije, brzo ``parsiranje`` financijskog skupa podataka
+osnove teorije portfelja, Monte Carlo metode, PCA dekompozicija te
+sve potrebne matematičke osnove i teorije potrebne za razumijevanje
+i implementaciju modela.
+Treće poglavlje detaljno opisuje implementaciju algoritama i struktura, uključujući
+model portfelja, model kriptovalute, postupke poput Cholesky dekompozicije,
+traženja svojstvene dekompozicije, brzog ``parsiranja`` financijskog skupa podataka
 i optimizacije za velike skupove podataka.
 U četvrtom poglavlju analiziraju se rezultati simulacija za različite
 konfiguracije portfelja, dok se u zaključku raspravlja o primjenjivosti
 modela, mogućim i očitim praktičnim problemima i smjerovima daljnjeg istraživanja.
 
 Ovakav rad može poslužiti kao osnova za daljnje istraživanje i razvoj
-naprednijih modela koji će omogućiti bolje razumijevanje i upravljanje
+naprednijih modela i aplikacija koji će omogućiti bolje razumijevanje i upravljanje
 rizicima povezanima s kriptovalutama, ali i ostalim financijskim instrumentima.
+Pogotovo jer se kroz izradu sustava i aplikacije kao sekundarni rezultat
+pokrenuo razvitak biblioteke za rad s financijskim podatcima i potrebnim
+matematičkim okvirima koja će se moći koristiti u budućim radovima i projektima.
+
 %-------------------------------------------------------------------------------
 \chapter{Teorija portfelja i matematičke osnove}
 \label{pog:teorija_portelja}
@@ -164,6 +185,17 @@ daje strogu matematičku definiciju financijskim pojmovima.
 Ključni optimizacijski problem teorije portfelja je
 \textit{dualni cilj}: maksimizacija očekivanog povrata
 uz istovremeno minimiziranje rizika.
+
+\section{Investicije}
+\label{sek:investicije}
+Investicija ili ulaganje je proces alokacije ograničenih resursa
+kao što su novac, vrijeme ili energija u svrhu ostvarivanja
+većeg povrata ili dodatne koristi u budućnosti \cite{Investments}.
+Ovime kažemo kako investicija ne mora nužno biti financijska,
+ali u ovom radu se fokusiramo na financijske investicije koje nam
+predstavljaju izdvajanje i ulaganje novca u različite financijske instrumente
+kroz određeni vremenski period s ciljem ostvarivanja većeg povrata
+u budućnosti ili smanjenje gubitka vrijednosti novca.
 
 \section{Portfelj}
 \label{sek:portfelj}
@@ -268,7 +300,7 @@ S_t = S_0 \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)t +
 \end{align*}
 \indent gdje je $S_0$ početna cijena, $\mu$ drift, $\sigma$ volatilnost i $W_t$
 Wienerov proces.\\
-Detaljno objašnjene o GBM-u i njegovim svojstvima te kompletan derivacijski
+Detaljno objašnjene GBM-a i njegovih svojstava te kompletan derivacijski
 postupak možete pronaći u \cite{GMBIzvod}.
 
 \section{Monte Carlo simulacije}
@@ -287,8 +319,9 @@ U kontekstu financija, Monte Carlo simulacije koriste se za
 generiranje vjerojatnosnih scenarija budućih cijena.
 Za portfelj od $n$ instrumenata, koraci su:
 \begin{enumerate}
-\item Generiraj nezavisne šokove $Z_i \sim N(0,1)$
-\item Transformiraj u korelirane šokove $\mathbf{Y} = L\mathbf{Z}$
+    \item Generiraj nezavisne slučajne varijable $Z_i \sim N(0,1)$ (i.i.d.)
+\item Transformiraj slučajni vektor nezavisnih varijabli $Z$ u
+    slučajni vektor koreliranih varijabli $\mathbf{Y} = L\mathbf{Z}$
     gdje je $L$ donje trokutasta matrica Cholesky
         dekompozicije $\boldsymbol{\Sigma}$
 \item Ažuriraj cijene simulacije po GBM formuli za svaki instrument:
@@ -303,7 +336,7 @@ S_t^{(i)} = S_0^{(i)} \exp\left(\left(\mu_i - \frac{\sigma_i^2}{2}\right)\Delta 
 Cholesky dekompozicija je numerička metoda koja se koristi za
 dekompoziciju simetričnih pozitivno definitnih matrica. I upravo
 je matrica kovarijance $\boldsymbol{\Sigma}$ simetrična pozitivno
-definitna matrica.
+definitna matrica. Teorem u \cite{NumerickaMatematika}.
 \begin{definition}
     \label{def:cholesky}
     Neka je $\boldsymbol{\Sigma}$ simetrična pozitivno definitna
@@ -346,13 +379,13 @@ objašnjavaju što veći dio ukupne varijance podataka.
 $\boldsymbol{\Lambda}$
 dijagonalna matrica vlastitih vrijednosti.\\
 
-\noindent Ovaj rezultat sljedi iz spektralnog teorema \ref{##TREBA DODATI REFERENCE##}.
+\noindent Ovaj rezultat sljedi iz spektralnog teorema \cite{NumerickaLinearna}.
 Sada možemo definirati PCA dekompoziciju.
 \begin{definition}
     PCA dekompozicija slučajnog vektora $\mathbf{X}$ daje novi vektor
     $\mathbf{Y} = (Y_1, Y_2, \dots, Y_n)^\intercal$ gdje su $Y_i$
-    glavne komponente slučajnog vektora $\mathbf{X}$.
-\indent Glavne komponente su linearne kombinacije originalnih varijabli
+    glavne komponente slučajnog vektora $\mathbf{X}$.\\
+    Glavne komponente su linearne kombinacije originalnih varijabli
     $\mathbf{X}$ i definiraju se kao:
     \begin{align*}
         \mathbf{Y} = \boldsymbol{V}^\intercal \mathbf{X}
@@ -376,9 +409,9 @@ omogućuje vizualizaciju rezultata. Prikaz modela rada aplikacije
 je dan na slici \ref{fig:model_aplikacije}.
 \\
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figures/model_aplikacije.png}
+    \includegraphics[width=1.0\textwidth]{Figures/model_aplikacije.png}
     \caption{Model rada aplikacije}
     \label{fig:model_aplikacije}
 \end{figure}
@@ -386,7 +419,7 @@ je dan na slici \ref{fig:model_aplikacije}.
 \section{Podatci}
 \label{sek:podaci}
 Podatci korišteni u aplikaciji su povijesne vrijednosti
-kriptovaluta preuzete sa stranice \cite{1}.
+kriptovaluta preuzete sa stranice \cite{kaggledataset}.
 Podatci su u CSV formatu i sadrže informacije o otvorenoj, zatvorenoj,
 najvišoj i najnižoj cijeni te volumenu kriptovalute i ukupnom tržišnom
 kapitalu za svaki vremenski interval. Za potrebe aplikacije,
@@ -428,26 +461,26 @@ U trenutnim podatcima nalaze se povijesne vrijednosti za 23 različite kriptoval
 \label{sek:algoritmi_i_komponente}
 Aplikacija se sastoji od nekoliko ključnih komponenti:
 \begin{itemize}
-    \item \textbf{Parsiranje podataka:} Učitavanje i obrada povijesnih
+    \item \textbf{Parsiranje podataka (\ref{sek:parsiranje_podataka}):} učitavanje i obrada povijesnih
     podataka o cijenama kriptovaluta.
 
-    \item \textbf{Model kriptovaluta:} Implementacija modela kriptovaluta.
+\item \textbf{Model kriptovaluta (\ref{sek:model_kriptovalute}):} Implementacija modela kriptovaluta.
 
-    \item \textbf{Model portfelja:} Definiranje portfelja kriptovaluta.
+    \item \textbf{Model portfelja (\ref{sek:model_portfelja}):} Definiranje portfelja kriptovaluta.
 
-    \item \textbf{Matematički okvir:} Implementacija matematičkih
+    \item \textbf{Matematički okvir (\ref{sek:matematicki_okvir}):} Implementacija matematičkih
     operacija potrebnih za simulaciju i modeliranje portfelja. Npr.
         (Množenje matrica, vektora, operacije nad vektorima i matricama te
         razne matrične dekompozicije).
 
-    \item \textbf{Monte Carlo simulacija:} Generiranje simulacija
+    \item \textbf{Monte Carlo simulacija (\ref{sek:monte_carlo_simulacija}):} Generiranje simulacija
     budućih cijena portfelja kriptovaluta.
 
-    \item \textbf{PCA dekompozicija:} Implementacija PCA dekompozicije
+    \item \textbf{PCA dekompozicija (\ref{sek:pca_dekompozicija}):} Implementacija PCA dekompozicije
     za redukciju dimenzionalnosti podataka i identifikaciju glavnih
     komponenti.
 
-    \item \textbf{Vizualizacija rezultata:} Prikaz rezultata simulacija
+    \item \textbf{Vizualizacija rezultata (\ref{sek:vizualizacija_rezultata}):} Prikaz rezultata simulacija
     kroz grafičko sučelje.
 \end{itemize}
 
@@ -636,6 +669,13 @@ $\begin{pmatrix} \|x\| \\ 0 \\ \dots \\ 0 \end{pmatrix}$.
 Nakon što se prvi stupac transformira, iterativno se primjenjuju
 Householderove refleksije na preostale stupce matrice.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/householder.png}
+    \caption{Primjer Householderove refleksije, preuzeto sa \cite{HouseholderSketch}}
+    \label{fig:householder}
+\end{figure}
+
 
 \subsubsection{Svojstvena dekompozicija}
 \label{sek:svojstvena_dekompozicija}
@@ -664,19 +704,23 @@ Implementacija Monte Carlo simulacija prvo koristi metodu za izračuvanje
 kovarijacijske matrice portfelja iz povijesnih podataka kriptovaluta.
 Također se može postaviti početni datum simulacije, broj simulacija i
 broj koraka simulacije.
-Zatim se generiraju nezavisne slučajne varijable(\textasciitilde \textit{N(0,1)}) koje se
-transformiraju u korelirane šokove pomoću Cholesky dekompozicije.
+Zatim se koristeći \texttt{std::normal\_distribution(0,1)} generiraju
+nezavisne slučajne varijable(\textasciitilde \textit{N(0,1)}) koje se
+transformiraju u korelirane slučajne varijable pomoću Cholesky dekompozicije.
 Zatim se ažuriraju cijene simulacije koristeći geometrijsko Brownovo gibanje
 prema formuli:
 \ref{sek:gbm}. Primjer rezultata simulacije je dan na slici
 \ref{fig:monte_carlo_example}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1.5\textwidth]{Figures/monte_carlo_example.png}
+    \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example.png}
     \caption{Primjer Monte Carlo simulacije portfelja kriptovaluta (100
     simulacija, 60 dana)}
     \label{fig:monte_carlo_example}
 \end{figure}
+
+
+
 
 \subsection{PCA dekompozicija}
 \label{sek:pca_dekompozicija}
@@ -691,9 +735,9 @@ daje vlastite vrijednosti i vlastite vektore kovarijacijske matrice te je
 objašnjena u \ref{sek:svojstvena_dekompozicija}.
 primjer rezultata PCA dekompozicije je dan na slici
 \ref{fig:pca_example}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=1.5\textwidth]{Figures/pca_example.png}
+    \includegraphics[width=1.0\textwidth]{Figures/pca_example.png}
     \caption{Primjer PCA dekompozicije portfelja kriptovaluta (3 glavne komponente)}
     \label{fig:pca_example}
 \end{figure}
@@ -712,34 +756,26 @@ broj glavnih komponenti te izvrši PCA dekompoziciju portfelja. Prikaz
 rezultata PCA dekompozicije je također u obliku grafova koji
 se otvara u novom prozoru aplikacije i prikazuje glavne komponente
 portfelja te varijancu koju objašnjavaju.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{Figures/gui.png}
+    \includegraphics[width=1.0\textwidth]{Figures/gui.png}
     \caption{Grafičko sučelje aplikacije za simulaciju portfelja kriptovaluta}
     \label{fig:portfolio_gui}
 \end{figure}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % Rasprava
 \chapter{Rezultati i rasprava}
 \label{pog:rezultati_i_rasprava}
+U ovom poglavlju prikazujemo rezultate postignute implementacijom aplikacije
+te raspravljamo o njihovoj važnosti i primjenjivosti u stvarnom svijetu.
+Također, analiziramo prednosti i nedostatke implementacije te mogućnosti
+optimizacija i proširenja aplikacije.
+\section{Implementacijski rezultati}
+\label{sek:implementacijski_rezultati}
+\subsection{Funkcionalnost učitavanja i parsiranja podataka}
 
-\Blindtext
+
+
 
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}
