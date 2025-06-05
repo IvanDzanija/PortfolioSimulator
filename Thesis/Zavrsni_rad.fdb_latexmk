@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex Zavrsni_rad"] 1749073007.89627 "Zavrsni_rad.aux" "Zavrsni_rad.bbl" "Zavrsni_rad" 1749073012.69633 0
+["bibtex Zavrsni_rad"] 1749087814.83919 "Zavrsni_rad.aux" "Zavrsni_rad.bbl" "Zavrsni_rad" 1749087951.92273 0
   "./fer_IEEEtran_HR.bst" 1623666897 60896 90d69aefaad7b24856119a58e789af2e ""
-  "./literatura.bib" 1749070107.47902 1802 bb69a3aae3cce2c31ce8a96c5939cda1 ""
-  "Zavrsni_rad.aux" 1749073012.3572 10602 b34824d92fdfeb4e83cf8e05d0657b11 "pdflatex"
+  "./literatura.bib" 1749087593.25324 3695 6910d8b8a75b79f507b12c2677668d6d ""
+  "Zavrsni_rad.aux" 1749087951.57973 11627 39ea49f2214276f25e8cb7878afcd760 "pdflatex"
   (generated)
   "Zavrsni_rad.bbl"
   "Zavrsni_rad.blg"
   (rewritten before read)
-["pdflatex"] 1749073007.98357 "Zavrsni_rad.tex" "Zavrsni_rad.pdf" "Zavrsni_rad" 1749073012.69646 0
+["pdflatex"] 1749087947.1076 "Zavrsni_rad.tex" "Zavrsni_rad.pdf" "Zavrsni_rad" 1749087951.92288 2
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc" 1561498186 2952 84fda6c8ae8be17712e9d998ffe48bad ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc" 1610747736 2904 e0faa515d685129700e18ca6e0e2b48f ""
@@ -196,12 +196,14 @@
   "Figures/householder.png" 1749069842.94183 49149 2b3c38558f26190b4192a81bcffd0b6f ""
   "Figures/model_aplikacije.png" 1748786365.9203 4261961 335f07decfa4c08ee3c5a4c94d67d008 ""
   "Figures/monte_carlo_example.png" 1748644271.76056 2549386 b381f86d316d94375153743f206241a6 ""
+  "Figures/monte_carlo_example2.png" 0 -1 0 ""
   "Figures/pca_example.png" 1748789069.33316 369383 3ee5be1bcc2a5f4974c47b11b44673ed ""
-  "Zavrsni_rad.aux" 1749073012.3572 10602 b34824d92fdfeb4e83cf8e05d0657b11 "pdflatex"
-  "Zavrsni_rad.bbl" 1749073007.9812 2213 79ddea69f7b899c4c8399faafeb04af6 "bibtex Zavrsni_rad"
-  "Zavrsni_rad.out" 1749073012.36211 4515 4bcdd21655a9cc98cde52b9618e17cff "pdflatex"
-  "Zavrsni_rad.tex" 1749073003.96141 32582 816ead3b277d3a9227fed849cb8c8b88 ""
-  "Zavrsni_rad.toc" 1749073012.3625 3043 757a11a6b168a2ba66f7ffcaa5d6fa83 "pdflatex"
+  "Zavrsni_rad.aux" 1749087951.57973 11627 39ea49f2214276f25e8cb7878afcd760 "pdflatex"
+  "Zavrsni_rad.bbl" 1749087814.9301 3209 3824c1ffa9220594e256d2b193b69f32 "bibtex Zavrsni_rad"
+  "Zavrsni_rad.out" 1749087951.58505 4846 6248a4a1096a84324899aa12f4d5cdf7 "pdflatex"
+  "Zavrsni_rad.tex" 1749087946.70927 35820 258077db51fa674a8878f7ab50136e67 ""
+  "Zavrsni_rad.toc" 1749087951.58532 3227 a4f9296f53ff2d2cabbbcb4d88024677 "pdflatex"
+  "`Figures/monte_carlo_example2.png'" 0 -1 0 ""
   "fer.cls" 1743893154.58505 27533 a4a365caff0c0893264b74a53b35e7ed ""
   "zadatak.pdf" 1741204811.60259 16248 33ee537c5ddbb0b9df1a2ba92b71fe7c ""
   (generated)

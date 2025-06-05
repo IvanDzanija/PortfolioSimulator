@@ -682,11 +682,13 @@ Householderove refleksije na preostale stupce matrice.
 Svojstvena dekompozicija je implementirana kao metoda koja prima
 kovarijacijsku matricu te par vlastitih vrijednosti i vlastitih vektora u koje
 se spremaju rezultati dekompozicije.
-Za izračun vlastitih vrijednosti koristi se QR dekompozicija
-koja se iterativno primjenjuje na matricu dok ne dobijemo
-gornje trokutastu matricu (u slučaju simetrične ulazne matrice dobijamo
-dijagonalnu matricu). Zatim se vlastiti vektori dobivaju
-posebno za svaku vlastitu vrijednost. Ovakva implementacija nije
+Za izračun vlastitih vrijednosti koristi se \emph{metoda QR iteracija}
+\cite{NLA} koja QR dekompoziciju
+iterativno primjenjuje na matricu dok ne dobijemo i onda množi
+matricu $R$ i $Q$ te tako dobivamo novu matricu koja je
+približno dijagonalna. Zatim se vlastiti vektori dobivaju
+posebno za svaku vlastitu vrijednost koristeći \emph{metodu
+inverznih iteracija} \cite{NLA}. Ovakva implementacija nije
 najefikasnija i sigurno među prvim optimizacijama koje bi se mogle
 i trebale napraviti.
 
@@ -773,6 +775,70 @@ optimizacija i proširenja aplikacije.
 \section{Implementacijski rezultati}
 \label{sek:implementacijski_rezultati}
 \subsection{Funkcionalnost učitavanja i parsiranja podataka}
+Ručna implementacija parsiranja podataka omogućila je
+optimizaciju učitavanja i obrade podataka zbog specifičnosti
+izgleda samog skupa podataka. Osim što odmah znamo koji su stupci
+prisutni dodatna optimizacija je postignuta pregledavanjem veličine
+datoteke i aproksimacijom broja redaka u datoteci. To nam omogućuje
+da unaprijed rezerviramo memoriju za vektor \emph{candle} struktura
+što značajno ubrzava proces parsiranja pogotovo kod većih skupova
+podataka jer ne moramo konstantno realocirati memoriju pri proširivanju
+vektora. Ova implementacija je na dostpunim skupovima podataka
+postigla brzinu parsiranja usporedivu s popularnom bibliotekom
+\emph{csv2} \cite{csv2} koja je optimizirana za parsiranje CSV datoteka.
+
+\subsection{Matematički okvir}
+\label{sek:matematicki_okvir_rezultati}
+Matematički okvir aplikacije implementiran je tako da
+se koristi samo standardna biblioteka C++. Iako je ovakav pristup
+produljio vrijeme izrade aplikacije te samo izvođenje aplikacije
+nije optimizirano kao što bi bilo da se koriste biblioteke poput
+\emph{Eigen} \cite{Eigen3} ili \emph{Armadillo} \cite{10980539},
+koje koriste optimizirane algoritme i strukture podataka za
+matematičke operacije te napredne optimizacije poput \emph{SIMD} instrukcija,
+\emph{template metaprogramming}-a i \emph{expression templates}-a,
+ovakav pristup je omogućio dublje razumijevanje i primjenu
+stečenih znanja.\\
+Implementacija se specifično oslanja
+na \texttt{std::vector} kao osnovnu strukturu podataka za vektore i
+matrice. \texttt{std::vector} je dinamički niz koji omogućuje
+efikasno upravljanje memorijom i automatsko proširivanje
+kada je potrebno.\\
+Većina matematičkih operacija je implementirana na \emph{naivni} način
+kako bi se osiguralo da su svi koraci jasni i razumljivi. Jedine
+optimizacije su napravljene koristeći \emph{move semantics} i
+kako bi se izbjeglo nepotrebno kopiranje podataka te korištenje
+\texttt{OpenMP}-a \cite{660313} za paralelizaciju određenih operacija.
+Sve operacije su testirane na skupnjenim skupovima podataka i
+vrijeme izvođenja je zadovoljavajuće za većinu operacija. Jedino
+što je potrebno optimizirati je traženje vlastitih vektora koristeći
+neki od asimptotski efikasnijih algoritama u odnosu na \emph{metodu
+inverznih iteracija}.
+
+\subsection{Monte Carlo simulacija}
+\label{sek:monte_carlo_rezultati}
+Monte Carlo simulacija se pokazala kao efikasan način
+generiranja vjerojatnosnih scenarija budućih cijena portfelja kriptovaluta
+ukoliko je inicijalni uzorak smislen i dovoljno velik.
+Jedan primjer simulacije koji izgleda realistično i smislen je
+dan je ranije na slici \ref{fig:monte_carlo_example}.
+Na tom se primjeru vidi blagi pozitivni \textit{drift} cijena portfelja
+te volatilnost koja je u skladu s očekivanjima za portfelj kriptovaluta.
+\\
+Drugi primjer simulacije je dan na slici \ref{fig:monte_carlo_example2}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example2.png}
+    \caption{Primjer Monte Carlo simulacije portfelja kriptovaluta (100
+    simulacija, 60 dana)}
+    \label{fig:monte_carlo_example2}
+\end{figure}
+
+
+
+
+
+
 
 
 
