@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 JUN 2025 03:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 JUN 2025 03:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1208,45 +1208,30 @@ Poglavlje 4..
 [23
 
 ]
-
-LaTeX Warning: Reference `fig:monte_carlo_example2' on page 24 undefined on inp
-ut line 828.
-
-
-LaTeX Warning: File `Figures/monte_carlo_example2.png' not found on input line 
-831.
-
-
-! Package pdftex.def Error: File `Figures/monte_carlo_example2.png' not found: 
-using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.831 ...twidth]{Figures/monte_carlo_example2.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[24] [25]
+<Figures/monte_carlo_example2.png, id=509, 1475.5125pt x 923.45pt>
+File: Figures/monte_carlo_example2.png Graphic file (type png)
+<use Figures/monte_carlo_example2.png>
+Package pdftex.def Info: Figures/monte_carlo_example2.png  used on input line 8
+31.
+(pdftex.def)             Requested size: 441.01773pt x 276.00851pt.
+ [24 <./Figures/monte_carlo_example2.png>]
 Poglavlje 5..
 
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 851.
 
-(./Zavrsni_rad.bbl [26
+(./Zavrsni_rad.bbl [25
 
-] [27
+] [26
 
-]) [28]
+]) [27]
 
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 865.
 
-[29
+[28
 
-] [30
+] [29
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
@@ -1272,7 +1257,7 @@ Package blindtext Warning: croatian not defined, using English instead.
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 890.
 
-[31
+[30
 
 
 ]
@@ -1284,7 +1269,7 @@ Package blindtext Warning: croatian not defined, using English instead.
 Package blindtext Warning: croatian not defined, using English instead.
 (blindtext)                 on input line 890.
 
-[32] (./Zavrsni_rad.aux)
+[31] (./Zavrsni_rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1425,49 +1410,34 @@ Figures/householder.png
 Figures/monte_carlo_example.png
 Figures/pca_example.png
 Figures/gui.png
+Figures/monte_carlo_example2.png
 Zavrsni_rad.bbl
  ***********
 
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `Zavrsni_rad.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Zavrsni_rad.out':
-(rerunfilecheck)             Before: C8B3C27AEEA40F6C5D16506A13D45DC6;4846
-(rerunfilecheck)             After:  6248A4A1096A84324899AA12F4D5CDF7;4846.
+Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
+(rerunfilecheck)             Checksum: 6248A4A1096A84324899AA12F4D5CDF7;4846.
  ) 
 Here is how much of TeX's memory you used:
- 23406 strings out of 474116
- 371646 string characters out of 5743683
+ 23383 strings out of 474116
+ 370693 string characters out of 5743683
  2003187 words of memory out of 5000000
- 45012 multiletter control sequences out of 15000+600000
+ 44991 multiletter control sequences out of 15000+600000
  691094 words of font info for 239 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1008b,2105s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{chapter*.10} has been referenced but does not exist
-, replaced by a fixed one
-
-</usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bold
-.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans
--Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-type1
-/STIX2Math.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-typ
-e1/STIX2Text-Bold.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/st
-ix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/
-public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/fo
-nts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/font
-s/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (35 pages, 6773149 bytes).
+</usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
+ld.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSa
+ns-Regular.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-typ
+e1/STIX2Math.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/stix2-t
+ype1/STIX2Text-Bold.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/
+stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
+1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
+fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fo
+nts/type1/public/cm-super/sftt1200.pfb>
+Output written on Zavrsni_rad.pdf (34 pages, 8462224 bytes).
 PDF statistics:
- 668 PDF objects out of 1000 (max. 8388607)
- 583 compressed objects within 6 object streams
- 228 named destinations out of 1000 (max. 500000)
- 24886 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 666 PDF objects out of 1000 (max. 8388607)
+ 580 compressed objects within 6 object streams
+ 226 named destinations out of 1000 (max. 500000)
+ 24891 words of extra memory for PDF output out of 29859 (max. 10000000)
 
