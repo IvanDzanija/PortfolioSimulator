@@ -11,7 +11,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 150 items from 100.
 Database file #1: literatura.bib
 Warning--string name "zagreb" is undefined
---line 85 of file literatura.bib
+--line 81 of file literatura.bib
 Warning--empty journal in GMBIzvod
 You've used 12 entries,
             4225 wiz_defined-function locations,
