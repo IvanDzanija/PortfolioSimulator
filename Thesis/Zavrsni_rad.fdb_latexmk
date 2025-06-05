@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex Zavrsni_rad"] 1749138779.99587 "Zavrsni_rad.aux" "Zavrsni_rad.bbl" "Zavrsni_rad" 1749138942.53774 0
+["bibtex Zavrsni_rad"] 1749144107.26871 "Zavrsni_rad.aux" "Zavrsni_rad.bbl" "Zavrsni_rad" 1749144231.85676 0
   "./fer_IEEEtran_HR.bst" 1623666897 60896 90d69aefaad7b24856119a58e789af2e ""
   "./literatura.bib" 1749091286.23294 3351 0ae2ee6753ca96375d5d8a2349dc38b0 ""
-  "Zavrsni_rad.aux" 1749138942.19564 14011 dcf9720df67f72e0e61e1a4102192a73 "pdflatex"
+  "Zavrsni_rad.aux" 1749144231.52228 14007 1ae8afa0fa482c8306c5ec9d398f2455 "pdflatex"
   (generated)
   "Zavrsni_rad.bbl"
   "Zavrsni_rad.blg"
   (rewritten before read)
-["pdflatex"] 1749138935.84522 "Zavrsni_rad.tex" "Zavrsni_rad.pdf" "Zavrsni_rad" 1749138942.53786 0
+["pdflatex"] 1749144225.26771 "Zavrsni_rad.tex" "Zavrsni_rad.pdf" "Zavrsni_rad" 1749144231.85688 0
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/opensans/a_jg4h6q.enc" 1561498186 2952 84fda6c8ae8be17712e9d998ffe48bad ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/stix2-type1/stix2-mathbb.enc" 1610747736 2904 e0faa515d685129700e18ca6e0e2b48f ""
@@ -202,11 +202,11 @@
   "Figures/monte_carlo_example3.png" 1749088485.50009 2279806 55a0ad84b21374443e4ce2454aa91735 ""
   "Figures/pca_example.png" 1748789069.33316 369383 3ee5be1bcc2a5f4974c47b11b44673ed ""
   "Figures/pca_example2.png" 1749130000.14515 329806 ae54039b85e60c2414a4bcb440197be9 ""
-  "Zavrsni_rad.aux" 1749138942.19564 14011 dcf9720df67f72e0e61e1a4102192a73 "pdflatex"
-  "Zavrsni_rad.bbl" 1749138780.08271 3209 3824c1ffa9220594e256d2b193b69f32 "bibtex Zavrsni_rad"
-  "Zavrsni_rad.out" 1749138942.20242 5567 57b97d7a99b31ae25be8a832c87e745c "pdflatex"
-  "Zavrsni_rad.tex" 1749138934.95451 48311 542e4cfe0496473ea573ec0bbbf3cb4b ""
-  "Zavrsni_rad.toc" 1749138942.20268 3534 6625e82f008dcda13611d84df2f8a404 "pdflatex"
+  "Zavrsni_rad.aux" 1749144231.52228 14007 1ae8afa0fa482c8306c5ec9d398f2455 "pdflatex"
+  "Zavrsni_rad.bbl" 1749144107.34714 3037 fe3086f8f7c7135606fdcebdcb4db3b0 "bibtex Zavrsni_rad"
+  "Zavrsni_rad.out" 1749144231.52748 5567 57b97d7a99b31ae25be8a832c87e745c "pdflatex"
+  "Zavrsni_rad.tex" 1749144224.8687 48403 11f25e2d66e7298d7e696f4cd8a80d8e ""
+  "Zavrsni_rad.toc" 1749144231.52786 3534 6625e82f008dcda13611d84df2f8a404 "pdflatex"
   "fer.cls" 1743893154.58505 27533 a4a365caff0c0893264b74a53b35e7ed ""
   "zadatak.pdf" 1741204811.60259 16248 33ee537c5ddbb0b9df1a2ba92b71fe7c ""
   (generated)
