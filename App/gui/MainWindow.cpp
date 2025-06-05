@@ -151,13 +151,6 @@ MainWindow::MainWindow(QWidget *parent)
     pcaLayout->addWidget(new QLabel("PCA Analysis Start Time:"));
     pcaLayout->addWidget(pcaStartDateInput);
 
-    // Data points for PCA
-    pcaDataPointsSpin = new QSpinBox(this);
-    pcaDataPointsSpin->setRange(50, 5000);
-    pcaDataPointsSpin->setValue(500);
-    pcaLayout->addWidget(new QLabel("Data Points for Analysis:"));
-    pcaLayout->addWidget(pcaDataPointsSpin);
-
     QPushButton *pcaButton = new QPushButton("Run PCA Analysis", this);
     connect(pcaButton, &QPushButton::clicked, this,
             &MainWindow::runPCAAnalysis);

@@ -890,6 +890,51 @@ simulacije u \ref{fig:monte_carlo_example3}.
 \subsection{PCA dekompozicija}
 \label{sek:pca_rezultati}
 
+Implementacija PCA dekompozicije koristi implementirane metode
+za izračunavanje uzoračke kovarijacijske matrice te nakon toga poziva
+metoda za određivanje svojstvenih vrijednosti i vektora. To zapravo znači
+da je većina vremena izvođenja ovisna o implementaciji svojstvene dekompozicije
+jer je asimptotski najsporija od svih operacija. Kao što je ranije spomenuto,
+implementacija koristi \emph{metodu QR iteracija} za izračun svojstvenih
+vrijednosti
+i \emph{metodu inverznih iteracija} za izračun svojstvenih vektora.
+Ovakva implementacija je dovoljno brza za manje skupove podataka i za
+potrebe ove aplikacije, ali već za matrice veličine 30x30 i više
+vrijeme izvođenja je par sekundi što je neprihvatljivo za
+aplikaciju koja bi trebala raditi u realnom vremenu. Ovakva bi se
+implementacija trebala optimizirati korištenjem i pametnijih algoritama
+za izračun svojstvenih vrijednosti i vektora te optimizacijama na
+razini C++ koda, kao što su \emph{SIMD} instrukcije i \emph{Cache}
+optimizacije.\\
+Primjer rezultata PCA dekompozicije je dan na slici \ref{fig:pca_example}.
+Iz tog i sljedećeg primjera danog na slici \ref{fig:pca_example2}
+se vidi da su kriptovalute jako međusobno korelirane i može se primijetiti
+da je prva glavna komponenta zapravo svojstveni portfelj približno
+jednakih težina.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/pca_example2.png}
+    \caption{Primjer PCA dekompozicije portfelja kriptovaluta (3 glavne komponente)}
+    \label{fig:pca_example2}
+\end{figure}
+
+\subsection{Vizualizacija rezultata}
+\label{sek:vizualizacija_rezultata_rezultati}
+Grafičko sučelje aplikacije omogućuje korisnicima jednostavno
+upravljanje portfeljem, pokretanje simulacija i vizualizaciju rezultata.
+Vizualizacija rezultata simulacija i PCA dekompozicije
+omogućuje korisnicima bolje razumijevanje rizika i mogućnosti portfelja
+kriptovaluta. Grafovi su interaktivni i omogućuju korisnicima
+da pregledavaju rezultate simulacija i PCA dekompozicije na različite načine.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/gui2.png}
+    \caption{Grafičko sučelje aplikacije za simulaciju portfelja kriptovaluta}
+    \label{fig:portfolio_gui2}
+\end{figure}
+
+
+
 
 
 
@@ -907,8 +952,41 @@ simulacije u \ref{fig:monte_carlo_example3}.
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}
 \label{pog:zakljucak}
+U ovom radu prikazan je razvoj aplikacije za procjenu rizika u
+investicijskim portfeljima kriptovaluta korištenjem Monte Carlo simulacija
+i PCA dekompozicije. Kroz teorijski pregled objašnjeni su ključni
+financijski i matematički koncepti poput teorije portfelja, modela
+geometrijskog Brownovog gibanja, kovarijacijske matrice,
+Cholesky i PCA dekompozicije, čime je postavljen temelj za razumijevanje
+i implementaciju modela. Implementacija je realizirana u C++ programskom
+jeziku, uz korištenje standardne biblioteke i vlastitih rješenja za
+matematičke operacije, što je omogućilo detaljno razumijevanje svakog
+koraka i fleksibilnost u razvoju.
+Rezultati pokazuju da Monte Carlo simulacije omogućuju generiranje
+vjerojatnosnih scenarija budućih vrijednosti portfelja, ali i ukazuju na
+ograničenja povezana s visokom volatilnošću i kratkom poviješću kriptovaluta.
+PCA dekompozicija dodatno je omogućila redukciju dimenzionalnosti i
+identifikaciju glavnih izvora rizika u portfelju, pri čemu su rezultati
+potvrdili visoku međusobnu koreliranost kriptovaluta. Analiza
+funkcionalnosti aplikacije pokazala je da je ručna implementacija
+parsiranja i matematičkog okvira bila dovoljno brza i pouzdana za manje
+skupove podataka, ali bi za veće skupove i rad u realnom vremenu bilo
+potrebno dodatno optimizirati algoritme, osobito za izračun svojstvenih
+vrijednosti i vektora.
+Aplikacija, uz grafičko sučelje, omogućuje korisnicima jednostavno
+upravljanje portfeljem, pokretanje simulacija i vizualizaciju rezultata,
+što može pomoći u boljem razumijevanju i upravljanju rizicima povezanima s
+kriptovalutama. Ograničenja modela proizlaze iz oslanjanja na povijesne
+podatke i pretpostavke o stacionarnosti procesa, zbog čega rezultati
+simulacija ne mogu u potpunosti predvidjeti buduće tržišne događaje.
 
-\blindtext
+Kao smjerovi daljnjeg razvoja predlaže se integracija naprednijih
+statističkih i strojno-učenih modela, proširenje podrške za real-time
+podatke te optimizacija postojećih algoritama korištenjem specijaliziranih
+matematičkih biblioteka. Razvijeni programski okvir i biblioteka za rad s
+financijskim podacima mogu poslužiti kao temelj za buduća istraživanja i
+razvoj naprednijih alata u području financijske analitike i upravljanja
+rizikom
 
 %--- LITERATURA / REFERENCES ---------------------------------------------------
 
