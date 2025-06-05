@@ -244,6 +244,7 @@ Logaritamski povrat $r_t$ definiramo preko prirodnog logaritma omjera cijena.
 \noindent Logaritamski povrat u pravilu koristimo zbog njegovih pogodnih
 matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$
 te svojstvo aditivnosti $r_{0,T} = \sum_{t=1}^T r_t$.
+
 \subsection{Očekivani povrat }
 \label{sek:ocekivani_povrat}
 \begin{definition}
@@ -772,7 +773,7 @@ U ovom poglavlju prikazujemo rezultate postignute implementacijom aplikacije
 te raspravljamo o njihovoj važnosti i primjenjivosti u stvarnom svijetu.
 Također, analiziramo prednosti i nedostatke implementacije te mogućnosti
 optimizacija i proširenja aplikacije.
-\section{Implementacijski rezultati}
+\section{Analiza i diskusija implementacijskih rezultata}
 \label{sek:implementacijski_rezultati}
 \subsection{Funkcionalnost učitavanja i parsiranja podataka}
 Ručna implementacija parsiranja podataka omogućila je
@@ -926,25 +927,51 @@ Vizualizacija rezultata simulacija i PCA dekompozicije
 omogućuje korisnicima bolje razumijevanje rizika i mogućnosti portfelja
 kriptovaluta. Grafovi su interaktivni i omogućuju korisnicima
 da pregledavaju rezultate simulacija i PCA dekompozicije na različite načine.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{Figures/gui2.png}
-    \caption{Grafičko sučelje aplikacije za simulaciju portfelja kriptovaluta}
-    \label{fig:portfolio_gui2}
-\end{figure}
+Implementacija grafičkog sučelja je napravljena korištenjem Qt biblioteke
+koja omogućuje jednostavno kreiranje grafičkog sučelja i apstrakciju
+od niskorazinskih detalja upravljanja prozorima i događajima.
+Iako je ovakvo rješenje dovoljno dobro za potrebe ove aplikacije,
+u budućnosti bi se mogla razmotriti implementacija ručnog rješenja
+za grafičko sučelje kako bi se dobila veća fleksibilnost i kontrola
+nad izgledom i ponašanjem sučelja. Također, mogla bi se razmotriti
+izrada boljeg rješenja za vizualizaciju rezultata simulacija i PCA dekompozicije
+kao što su 3D grafovi ili animacije koje bi omogućile bolje razumijevanje
+rizika i mogućnosti portfelja kriptovaluta.\\
+Navedena poboljšanja bi omogućila također i bolji dizajn aplikacije
+te unaprijeđenje korisčkog iskustva u vidu \textit{UX} i \textit{UI} dizajna.
 
-
-
-
-
-
-
-
-
-
-
-
-
+\chapter{Upute za korištenje i pokretanje aplikacije}
+\label{sek:upute_za_koristenje}
+Aplikacija se može pokrenuti na bilo kojem sustavu koji podržava
+\texttt{C++} i \texttt{Qt} biblioteku. Potrebno je instalirati \texttt{Qt}
+biblioteku na lokalno računalo te imati dostupan \texttt{Clang} kompilator.
+Nakon toga se može ili ručno kompajlirati aplikacija koristeći dani
+\texttt{CMakeLists.txt} unutar direktorija \texttt{App} ili se može
+pokrenuti \texttt{build\_script.sh} skripta koja je također unutar direktorija
+\texttt{App} i automatski stvara izvršnu datoteku aplikacije. Skripta je
+napisana za \texttt{Unix} okruženje.
+Nakon kompajliranja aplikacije unutar direktorija \texttt{App/build} će se
+stvoriti izvršna datoteka \texttt{PortfolioSimulator} koja se može pokrenuti
+direktno iz terminala. Aplikacija će se pokrenuti u grafičkom sučelju
+i korisnik dalje može interaktivno koristiti aplikaciju. Uz samu aplikaciju
+stvara se i dodatna datoteka \texttt{run\_tests} koja služi za provođenje
+testova aplikacije. Testovi su napisani opet u C++ i koriste samo standardnu
+biblioteku C++. Napisani su tako da pokrivaju sve ključne
+komponente aplikacije i provjeravaju ispravnost implementacije.
+Sve naredbe i primjeri za pokretanje aplikacije i testova dani su u
+nastavku.
+\begin{lstlisting}[language=bash, caption={Primjeri naredbi za pokretanje aplikacije i testova}]
+# Kloniranje repozitorija
+git clone https://github.com/IvanDzanija/PortfolioSimulator.git
+# Pozicioniranje u direktorij aplikacije
+cd PortfolioSimulator/App
+# Pokretanje skripte za kompajliranje aplikacije
+./build_script.sh
+# Pokretanje aplikacije
+./build/PortfolioSimulator
+# Pokretanje testova
+./build/run_tests
+\end{lstlisting}
 
 
 
@@ -952,8 +979,8 @@ da pregledavaju rezultate simulacija i PCA dekompozicije na različite načine.
 %--- ZAKLJUČAK / CONCLUSION ----------------------------------------------------
 \chapter{Zaključak}
 \label{pog:zakljucak}
-U ovom radu prikazan je razvoj aplikacije za procjenu rizika u
-investicijskim portfeljima kriptovaluta korištenjem Monte Carlo simulacija
+U ovom radu prikazan je razvoj aplikacije za modeliranje investicijskih
+portfelja kriptovaluta korištenjem Monte Carlo simulacija
 i PCA dekompozicije. Kroz teorijski pregled objašnjeni su ključni
 financijski i matematički koncepti poput teorije portfelja, modela
 geometrijskog Brownovog gibanja, kovarijacijske matrice,
@@ -971,22 +998,24 @@ potvrdili visoku međusobnu koreliranost kriptovaluta. Analiza
 funkcionalnosti aplikacije pokazala je da je ručna implementacija
 parsiranja i matematičkog okvira bila dovoljno brza i pouzdana za manje
 skupove podataka, ali bi za veće skupove i rad u realnom vremenu bilo
-potrebno dodatno optimizirati algoritme, osobito za izračun svojstvenih
+potrebno dodatno optimizirati algoritme, osobito algoritam za izračun svojstvenih
 vrijednosti i vektora.
 Aplikacija, uz grafičko sučelje, omogućuje korisnicima jednostavno
 upravljanje portfeljem, pokretanje simulacija i vizualizaciju rezultata,
 što može pomoći u boljem razumijevanju i upravljanju rizicima povezanima s
 kriptovalutama. Ograničenja modela proizlaze iz oslanjanja na povijesne
-podatke i pretpostavke o stacionarnosti procesa, zbog čega rezultati
+podatke i pretpostavke o distribuciji i parametrima procesa, zbog čega rezultati
 simulacija ne mogu u potpunosti predvidjeti buduće tržišne događaje.
 
-Kao smjerovi daljnjeg razvoja predlaže se integracija naprednijih
-statističkih i strojno-učenih modela, proširenje podrške za real-time
+Tijek daljnjeg razvoja aplikacije bi uključivao integraciju naprednijih
+statističkih modela koji nisu toliko ovisni o početnoj pretpostavci
+distribucije i parametara, proširenje podrške za \textit{real-time}
 podatke te optimizacija postojećih algoritama korištenjem specijaliziranih
-matematičkih biblioteka. Razvijeni programski okvir i biblioteka za rad s
+matematičkih algoritama i optimizacijom prisupa \textit{Cache} memoriji.
+Razvijeni programski okvir i biblioteka za rad s
 financijskim podacima mogu poslužiti kao temelj za buduća istraživanja i
 razvoj naprednijih alata u području financijske analitike i upravljanja
-rizikom
+rizikom te svojom modularnošću pružiti dodatni edukacijski resurs.
 
 %--- LITERATURA / REFERENCES ---------------------------------------------------
 
@@ -998,19 +1027,59 @@ rizikom
 
 % Sažetak na hrvatskom
 \begin{sazetak}
-	Unesite sažetak na hrvatskom.
-
-	\blindtext
+    ``PortfolioSimulator`` je aplikacija za modeliranje investicijskih
+    portfelja kriptovaluta korištenjem Monte Carlo simulacija i PCA
+    dekompozicije. Aplikacija je implementirana u \texttt{C++} programskom jeziku,
+    koristeći standardnu biblioteku \texttt{STL} i vlastita rješenja za
+    matematičke, matrične i vektorske operacije te \texttt{Qt} biblioteku
+    za grafičko sučelje.
+    Povijesni podaci o cijenama 23 kriptovalute preuzeti su s
+    javno dostupnog izvora, a korisniku je omogućeno upravljanje
+    portfeljem i simulacijama.
+    U uvodnom dijelu objašnjeni su ključni financijski i matematički
+    koncepti: teorija portfelja, geometrijsko Brownovo gibanje,
+    kovarijacijska matrica, Cholesky i PCA dekompozicija.
+    Analiza rezultata pokazuje da su kriptovalute visoko međusobno
+    korelirane i volatilne, što ograničava preciznost modela
+    temeljenih isključivo na povijesnim podacima.
+    U sljedećem poglavlju detaljno je opisana implementacija svega
+    potrebnog za rad aplikacije, uključujući parsiranje podataka,
+    matematički okvir, modele kriptovaluta i portfelja te Monte Carlo
+    simulacije i PCA dekompoziciju. Na kraju je dan pregled postignutih
+    rezultata, rasprava o funkcionalnosti aplikacije i upute za korištenje
+    i pokretanje.
 \end{sazetak}
 
 \begin{kljucnerijeci}
-	prva ključna riječ; druga ključna riječ; treća ključna riječ
+    PortfolioSimulator; Monte Carlo simulacije; PCA dekompozicija;
+    kriptovalute; C++; Qt; STL; stohastički modeli; financijska analitika;
 \end{kljucnerijeci}
 
 % Abstract in English
 \begin{abstract}
-	Enter the abstract in English.
-
+    "PortfolioSimulator" is an application for modeling
+    investment portfolios of cryptocurrencies using Monte Carlo
+    simulations and PCA decomposition. The application is implemented
+    in the \texttt{C++} programming language, utilizing the standard library
+    \texttt{STL}
+    and custom solutions for mathematical, matrix, and vector operations,
+    as well as the \texttt{Qt} library for the graphical interface.
+    Historical price data for 23 cryptocurrencies were obtained from a
+    publicly available source, and the user is able to manage the
+    portfolio and simulations.
+    The introductory section explains key financial and mathematical
+    concepts: portfolio theory, geometric Brownian motion, covariance
+    matrix, Cholesky and PCA decomposition.
+    The analysis of the results shows that cryptocurrencies are highly
+    intercorrelated and volatile, which limits the accuracy of models
+    based solely on historical data.
+    The following chapter describes in detail the implementation
+    of everything needed for the application to work, including
+    data parsing, mathematical framework, cryptocurrency and
+    portfolio models, Monte Carlo simulations, and PCA decomposition.
+    Finally, an overview of the achieved results,
+    a discussion of the application's functionality, and instructions
+    for use and execution are provided.
 	\blindtext
 \end{abstract}
 

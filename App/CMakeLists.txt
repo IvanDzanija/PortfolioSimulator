@@ -88,19 +88,19 @@ file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/inc
 
 # === GUI ===
 file(GLOB_RECURSE GUI_SOURCES CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/gui/*.cpp)
-add_executable(gui ${GUI_SOURCES} ${BACKEND_SOURCES})
-target_include_directories(gui PRIVATE
+add_executable(PortfolioSimulator ${GUI_SOURCES} ${BACKEND_SOURCES})
+target_include_directories(PortfolioSimulator PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-target_link_libraries(gui PRIVATE
+target_link_libraries(PortfolioSimulator PRIVATE
     Qt6::Widgets
     Qt6::Charts
 )
 
 # Apply OpenMP flags if available
 if(OPENMP_FOUND)
-    target_compile_options(gui PRIVATE ${OPENMP_FLAGS})
-    target_link_libraries(gui PRIVATE ${OPENMP_LIBRARIES})
+    target_compile_options(PortfolioSimulator PRIVATE ${OPENMP_FLAGS})
+    target_link_libraries(PortfolioSimulator PRIVATE ${OPENMP_LIBRARIES})
 endif()
 
 # === Tests ===
