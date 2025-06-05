@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 JUN 2025 03:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 JUN 2025 04:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1214,62 +1214,81 @@ File: Figures/monte_carlo_example2.png Graphic file (type png)
 Package pdftex.def Info: Figures/monte_carlo_example2.png  used on input line 8
 31.
 (pdftex.def)             Requested size: 441.01773pt x 276.00851pt.
+<Figures/XRP_hist.png, id=511, 902.37125pt x 546.04pt>
+File: Figures/XRP_hist.png Graphic file (type png)
+<use Figures/XRP_hist.png>
+Package pdftex.def Info: Figures/XRP_hist.png  used on input line 848.
+(pdftex.def)             Requested size: 441.01773pt x 266.87039pt.
  [24 <./Figures/monte_carlo_example2.png>]
+<Figures/monte_carlo_example3.png, id=521, 1474.50874pt x 923.45pt>
+File: Figures/monte_carlo_example3.png Graphic file (type png)
+<use Figures/monte_carlo_example3.png>
+Package pdftex.def Info: Figures/monte_carlo_example3.png  used on input line 8
+71.
+(pdftex.def)             Requested size: 441.01773pt x 276.1917pt.
+ [25 <./Figures/XRP_hist.png>]
+<Figures/BTC_hist.png, id=532, 913.4125pt x 536.0025pt>
+File: Figures/BTC_hist.png Graphic file (type png)
+<use Figures/BTC_hist.png>
+Package pdftex.def Info: Figures/BTC_hist.png  used on input line 884.
+(pdftex.def)             Requested size: 441.01773pt x 258.79134pt.
+
+[26 <./Figures/monte_carlo_example3.png>] [27 <./Figures/BTC_hist.png>]
 Poglavlje 5..
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 851.
+(blindtext)                 on input line 907.
 
-(./Zavrsni_rad.bbl [25
-
-] [26
-
-]) [27]
-
-Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 865.
-
-[28
+(./Zavrsni_rad.bbl [28
 
 ] [29
+
+]) [30]
+
+Package blindtext Warning: croatian not defined, using English instead.
+(blindtext)                 on input line 921.
+
+[31
+
+] [32
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{chapter.1}) h
 as been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.887 \chapter{The Code}
+l.943 \chapter{The Code}
                         
 Privitak A.
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 890.
+(blindtext)                 on input line 946.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 890.
+(blindtext)                 on input line 946.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 890.
+(blindtext)                 on input line 946.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 890.
+(blindtext)                 on input line 946.
 
-[30
+[33
 
 
 ]
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 890.
+(blindtext)                 on input line 946.
 
 
 Package blindtext Warning: croatian not defined, using English instead.
-(blindtext)                 on input line 890.
+(blindtext)                 on input line 946.
 
-[31] (./Zavrsni_rad.aux)
+[34] (./Zavrsni_rad.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -1411,18 +1430,21 @@ Figures/monte_carlo_example.png
 Figures/pca_example.png
 Figures/gui.png
 Figures/monte_carlo_example2.png
+Figures/XRP_hist.png
+Figures/monte_carlo_example3.png
+Figures/BTC_hist.png
 Zavrsni_rad.bbl
  ***********
 
 Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
-(rerunfilecheck)             Checksum: 6248A4A1096A84324899AA12F4D5CDF7;4846.
+(rerunfilecheck)             Checksum: 72376BD3C033276E1CCF22B5B385F2CF;4846.
  ) 
 Here is how much of TeX's memory you used:
- 23383 strings out of 474116
- 370693 string characters out of 5743683
+ 23429 strings out of 474116
+ 371774 string characters out of 5743683
  2003187 words of memory out of 5000000
- 44991 multiletter control sequences out of 15000+600000
- 691094 words of font info for 239 fonts, out of 8000000 for 9000
+ 45021 multiletter control sequences out of 15000+600000
+ 691985 words of font info for 244 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1008b,2105s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
@@ -1434,10 +1456,10 @@ stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
 fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fo
 nts/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (34 pages, 8462224 bytes).
+Output written on Zavrsni_rad.pdf (37 pages, 10323422 bytes).
 PDF statistics:
- 666 PDF objects out of 1000 (max. 8388607)
- 580 compressed objects within 6 object streams
- 226 named destinations out of 1000 (max. 500000)
- 24891 words of extra memory for PDF output out of 29859 (max. 10000000)
+ 697 PDF objects out of 1000 (max. 8388607)
+ 601 compressed objects within 7 object streams
+ 232 named destinations out of 1000 (max. 500000)
+ 24906 words of extra memory for PDF output out of 29859 (max. 10000000)
 

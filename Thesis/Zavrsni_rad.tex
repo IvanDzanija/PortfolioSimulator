@@ -829,10 +829,66 @@ Drugi primjer simulacije je dan na slici \ref{fig:monte_carlo_example2}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example2.png}
-    \caption{Primjer Monte Carlo simulacije portfelja kriptovaluta (100
+    \caption{Primjer Monte Carlo simulacije portfelja (XRP) kriptovaluta (100
     simulacija, 60 dana)}
     \label{fig:monte_carlo_example2}
 \end{figure}
+
+Ovaj primjer simulacije pokazuje da je \textit{drift} cijena portfelja
+negativan, ali da je volatilnost portfelja također visoka. Ovakav
+izgled simulacije je očekivan ako uzmemo u obzir da koristimo
+statističku metodu koja gleda samo povijesne podatke i ne uzima u obzir
+puno drugih faktora koji utječu na cijene kriptovaluta. Izgled kretanja
+vrijednosti portfelja u povijesnim podatcima dan je na slici \ref{fig:XRP_hist}.
+Na slici se vidi da je volatilnost cijene kriptovalute XRP
+visoka te je vrijednost iste u zadnjih nekoliko godina
+većinom opadala uz 2 velika i nagla porasta.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/XRP_hist.png}
+    \caption{Povijesno kretanje cijene kriptovalute XRP}
+    \label{fig:XRP_hist}
+\end{figure}
+
+Treći primjer simulacije je dan na slici \ref{fig:monte_carlo_example3}.
+Na slici se vidi da je \textit{drift} cijena portfelja poprilično
+pozitivna, ali da je volatilnost opet visoka.\\
+U ovom primjeru uočavamo problem kod Monte Carlo simulacija za
+kriptovalute. Budući da se o finacijskim instrumentima koji su
+relativno novi i malo je povijesnih podataka,
+Monte Carlo simulacije koje su statistička metoda i temelje se
+na povijesnim podacima, ne daju uvijek
+realistične rezultate bez uzimanja u obzir dodatnih informacija o tržištu.
+Iz ove bi se simulacije moglo zaključiti da očekujemo rast vrijednosti
+od nekoliko posto u sljedećih 60 dana, ali to nije nužno točno
+(iako je vrijednost Bitcoin-a stvarno značajno porasla u proteklom vremenu).
+Također je uz toliko pozitivan \textit{drift} i volatilnost teško
+dobro odrediti jer utjecaj \textit{drift}-a u samoj formuli
+\ref{sek:gbm} je dovoljno značajan da model neće predvidjeti kroz
+toliki period vremena da će vrijednost portfelja pasti.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example3.png}
+    \caption{Primjer Monte Carlo simulacije portfelja (Bitcoin) kriptovaluta (100
+    simulacija, 60 dana)}
+    \label{fig:monte_carlo_example3}
+\end{figure}
+Promatajući povijesne podatke Bitcoin-a, dane na slici \ref{fig:BTC_hist},
+vidimo da je volatilnost cijene Bitcoin-a također visoka, ali da je
+zapravo cijena Bitcoin-a u zadnjih nekoliko godina većinom snažno
+rasla uz nekoliko manjih padova. Ovakav izgled povijesnih podataka
+zapravo potpuno opravdava pozitivni \textit{drift} i sam izgled
+simulacije u \ref{fig:monte_carlo_example3}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/BTC_hist.png}
+    \caption{Povijesno kretanje cijene kriptovalute Bitcoin}
+    \label{fig:BTC_hist}
+\end{figure}
+
+
+
+
 
 
 
