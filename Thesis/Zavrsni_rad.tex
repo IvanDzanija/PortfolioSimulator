@@ -151,7 +151,7 @@ nestale samo nekoliko mjeseci nakon što su se pojavile. Period manji od
 10 godina je u financijskom svijetu vrlo kratak pogotovo ako uzmemo u obzir
 da nije bilo prevelikih promjena ili kriza na financijskim tržištima
 u vremenu postojanja kriptovaluta.\\
-U radu je razvijen C++ programski okvir koji integrira povijesne podatke
+U radu je razvijen \texttt{C++} programski okvir koji integrira povijesne podatke
 kriptovaluta, obavlja potrebne matematičke operacije i generira simulacije.
 Generirane simulacije omogućuju analizu različitih scenarija kretanja cijena,
 a korisnik može odabrati različite portfelje i vremenske okvire.
@@ -402,10 +402,10 @@ Sada možemo definirati PCA dekompoziciju.
 \chapter{Implementacija aplikacije}
 \label{pog:implementacija}
 Ovaj dio rada opisuje implementaciju aplikacije za simulaciju
-portfelja kriptovaluta. Aplikacija je napisana u C++ programskom
-jeziku i koristi isključivo standardnu biblioteku C++ za matematičke
+portfelja kriptovaluta. Aplikacija je napisana u \texttt{C++} programskom
+jeziku i koristi isključivo standardnu biblioteku \texttt{C++} za matematičke
 operacije i modeliranje. Za interakciju s korisnikom koristi se
-grafičko sučelje(implementirano sa Qt bibliotekom za C++) koje
+grafičko sučelje(implementirano sa Qt bibliotekom za \texttt{C++}) koje
 omogućuje vizualizaciju rezultata. Prikaz modela rada aplikacije
 je dan na slici \ref{fig:model_aplikacije}.
 \\
@@ -586,7 +586,7 @@ class Portfolio {
 Matematički okvir aplikacije implementira osnovne matematičke
 operacije nad vektorima i matricama, kao što su množenje
 matrica i vektora te razne matrične dekompozicije. Sve metode koriste
-samo standardnu biblioteku C++.
+samo standardnu biblioteku \texttt{C++}.
 
 \begin{lstlisting}[caption={Metode implementirane u matematičkom okviru}, label={lst:cpp_example}]
 template <typename T>
@@ -748,7 +748,7 @@ primjer rezultata PCA dekompozicije je dan na slici
 \subsection{Vizualizacija rezultata}
 \label{sek:vizualizacija_rezultata}
 Za vizualizaciju rezultata i interakciju s korisnikom koristi se
-grafičko sučelje implementirano u C++ koristeći Qt biblioteku.
+grafičko sučelje implementirano u \texttt{C++} koristeći Qt biblioteku.
 Grafičko sučelje omogućuje korisniku da odabere kriptovalute koje želi
 staviti u portfelj, postavi udjele kriptovaluta u portfelju,
 odabere vremenski period simulacije i broj simulacija.
@@ -791,7 +791,7 @@ postigla brzinu parsiranja usporedivu s popularnom bibliotekom
 \subsection{Matematički okvir}
 \label{sek:matematicki_okvir_rezultati}
 Matematički okvir aplikacije implementiran je tako da
-se koristi samo standardna biblioteka C++. Iako je ovakav pristup
+se koristi samo standardna biblioteka \texttt{C++}. Iako je ovakav pristup
 produljio vrijeme izrade aplikacije te samo izvođenje aplikacije
 nije optimizirano kao što bi bilo da se koriste biblioteke poput
 \emph{Eigen} \cite{Eigen3} ili \emph{Armadillo} \cite{10980539},
@@ -862,7 +862,7 @@ na povijesnim podacima, ne daju uvijek
 realistične rezultate bez uzimanja u obzir dodatnih informacija o tržištu.
 Iz ove bi se simulacije moglo zaključiti da očekujemo rast vrijednosti
 od nekoliko posto u sljedećih 60 dana, ali to nije nužno točno
-(iako je vrijednost Bitcoin-a stvarno značajno porasla u proteklom vremenu).
+(iako je vrijednost \textit{Bitcoin}-a stvarno značajno porasla u proteklom vremenu).
 Također je uz toliko pozitivan \textit{drift} i volatilnost teško
 dobro odrediti jer utjecaj \textit{drift}-a u samoj formuli
 \ref{sek:gbm} je dovoljno značajan da model neće predvidjeti kroz
@@ -874,9 +874,9 @@ toliki period vremena da će vrijednost portfelja pasti.
     simulacija, 60 dana)}
     \label{fig:monte_carlo_example3}
 \end{figure}
-Promatajući povijesne podatke Bitcoin-a, dane na slici \ref{fig:BTC_hist},
-vidimo da je volatilnost cijene Bitcoin-a također visoka, ali da je
-zapravo cijena Bitcoin-a u zadnjih nekoliko godina većinom snažno
+Promatajući povijesne podatke \textit{Bitcoin}-a, dane na slici \ref{fig:BTC_hist},
+vidimo da je volatilnost cijene \textit{Bitcoin}-a također visoka, ali da je
+zapravo cijena \textit{Bitcoin}-a u zadnjih nekoliko godina većinom snažno
 rasla uz nekoliko manjih padova. Ovakav izgled povijesnih podataka
 zapravo potpuno opravdava pozitivni \textit{drift} i sam izgled
 simulacije u \ref{fig:monte_carlo_example3}.
@@ -905,7 +905,7 @@ vrijeme izvođenja je par sekundi što je neprihvatljivo za
 aplikaciju koja bi trebala raditi u realnom vremenu. Ovakva bi se
 implementacija trebala optimizirati korištenjem i pametnijih algoritama
 za izračun svojstvenih vrijednosti i vektora te optimizacijama na
-razini C++ koda, kao što su \emph{SIMD} instrukcije i \emph{Cache}
+razini \texttt{C++} koda, kao što su \emph{SIMD} instrukcije i \emph{Cache}
 optimizacije.\\
 Primjer rezultata PCA dekompozicije je dan na slici \ref{fig:pca_example}.
 Iz tog i sljedećeg primjera danog na slici \ref{fig:pca_example2}
@@ -955,8 +955,8 @@ stvoriti izvršna datoteka \texttt{PortfolioSimulator} koja se može pokrenuti
 direktno iz terminala. Aplikacija će se pokrenuti u grafičkom sučelju
 i korisnik dalje može interaktivno koristiti aplikaciju. Uz samu aplikaciju
 stvara se i dodatna datoteka \texttt{run\_tests} koja služi za provođenje
-testova aplikacije. Testovi su napisani opet u C++ i koriste samo standardnu
-biblioteku C++. Napisani su tako da pokrivaju sve ključne
+testova aplikacije. Testovi su napisani opet u \texttt{C++} i koriste samo standardnu
+biblioteku \texttt{C++}. Napisani su tako da pokrivaju sve ključne
 komponente aplikacije i provjeravaju ispravnost implementacije.
 Sve naredbe i primjeri za pokretanje aplikacije i testova dani su u
 nastavku.
@@ -985,7 +985,7 @@ i PCA dekompozicije. Kroz teorijski pregled objašnjeni su ključni
 financijski i matematički koncepti poput teorije portfelja, modela
 geometrijskog Brownovog gibanja, kovarijacijske matrice,
 Cholesky i PCA dekompozicije, čime je postavljen temelj za razumijevanje
-i implementaciju modela. Implementacija je realizirana u C++ programskom
+i implementaciju modela. Implementacija je realizirana u \texttt{C++} programskom
 jeziku, uz korištenje standardne biblioteke i vlastitih rješenja za
 matematičke operacije, što je omogućilo detaljno razumijevanje svakog
 koraka i fleksibilnost u razvoju.
@@ -1052,7 +1052,7 @@ rizikom te svojom modularnošću pružiti dodatni edukacijski resurs.
 
 \begin{kljucnerijeci}
     PortfolioSimulator; Monte Carlo simulacije; PCA dekompozicija;
-    kriptovalute; C++; Qt; STL; stohastički modeli; financijska analitika;
+    kriptovalute; \texttt{C++}; Qt; STL; stohastički modeli; financijska analitika;
 \end{kljucnerijeci}
 
 % Abstract in English
@@ -1085,7 +1085,7 @@ rizikom te svojom modularnošću pružiti dodatni edukacijski resurs.
 
 \begin{keywords}
     PortfolioSimulator; Monte Carlo simulation; PCA decomposition;
-    cryptocurrency; C++; Qt; STL; stochastic models; financial analytics;
+    cryptocurrency; \texttt{C++}; Qt; STL; stochastic models; financial analytics;
 \end{keywords}
 
 %--- PRIVITCI / APPENDIX -------------------------------------------------------

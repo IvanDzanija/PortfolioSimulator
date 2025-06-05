@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 JUN 2025 19:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.3.5)  5 JUN 2025 20:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1018,6 +1018,15 @@ been already used, duplicate ignored
 l.114 \chapter
               {Uvod} [2]
 Poglavlje 1..
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
+54.
+(/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has 
 been already used, duplicate ignored
@@ -1026,7 +1035,8 @@ been already used, duplicate ignored
 l.172 
        [3
 
-] [4]
+] [4{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.en
+c}]
 Poglavlje 2..
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <16> not availabl
 e
@@ -1139,7 +1149,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 404--412
 
  []
 
-<Figures/model_aplikacije.png, id=292, 3892.5425pt x 1777.64125pt>
+<Figures/model_aplikacije.png, id=293, 3892.5425pt x 1777.64125pt>
 File: Figures/model_aplikacije.png Graphic file (type png)
 <use Figures/model_aplikacije.png>
 Package pdftex.def Info: Figures/model_aplikacije.png  used on input line 415.
@@ -1161,18 +1171,7 @@ nc}]
 [13]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 503.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 5
-03.
- (/usr/local/texlive/2024/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `cmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
- [14{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.en
-c}] [15]
-[16] [17]
+ [14] [15] [16] [17]
 LaTeX Font Info:    Font shape `T1/opensans-TLF/bx/n' in size <12> not availabl
 e
 (Font)              Font shape `T1/opensans-TLF/b/n' tried instead on input lin
@@ -1429,9 +1428,9 @@ ls2stix2tt.fd    2018/04/02 v2.0.0-latex stix2 typewriter LS2 font definitions
  zadatak.pdf    Graphic file (type pdf)
  zadatak.pdf    Graphic file (type pdf)
  zadatak.pdf    Graphic file (type pdf)
+  t1cmtt.fd    2023/04/13 v2.5m Standard LaTeX font definitions
 Figures/model_aplikacije.png
 ts1stix2.fd    2018/04/02 v2.0.0-latex stix2 TS1 font definitions
-  t1cmtt.fd    2023/04/13 v2.5m Standard LaTeX font definitions
 Figures/householder.png
 Figures/monte_carlo_example.png
 Figures/pca_example.png
@@ -1450,11 +1449,11 @@ Package rerunfilecheck Info: File `Zavrsni_rad.out' has not changed.
 (rerunfilecheck)             Checksum: 57B97D7A99B31AE25BE8A832C87E745C;5567.
  ) 
 Here is how much of TeX's memory you used:
- 23573 strings out of 474116
- 373856 string characters out of 5743683
+ 23579 strings out of 474116
+ 373988 string characters out of 5743683
  2002187 words of memory out of 5000000
  45135 multiletter control sequences out of 15000+600000
- 692721 words of font info for 248 fonts, out of 8000000 for 9000
+ 693354 words of font info for 251 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,17n,131p,1008b,2105s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/ascender/opensans/OpenSans-Bo
@@ -1466,7 +1465,7 @@ stix2-type1/STIX2Text-Italic.pfb></usr/local/texlive/2024/texmf-dist/fonts/type
 1/public/stix2-type1/STIX2Text-Regular.pfb></usr/local/texlive/2024/texmf-dist/
 fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/2024/texmf-dist/fo
 nts/type1/public/cm-super/sftt1200.pfb>
-Output written on Zavrsni_rad.pdf (41 pages, 10491589 bytes).
+Output written on Zavrsni_rad.pdf (41 pages, 10492052 bytes).
 PDF statistics:
  746 PDF objects out of 1000 (max. 8388607)
  644 compressed objects within 7 object streams
