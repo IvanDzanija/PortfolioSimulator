@@ -1,0 +1,14 @@
+u 3.2.5. dodati sliku objašnjena procesa generiranja simulacija od početnog
+uzorka do konačnog rezultata. FF
+
+Ubaciti testiranje. Samo staviti datum i vriieme cutoffa pa provjeriti koliko se
+slaze sa podatcima
+
+U uvod dodati da je cilj rada bio nauciti i isprobati rucne implementacije
+raznih matematickih alata i kako se oni koriste u praksi
+
+Dodati objašnjenje zasto uopce imati PCA dekompoziciju i sta se dobije s time.
+
+Dodati u raspravu kako izgleda drift i volatilnost za portfelje u raspravi.
+
+Dodati slike distribucije simulacija u app

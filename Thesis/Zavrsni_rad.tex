@@ -130,16 +130,20 @@ Monte Carlo simulacija, kao statistička metoda temeljena na ponovljenom
 uzorkovanju slučajnih varijabli i često korištena metoda u modeliranju
 ostalih financijskih instrumenata, nameće se kao potencijalno uspješan
 pristup za analizu portfelja kriptovaluta.\\
-U ovom radu fokusira se na implementaciji
-Monte Carlo metode za predviđanje vrijednosti portfelja s primjenom
+U ovom radu fokusira se na ručnoj implementaciji svih matematičkih
+operacija i modela u \texttt{C++} programskom jeziku bez korištenja
+vanjskih biblioteka osim standardne biblioteke potrebnih za modeliranje
+i provođenje Monte Carlo simulacija.\\
+To uključuje Monte Carlo metodu za predviđanje vrijednosti portfelja s primjenom
 Cholesky dekompozicije kako bi se osigurala realistična obrada
 korelacija između kriptovaluta koje su još uvijek specijalna skupina investicija
 s visokom međusobnom korelecijom.\\
 Osim Monte Carlo simulacija za predviđanje budućih cijena portfelja,
 implementira se i PCA (Principal Component Analysis) dekompozicija
-kao jedna od jednostavnih metoda za smanjenje volatilnosti portfelja
-upravo postignutu kroz smanjenje dimenzionalnosti podataka i identifikaciju
-glavnih komponenti koje objašnjavaju najveći dio varijance podataka.\\
+kao jedna od jednostavnih metoda za efikasnu diverzifikaciju portfelja
+i samim time smanjenje rizika upravo kroz smanjenje dimenzionalnosti podataka
+i identifikaciju glavnih komponenti koje objašnjavaju najveći dio
+varijance podataka.\\
 Glavni izazov u modeliranju kriptovaluta leži u njihovoj inherentnoj
 nestabilnosti. Dok tradicionalne financijske instrumente karakteriziraju
 relativno predvidljivi obrasci, kriptovalute pokazuju ekstremne fluktuacije
@@ -356,8 +360,9 @@ Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ vari
 \end{theorem}
 \begin{proof}
 \begin{align*}
-\text{Cov}(\mathbf{Y}) = \mathbb{E}[L\mathbf{Z}(L\mathbf{Z})^\intercal]
-    = L\mathbb{E}[\mathbf{Z}\mathbf{Z}^\intercal]L^\intercal
+\text{Cov}(\mathbf{Y}) = \mathbb{E}[L\mathbf{Z}(L\mathbf{Z})^\intercal] -
+    \mathbb{E}[L\mathbf{Z}]\mathbb{E}[(L\mathbf{Z})^\intercal]
+    = L\mathbb{E}[\mathbf{Z}\mathbf{Z}^\intercal]L^\intercal - 0
     = L \cdot I \cdot L^\intercal = LL^\intercal = \boldsymbol{\Sigma}
 \end{align*}
 \end{proof}
@@ -698,6 +703,12 @@ i trebale napraviti.
 
 \subsection{Monte Carlo simulacija}
 \label{sek:monte_carlo_simulacija}
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=0.7\textheight, keepaspectratio]{Figures/Monte_Carlo_explanation.png}
+    \caption{Monte Carlo simulacija portfelja kriptovaluta}
+    \label{fig:monte_carlo}
+\end{figure}
 Monte Carlo simulacija je implementirana kao metoda klase
 \texttt{Portfolio} koja generira simulacije budućih cijena portfelja
 kriptovaluta. Simulacije koriste model geometrijskog Brownovog gibanja
