@@ -5,9 +5,10 @@ Ubaciti testiranje. Samo staviti datum i vriieme cutoffa pa provjeriti koliko se
 slaze sa podatcima
 
 U uvod dodati da je cilj rada bio nauciti i isprobati rucne implementacije
-raznih matematickih alata i kako se oni koriste u praksi
+raznih matematickih alata i kako se oni koriste u praksi. FF
 
-Dodati objašnjenje zasto uopce imati PCA dekompoziciju i sta se dobije s time.
+Dodati objašnjenje zasto uopce imati PCA dekompoziciju
+i sta se dobije s time. FF
 
 Dodati u raspravu kako izgleda drift i volatilnost za portfelje u raspravi.
 

@@ -132,8 +132,10 @@ ostalih financijskih instrumenata, nameće se kao potencijalno uspješan
 pristup za analizu portfelja kriptovaluta.\\
 U ovom radu fokusira se na ručnoj implementaciji svih matematičkih
 operacija i modela u \texttt{C++} programskom jeziku bez korištenja
-vanjskih biblioteka osim standardne biblioteke potrebnih za modeliranje
-i provođenje Monte Carlo simulacija.\\
+vanjskih biblioteka potrebnih za modeliranje i provođenje Monte
+Carlo simulacija. Cilj je stečeno znanje na kolegijima primjeniti
+na barem naivne implementacije kako bi se moglo usporediti rad takog
+pristupa sa razvijenim i maksimalno optimiziranim bibliotekama.\\
 To uključuje Monte Carlo metodu za predviđanje vrijednosti portfelja s primjenom
 Cholesky dekompozicije kako bi se osigurala realistična obrada
 korelacija između kriptovaluta koje su još uvijek specijalna skupina investicija
@@ -371,7 +373,10 @@ Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ vari
 \label{sek:pca}
 PCA (Principal Component Analysis) je tehnika koja se koristi za
 redukciju dimenzionalnosti podataka i identifikaciju glavnih komponenti koje
-objašnjavaju što veći dio ukupne varijance podataka.
+objašnjavaju što veći dio ukupne varijance podataka. Ovo nam omogućuje
+najefikasniju diverzifikaciju portfelja i samim time smanjenje
+rizika \cite{Investments}.
+
 \begin{definition}
     Neka je $\boldsymbol{\Sigma}$ kovarijacijska matrica slučajnog
     vektora $\mathbf{X} = (X_1, X_2, \dots, X_n)^\intercal$.
