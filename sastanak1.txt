@@ -1,15 +1,22 @@
-u 3.2.5. dodati sliku objašnjena procesa generiranja simulacija od početnog
+Sastanak 12.06.2025.
+
+
+U 3.2.5. dodati sliku objašnjena procesa generiranja simulacija od početnog
 uzorka do konačnog rezultata. FF
 
-Ubaciti testiranje. Samo staviti datum i vriieme cutoffa pa provjeriti koliko se
-slaze sa podatcima
+Ubaciti testiranje. Samo staviti datum i vrijeme cutoffa pa provjeriti koliko se
+slaze sa podatcima. Treba pronaci nacin da jedostavno stavim na jedan graf i
+jedno i drugo da se moze usporediti. Ili ispisati podatke u csv i onda u
+jupyteru usporediti.
 
 U uvod dodati da je cilj rada bio nauciti i isprobati rucne implementacije
-raznih matematickih alata i kako se oni koriste u praksi. FF
+raznih matematickih alata i kako se oni koriste u praksi i zasto se provodi
+toliko vremena optimirajući algoritme van same asimptoske kompleksnosti. FF
 
 Dodati objašnjenje zasto uopce imati PCA dekompoziciju
 i sta se dobije s time. FF
 
 Dodati u raspravu kako izgleda drift i volatilnost za portfelje u raspravi.
 
-Dodati slike distribucije simulacija u app
+Dodati slike distribucije simulacija u app (ili nekako staviti nijanse ili
+poseban prozor za graf distibucije)
