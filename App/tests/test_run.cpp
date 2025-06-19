@@ -12,7 +12,6 @@ int main(void) {
     std::cout << "Running tests..." << std::endl;
 
     Portfolio test = parser_test();
-    return 0;
     // std::cout << "Parser test:" << std::endl;
     // for (auto x : test.assets) {
     // 	std::cout << "Coin name: " << x.first.name << std::endl;
@@ -30,7 +29,7 @@ int main(void) {
     // }
     // std::cout << "Alignment test:" << std::endl;
     Doubles_Matrix aligned = alignment_test(test, start);
-
+    Doubles_Matrix remainder = remainder_test(test, start);
     //	for (const auto &row : aligned) {
     //		for (const auto &value : row) {
     //			std::cout << value << ' ';
@@ -39,6 +38,12 @@ int main(void) {
     //	}
     //	std::cout << aligned.size() << " x " << aligned.at(0).size() <<
     // std::endl;
+    for (const auto &row : remainder) {
+        for (const auto &value : row) {
+            std::cout << value << ' ';
+        }
+        std::cout << std::endl;
+    }
 
     std::cout << "Math test:" << std::endl;
 

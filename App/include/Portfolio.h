@@ -17,6 +17,7 @@ class Portfolio {
     // Covariance matrix
     Doubles_Matrix aligned_log_return_matrix;
     Doubles_Matrix covariance_matrix;
+    Doubles_Matrix future_log_return_matrix;
     std::vector<double> aligned_means;
     std::vector<double> aligned_volatilities;
 
@@ -26,6 +27,7 @@ class Portfolio {
     bool aligned_returns_calculated = false;
     bool covariance_matrix_calculated = false;
     bool aligned_metrics_calculated = false;
+    bool future_log_returns_calculated = false;
 
     void add_asset(const Cryptocurrency &crypto, double ammount) {
         _assets.emplace(crypto, ammount);
@@ -95,9 +97,11 @@ class Portfolio {
 
     Doubles_Matrix &aligned_log_returns(timestamp start);
     Doubles_Matrix &calculate_covariance(timestamp start);
+    Doubles_Matrix &future_log_returns(timestamp start);
     int calculate_aligned_metrics(timestamp start);
     std::vector<Doubles_Matrix> monte_carlo(int simulations, int steps,
                                             timestamp start);
+
     int PCA(timestamp start, int num_components,
             std::vector<std::pair<double, std::vector<double>>> &components,
             double &total_variance, double &variance_explained);

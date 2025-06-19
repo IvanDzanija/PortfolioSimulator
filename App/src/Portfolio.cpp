@@ -166,3 +166,28 @@ Doubles_Matrix &Portfolio::calculate_covariance(timestamp start) {
     covariance_matrix_calculated = true;
     return covariance_matrix;
 }
+
+Doubles_Matrix &Portfolio::future_log_returns(timestamp start) {
+    if (future_log_returns_calculated && aligned_stamp == start) {
+        return future_log_return_matrix;
+    }
+    Doubles_Matrix ret;
+
+    // teribbly written code, remove all push_back's + can binary search for
+    // date
+
+    for (const auto &pair : _assets) {
+        const Cryptocurrency &crypto = pair.first;
+        std::vector<double> possible;
+        for (const Candle &candle : crypto.hist_data) {
+            if (candle.time > start) {
+                std::cout << candle.time << ' ' << start << std::endl;
+                std::cout << candle.log_return << std::endl;
+                possible.push_back(candle.log_return);
+            }
+        }
+        ret.push_back(possible);
+    }
+    future_log_return_matrix = std::move(ret);
+    return future_log_return_matrix;
+}
