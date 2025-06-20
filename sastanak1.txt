@@ -20,4 +20,4 @@ Dodati u raspravu kako izgleda drift i volatilnost za portfelje u raspravi.
 FF
 
 Dodati slike distribucije simulacija u app (ili nekako staviti nijanse ili
-poseban prozor za graf distibucije)
+poseban prozor za graf distibucije)FF
