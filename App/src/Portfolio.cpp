@@ -39,7 +39,7 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
         std::vector<double> possible(_assets.size());
         possible.at(0) = candle_pivot.log_return;
 
-        // loop over all the _assets
+        // loop over all the assets
         // vector last_positions is used to skip the candles that are
         // already processed
         size_t asset_index = 0;
@@ -92,6 +92,9 @@ Doubles_Matrix &Portfolio::aligned_log_returns(timestamp start) {
         return aligned_log_return_matrix;
     }
     aligned_stamp = start;
+    if (aligned_end > start) {
+        aligned_end = start;
+    }
     aligned_log_return_matrix = math::matrix_transpose(ret);
     return aligned_log_return_matrix;
 }
@@ -181,8 +184,8 @@ Doubles_Matrix &Portfolio::future_log_returns(timestamp start) {
         std::vector<double> possible;
         for (const Candle &candle : crypto.hist_data) {
             if (candle.time > start) {
-                std::cout << candle.time << ' ' << start << std::endl;
-                std::cout << candle.close << std::endl;
+                //  std::cout << candle.time << ' ' << start << std::endl;
+                //  std::cout << candle.close << std::endl;
                 possible.push_back(candle.close);
             }
         }

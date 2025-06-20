@@ -11,7 +11,6 @@
 std::mt19937 rnd(std::chrono::steady_clock::now().time_since_epoch().count());
 std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
                                                    timestamp start) {
-
     Doubles_Matrix covariance = calculate_covariance(start);
     if (covariance.empty()) {
         std::cerr << "Starting date mismatch. Some assets probably didn't "
@@ -32,11 +31,13 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 
         // we check till aligned_end because start can be in the future and
         // gives pointer past-the-end
+        std::cout << aligned_end << ' ' << crypto.name << std::endl;
         auto it = std::lower_bound(crypto.hist_data.begin(),
                                    crypto.hist_data.end(), aligned_end,
                                    [](const Candle &candle, timestamp stamp) {
                                        return candle.time < stamp;
                                    });
+        it->print();
         starting_prices.at(index) = it->close;
         //	std::cout << "Starting price for " << crypto.name << ": "
         //			  << starting_prices.at(index) << std::endl;

@@ -116,10 +116,10 @@ MainWindow::MainWindow(QWidget *parent)
     monteCarloLayout->addWidget(startDateInput);
 
     simSpin = new QSpinBox(this);
-    simSpin->setRange(10, 10000);
+    simSpin->setRange(1, 100000);
     simSpin->setValue(100);
     stepSpin = new QSpinBox(this);
-    stepSpin->setRange(10, 10000);
+    stepSpin->setRange(1, 100000);
     stepSpin->setValue(60);
 
     monteCarloLayout->addWidget(new QLabel("Simulations:"));
@@ -277,20 +277,21 @@ void MainWindow::runMonteCarloSimulation() {
                                  "console log for more info.");
             return;
         }
-        // This can me multithreaded, one thread for simulation, one for
-        // fetching cut-off data
+        // This can me multithreaded, one thread for fetching the simulation,
+        // one for fetching cut-off data
         if (time_set) {
             std::cout << "Monte Carlo simulation started at: "
                       << timestamp_to_string(start) << std::endl;
             Doubles_Matrix rem = portfolio.future_log_returns(start);
             if (portfolio.get_asset_count() == 1) {
                 // this is only for testing
-                std::vector<double> last_row;
+                Doubles_Matrix last_row(1, std::vector<double>(step_count));
                 for (size_t i = 0; i < rem.size(); ++i) {
-                    for (size_t j = 0; j < sim_count; ++j) {
-                        last_row.push_back(rem.at(i).at(j));
+                    for (size_t j = 0; j < step_count; ++j) {
+                        last_row.at(i).at(j) = rem.at(i).at(j);
                     }
                 }
+                result.push_back(last_row);
             }
         } else {
             std::cout << "Monte Carlo simulation started at: now" << std::endl;

@@ -21,6 +21,14 @@ struct Candle {
         : open(o), high(h), low(l), close(c), volume(v), marketcap(m), time(t) {
         log_return = std::log(close / open);
     }
+
+    void print() const {
+        std::cout << "Candle at " << time << ": "
+                  << "Open: " << open << ", High: " << high << ", Low: " << low
+                  << ", Close: " << close << ", Volume: " << volume
+                  << ", Market Cap: " << marketcap
+                  << ", Log Return: " << log_return << std::endl;
+    }
 };
 
 class Cryptocurrency {
