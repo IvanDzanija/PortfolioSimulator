@@ -33,6 +33,7 @@ class MainWindow : public QMainWindow {
     void addCoinToPortfolio();
     void runMonteCarloSimulation();
     void runPCAAnalysis();
+    void showFinalDayDistribution();
 
   private:
     QWidget *centralWidget;
@@ -52,6 +53,8 @@ class MainWindow : public QMainWindow {
     QLineEdit *pcaStartDateInput;
     QSpinBox *pcaDataPointsSpin;
     QTextEdit *pcaResultsText;
+    std::vector<Doubles_Matrix> lastSimulationResults;
+    QPushButton *distributionButton;
 
     void
     plotSimulation(const std::vector<std::vector<std::vector<double>>> &data);

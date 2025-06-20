@@ -1,5 +1,6 @@
 #include "ChartPreviewWindow.h"
 #include "DateTime_formatting.h"
+#include "DistributionChartWindow.h"
 #include "MainWindow.h"
 #include <QDir>
 #include <QGroupBox>
@@ -131,6 +132,12 @@ MainWindow::MainWindow(QWidget *parent)
     connect(simulateButton, &QPushButton::clicked, this,
             &MainWindow::runMonteCarloSimulation);
     monteCarloLayout->addWidget(simulateButton);
+
+    distributionButton = new QPushButton("Show Final Day Distribution", this);
+    distributionButton->setEnabled(false);
+    connect(distributionButton, &QPushButton::clicked, this,
+            &MainWindow::showFinalDayDistribution);
+    monteCarloLayout->addWidget(distributionButton);
 
     rightPanel->addWidget(monteCarloGroup);
 
@@ -277,6 +284,9 @@ void MainWindow::runMonteCarloSimulation() {
                                  "console log for more info.");
             return;
         }
+        lastSimulationResults = result;
+        distributionButton->setEnabled(true);
+
         // This can me multithreaded, one thread for fetching the simulation,
         // one for fetching cut-off data
         if (time_set) {
@@ -481,4 +491,42 @@ void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
     chart->setTitle("Monte Carlo Simulation");
     auto *preview = new ChartPreviewWindow(chart, this);
     preview->show();
+}
+
+void MainWindow::showFinalDayDistribution() {
+    if (lastSimulationResults.empty()) {
+        QMessageBox::warning(this, "No Simulation Data",
+                             "Please run a Monte Carlo simulation first.");
+        return;
+    }
+
+    // Extract final day values from all simulations
+    std::vector<double> finalDayValues;
+
+    // Get the last step (final day) from each simulation
+    for (const auto &simulation : lastSimulationResults) {
+        if (!simulation.empty() && !simulation[0].empty()) {
+            // Sum all assets for the final day of this simulation
+            double portfolioValue = 0.0;
+            size_t finalStep = simulation[0].size() - 1; // Last step index
+
+            for (size_t asset = 0; asset < simulation.size(); ++asset) {
+                if (finalStep < simulation[asset].size()) {
+                    portfolioValue += simulation[asset][finalStep];
+                }
+            }
+            finalDayValues.push_back(portfolioValue);
+        }
+    }
+
+    if (finalDayValues.empty()) {
+        QMessageBox::warning(this, "No Data",
+                             "No final day data found in simulation results.");
+        return;
+    }
+
+    // Create and show the distribution window
+    auto *distributionWindow =
+        new DistributionChartWindow(finalDayValues, this);
+    distributionWindow->show();
 }
