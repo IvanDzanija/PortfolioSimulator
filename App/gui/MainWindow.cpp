@@ -287,7 +287,7 @@ void MainWindow::runMonteCarloSimulation() {
                 // this is only for testing
                 std::vector<double> last_row;
                 for (size_t i = 0; i < rem.size(); ++i) {
-                    for (size_t j = 0; j < rem.size(); ++j) {
+                    for (size_t j = 0; j < sim_count; ++j) {
                         last_row.push_back(rem.at(i).at(j));
                     }
                 }
