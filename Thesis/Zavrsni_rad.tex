@@ -100,8 +100,8 @@ u investicijskim portfeljima uz pomoć Monte Carlo simulacija}
 
 \begin{zahvale}
 	% Ovdje upišite zahvale / Write in the acknowledgment
-	Hvala na svemu puno.
-	ovo je test i opet
+    Zahvaljujem mentorici izv. prof. dr. sc. Mihaeli Vranić na mentorstvu i
+    vodstvu te fleksibilnosti i razumijevanju kroz proces izrade ovog rada.
 \end{zahvale}
 
 % Odovud započinje numeriranje stranica / Page numbering starts from here
@@ -210,10 +210,10 @@ pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
 \begin{definition}
 	Vektor $\mathbf{w}$ predstavlja udjele investicija u portfelju.
 \end{definition}
-\begin{align*}
+\begin{align}
 	\mathbf{w} = \begin{pmatrix} w_1 \\ w_2 \\ \dots \\ w_N \end{pmatrix},
 	\indent \sum_{i = 1}^{N} w_i = 1
-\end{align*}
+\end{align}
 
 \section{Povrati}
 \label{sek:povrati}
@@ -225,10 +225,10 @@ Povrat investicije je osnovna mjera uspješnosti investicije.
     $P_{t-1}$ cijena istog instrumenta u trenutku $t-1$. Aritmetički povrat
     $R_t$ definiramo kao:
 \end{definition}
-\begin{align*}R_t = \frac{P_t}{P_{t-1}} - 1 =
+\begin{align}R_t = \frac{P_t}{P_{t-1}} - 1 =
     \frac{P_t - P_{t-1}}{P_{t-1}} =
 \frac{\Delta P}{P_{t-1}}
-\end{align*}
+\end{align}
 
 \noindent Neka buduća cijena nam neće biti poznata pri investiranju te
 zato povrat promatramo kao slučajnu varijablu.
@@ -244,9 +244,9 @@ Logaritamski povrat $r_t$ definiramo preko prirodnog logaritma omjera cijena.
     $P_{t-1}$ cijena istog instrumenta u trenutku $t-1$. Logaritamski povrat
     $r_t$ definiramo kao:
 \end{definition}
-\begin{align*}
+\begin{align}
     r_t = \ln\left(\frac{P_t}{P_{t-1}}\right) = \ln(P_t) - \ln(P_{t-1})
-\end{align*}
+\end{align}
 \noindent Logaritamski povrat u pravilu koristimo zbog njegovih pogodnih
 matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$
 te svojstvo aditivnosti $r_{0,T} = \sum_{t=1}^T r_t$.
@@ -258,16 +258,16 @@ te svojstvo aditivnosti $r_{0,T} = \sum_{t=1}^T r_t$.
 	povrata jer je upravo srednja vrijednost nepristran procjenitelj
 	očekivanja slučajne varijable $R_t$ za koji vrijedi:
 \end{definition}
-\begin{align*}
+\begin{align}
 	E(R_t) =\frac{1}{N} \sum_{i = 1}^{N} R_i
-\end{align*}
+\end{align}
 \begin{definition}
 Očekivani povrat portfelja je linearna kombinacija očekivanih povrata pojedinačnih asseta:
 \end{definition}
-\begin{align*}
+\begin{align}
 \mathbb{E}[R_p] =
     \mathbf{w}^\intercal \boldsymbol{\mu} = \sum_{i=1}^n w_i \mu_i
-\end{align*}
+\end{align}
 \indent gdje je $\boldsymbol{\mu} = (\mu_1, \dots, \mu_n)^\intercal$ vektor očekivanih povrata.
 
 \section{Volatilnost}
@@ -279,15 +279,15 @@ jer će nam upravo takva mjera kvantificirati kretanje povrata.
 	Volatilnost investicije definiramo kao nepristran procjenitelj
 	standardne devijacije slučajne varijable $R_t$:
 \end{definition}
-\begin{align*}
+\begin{align}
 	\sigma_R = \sqrt{\frac{1}{N - 1} \sum_{i = 1}^{N} \left[R_i - E(R_t)\right]^2}
-\end{align*}
+\end{align}
 \begin{definition}
 Volatilnost portfelja mjeri se standardnom devijacijom povrata i dana je kvadratnim korijenom varijance:
 \end{definition}
-\begin{align*}
+\begin{align}
 \sigma_p = \sqrt{\mathbf{w}^\intercal \boldsymbol{\Sigma} \mathbf{w}}
-\end{align*}
+\end{align}
 \indent gdje je $\boldsymbol{\Sigma}$ matrica kovarijance s elementima $\Sigma_{ij} = \text{Cov}(r_i, r_j)$.
 
 \section{Geometrijsko Brownovo gibanje}
@@ -295,16 +295,16 @@ Volatilnost portfelja mjeri se standardnom devijacijom povrata i dana je kvadrat
 Geometrijsko Brownovo gibanje (GBM) je jedan od standardnih
 stohastičkih procesa za modeliranje kretanja cijena financijskih instrumenata.
 Diferencijalna jednadžba GBM-a je:
-\begin{align*}
+\begin{align}
     dS_t = \mu S_t dt + \sigma S_t dW\left(t\right)
-\end{align*}
+\end{align}
 \indent gdje je $W\left(t\right)$ Wienerov proces.\\
 Eksplicitno rješenje GBM-a daje formulu za cijenu u trenutku $t$:
 
-\begin{align*}
+\begin{align}
 S_t = S_0 \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)t +
-    \sigma W_t\right]
-\end{align*}
+    \sigma W_t\right] \label{eq:gbm}
+\end{align}
 \indent gdje je $S_0$ početna cijena, $\mu$ drift, $\sigma$ volatilnost i $W_t$
 Wienerov proces.\\
 Detaljno objašnjene GBM-a i njegovih svojstava te kompletan derivacijski
@@ -332,9 +332,9 @@ Za portfelj od $n$ instrumenata, koraci su:
     gdje je $L$ donje trokutasta matrica Cholesky
         dekompozicije $\boldsymbol{\Sigma}$
 \item Ažuriraj cijene simulacije po GBM formuli za svaki instrument:
-\begin{align*}
+\begin{align}
 S_t^{(i)} = S_0^{(i)} \exp\left(\left(\mu_i - \frac{\sigma_i^2}{2}\right)\Delta t + \sigma_i Y_i \sqrt{\Delta t}\right)
-\end{align*}
+\end{align}
 \item Izračunaj vrijednost portfelja $V_t = \sum_{i=1}^n w_i S_t^{(i)}$
 \end{enumerate}
 
@@ -349,9 +349,9 @@ definitna matrica. Teorem u \cite{NumerickaMatematika}.
     Neka je $\boldsymbol{\Sigma}$ simetrična pozitivno definitna
     matrica kovarijance. Tada postoji jedinstvena donja trokutasta
     matrica $L$ takva da:
-    \begin{align*}
+    \begin{align}
         \boldsymbol{\Sigma} = LL^\intercal
-    \end{align*}
+    \end{align}
     \indent gdje je $L$ donja trokutasta matrica.
 \end{definition}
 Ova faktorizacija omogućuje generiranje vektora koreliranih slučajnih varijabli
@@ -361,12 +361,12 @@ iz vektora nezavisnih slučajnih varijabli.
 Neka je $\mathbf{Z} = (Z_1, ..., Z_n)^\intercal$ vektor nezavisnih $N(0,1)$ varijabli. Tada vektor $\mathbf{Y} = L\mathbf{Z}$ ima kovarijacijsku matricu $\boldsymbol{\Sigma}$.
 \end{theorem}
 \begin{proof}
-\begin{align*}
+\begin{align}
 \text{Cov}(\mathbf{Y}) = \mathbb{E}[L\mathbf{Z}(L\mathbf{Z})^\intercal] -
     \mathbb{E}[L\mathbf{Z}]\mathbb{E}[(L\mathbf{Z})^\intercal]
     = L\mathbb{E}[\mathbf{Z}\mathbf{Z}^\intercal]L^\intercal - 0
     = L \cdot I \cdot L^\intercal = LL^\intercal = \boldsymbol{\Sigma}
-\end{align*}
+\end{align}
 \end{proof}
 
 \section{PCA dekompozicija}
@@ -383,9 +383,9 @@ rizika \cite{Investments}.
     Svojstvena dekompozicija matrice
     $\boldsymbol{\Sigma}$ daje:
 \end{definition}
-\begin{align*}
+\begin{align}
     \boldsymbol{\Sigma} = \boldsymbol{V} \boldsymbol{\Lambda} \boldsymbol{V}^\intercal
-\end{align*}
+\end{align}
 \indent gdje je $\boldsymbol{V}$ ortogonalna matrica vlastitih vektora, a
 $\boldsymbol{\Lambda}$
 dijagonalna matrica vlastitih vrijednosti.\\
@@ -398,9 +398,9 @@ Sada možemo definirati PCA dekompoziciju.
     glavne komponente slučajnog vektora $\mathbf{X}$.\\
     Glavne komponente su linearne kombinacije originalnih varijabli
     $\mathbf{X}$ i definiraju se kao:
-    \begin{align*}
+    \begin{align}
         \mathbf{Y} = \boldsymbol{V}^\intercal \mathbf{X}
-    \end{align*}
+    \end{align}
     \indent gdje je $\boldsymbol{V}$ matrica vlastitih vektora kovarijacijske
     matrice $\boldsymbol{\Sigma}$, a $Y_i$ su glavne komponente.
 \end{definition}
@@ -837,7 +837,13 @@ inverznih iteracija}.
 Monte Carlo simulacija se pokazala kao efikasan način
 generiranja vjerojatnosnih scenarija budućih cijena portfelja kriptovaluta
 ukoliko je inicijalni uzorak smislen i dovoljno velik.
-Jedan primjer simulacije koji izgleda realistično i smislen je
+Treba napomenuti kako bi Monte Carlo metoda modelirana sa
+geometrijskim Brownovim gibanjem (GBM) trebala biti korištena
+na kratkim vremenskim intervalima jer ipak uzima malo mogućih
+značajki iz povijesnih podataka i dalje se bazira na simuliranju
+stohastičkog procesa. Za duže vremenske periode se preporučuju
+regresijske metode koje prate trendove i sezonalnost.
+Jedan primjer simulacije koji izgleda realistično i smisleno
 dan je ranije na slici \ref{fig:monte_carlo_example}.
 Na tom se primjeru vidi blagi pozitivni \textit{drift} cijena portfelja
 te volatilnost koja je u skladu s očekivanjima za portfelj kriptovaluta.
@@ -847,13 +853,13 @@ Drugi primjer simulacije je dan na slici \ref{fig:monte_carlo_example2}.
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example2.png}
     \caption{Primjer Monte Carlo simulacije portfelja (XRP) kriptovaluta (100
-    simulacija, 60 dana)}
+    simulacija, 60 dana, drift = 0.00154516, volatilnost = 0.0727809)}
     \label{fig:monte_carlo_example2}
 \end{figure}
 
-Ovaj primjer simulacije pokazuje da je \textit{drift} cijena portfelja
-negativan, ali da je volatilnost portfelja također visoka. Ovakav
-izgled simulacije je očekivan ako uzmemo u obzir da koristimo
+Ovaj primjer simulacije pokazuje da je \textit{drift} povrata portfelja izrazito
+nisko pozitivan, ali da je volatilnost portfelja toliko visoka da model predviđa
+budući pad. Ovakav izgled simulacije je očekivan ako uzmemo u obzir da koristimo
 statističku metodu koja gleda samo povijesne podatke i ne uzima u obzir
 puno drugih faktora koji utječu na cijene kriptovaluta. Izgled kretanja
 vrijednosti portfelja u povijesnim podatcima dan je na slici \ref{fig:XRP_hist}.
@@ -868,26 +874,27 @@ većinom opadala uz 2 velika i nagla porasta.
 \end{figure}
 
 Treći primjer simulacije je dan na slici \ref{fig:monte_carlo_example3}.
-Na slici se vidi da je \textit{drift} cijena portfelja poprilično
-pozitivna, ali da je volatilnost opet visoka.\\
-U ovom primjeru uočavamo problem kod Monte Carlo simulacija za
-kriptovalute. Budući da se o finacijskim instrumentima koji su
+Na slici se vidi da je \textit{drift} povrata portfelja pozitivan,
+ali da je volatilnost nešto niža nego u prethodnom primjeru te model
+predviđa stabilniji budući rast.\\
+U ovom primjeru uočavamo problem kod modela GMB te Monte Carlo simulacija za
+kriptovalute za dulje vremenske periode.
+Budući da se radi o finacijskim instrumentima koji su
 relativno novi i malo je povijesnih podataka,
 Monte Carlo simulacije koje su statistička metoda i temelje se
-na povijesnim podacima, ne daju uvijek
-realistične rezultate bez uzimanja u obzir dodatnih informacija o tržištu.
+na povijesnim podacima i modeliranju stohastičkog proces,
+ne daju uvijek
+realistične rezultate. Problem je u zanemarivanju dodatnih
+informacija o tržištu koje bi se mogle modelirati korištenjem
+regresijskih metoda.
 Iz ove bi se simulacije moglo zaključiti da očekujemo rast vrijednosti
 od nekoliko posto u sljedećih 60 dana, ali to nije nužno točno
 (iako je vrijednost \textit{Bitcoin}-a stvarno značajno porasla u proteklom vremenu).
-Također je uz toliko pozitivan \textit{drift} i volatilnost teško
-dobro odrediti jer utjecaj \textit{drift}-a u samoj formuli
-\ref{sek:gbm} je dovoljno značajan da model neće predvidjeti kroz
-toliki period vremena da će vrijednost portfelja pasti.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example3.png}
     \caption{Primjer Monte Carlo simulacije portfelja (Bitcoin) kriptovaluta (100
-    simulacija, 60 dana)}
+    simulacija, 60 dana, drift = 0.0017602, volatilnost = 0.0426928)}
     \label{fig:monte_carlo_example3}
 \end{figure}
 Promatajući povijesne podatke \textit{Bitcoin}-a, dane na slici \ref{fig:BTC_hist},
@@ -902,6 +909,24 @@ simulacije u \ref{fig:monte_carlo_example3}.
     \caption{Povijesno kretanje cijene kriptovalute Bitcoin}
     \label{fig:BTC_hist}
 \end{figure}
+
+Primjer testiranja Monte Carlo simulacije je dan na slici
+\ref{fig:monte_carlo_test}.
+Na slici se jasno vidi kako model može simulirati generalno kretanje
+vrijednosti portfelja te intervale u kojima očekuje volatilnost, ali
+je problem odrediti točan smjer kretanja te volatilnosti. Također vidimo
+da što je manji interval predviđanja to je simulacija točnija.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_test.png}
+    \caption{Test Monte Carlo simulacije portfelja kriptovaluta (3
+    simulacije, 45 dana)\\
+    Ljubičasti portfelj - stvarne cijene kriptovalute\\
+    Plavi, zeleni i žuti portfelj - simulirane cijene kriptovalute
+    }
+    \label{fig:monte_carlo_test}
+\end{figure}
+
 
 
 \subsection{PCA dekompozicija}
@@ -1096,7 +1121,6 @@ rizikom te svojom modularnošću pružiti dodatni edukacijski resurs.
     Finally, an overview of the achieved results,
     a discussion of the application's functionality, and instructions
     for use and execution are provided.
-	\blindtext
 \end{abstract}
 
 \begin{keywords}
@@ -1109,8 +1133,6 @@ rizikom te svojom modularnošću pružiti dodatni edukacijski resurs.
 % Sva poglavlja koja slijede će biti označena slovom i riječi privitak / All following chapters will be denoted with an appendix and a letter
 \backmatter
 
-\chapter{The Code}
-
-\Blindtext
+% \chapter{The Code}
 
 \end{document}

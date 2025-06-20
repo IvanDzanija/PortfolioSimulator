@@ -83,6 +83,8 @@ std::vector<Doubles_Matrix> Portfolio::monte_carlo(int simulations, int steps,
 
             double mu = aligned_means.at(j);
             double sigma = aligned_volatilities.at(j);
+            std::cout << "Drift: " << mu << ", Volatility: " << sigma
+                      << std::endl;
 
             prices.at(i).at(j).at(0) = starting_prices.at(j) * weights.at(j);
 
