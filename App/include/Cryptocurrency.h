@@ -76,6 +76,14 @@ class Cryptocurrency {
         return name == other.name;
     }
 
+    void print() const {
+        std::cout << "Cryptocurrency: " << name << " (" << tick << ")\n"
+                  << "Historical Data Size: " << hist_data.size() << "\n"
+                  << "Starting Timestamp: " << hist_data.front().time << "\n"
+                  << "Ending Timestamp: " << hist_data.back().time << "\n"
+                  << std::endl;
+    }
+
     std::string get_name() const { return name; }
     std::string get_tick() const { return tick; }
     void set_name(const std::string &name) { this->name = name; }

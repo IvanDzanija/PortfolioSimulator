@@ -227,6 +227,7 @@ void MainWindow::addCoinToPortfolio() {
         Cryptocurrency coin = parser.fastReadCryptoCSV(
             "../datasets/coin_" + filename.toStdString() + ".csv");
         portfolio.add_asset(coin, amount);
+        coin.print();
         portfolioMap.insert(filename, amount);
         portfolioView->addItem(QString("%1 (%2)")
                                    .arg(QString::fromStdString(coin.get_name()))
@@ -245,6 +246,7 @@ void MainWindow::runMonteCarloSimulation() {
     QString datetimeStr = startDateInput->text();
 
     timestamp start;
+    bool time_set = false;
     if (datetimeStr.isEmpty()) {
         start = std::chrono::floor<std::chrono::seconds>(
             std::chrono::system_clock::now());
@@ -256,6 +258,7 @@ void MainWindow::runMonteCarloSimulation() {
     } else {
         try {
             start = string_to_timestamp(datetimeStr.toStdString());
+            time_set = true;
         } catch (const std::exception &e) {
             QMessageBox::critical(
                 this, "Invalid Date",
@@ -264,13 +267,33 @@ void MainWindow::runMonteCarloSimulation() {
         }
     }
     try {
+        int sim_count = simSpin->value();
+        int step_count = stepSpin->value();
         std::vector<Doubles_Matrix> result =
-            portfolio.monte_carlo(simSpin->value(), stepSpin->value(), start);
+            portfolio.monte_carlo(sim_count, step_count, start);
         if (result.empty()) {
             QMessageBox::warning(this, "Simulation Error",
                                  "No data available for the given date. Check "
                                  "console log for more info.");
             return;
+        }
+        // This can me multithreaded, one thread for simulation, one for
+        // fetching cut-off data
+        if (time_set) {
+            std::cout << "Monte Carlo simulation started at: "
+                      << timestamp_to_string(start) << std::endl;
+            Doubles_Matrix rem = portfolio.future_log_returns(start);
+            if (portfolio.get_asset_count() == 1) {
+                // this is only for testing
+                std::vector<double> last_row;
+                for (size_t i = 0; i < rem.size(); ++i) {
+                    for (size_t j = 0; j < rem.size(); ++j) {
+                        last_row.push_back(rem.at(i).at(j));
+                    }
+                }
+            }
+        } else {
+            std::cout << "Monte Carlo simulation started at: now" << std::endl;
         }
         plotSimulation(result);
     } catch (const std::exception &e) {

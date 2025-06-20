@@ -182,8 +182,8 @@ Doubles_Matrix &Portfolio::future_log_returns(timestamp start) {
         for (const Candle &candle : crypto.hist_data) {
             if (candle.time > start) {
                 std::cout << candle.time << ' ' << start << std::endl;
-                std::cout << candle.log_return << std::endl;
-                possible.push_back(candle.log_return);
+                std::cout << candle.close << std::endl;
+                possible.push_back(candle.close);
             }
         }
         ret.push_back(possible);

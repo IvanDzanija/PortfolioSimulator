@@ -95,6 +95,8 @@ class Portfolio {
         return _asset_names;
     }
 
+    inline int get_asset_count() const { return _assets.size(); }
+
     Doubles_Matrix &aligned_log_returns(timestamp start);
     Doubles_Matrix &calculate_covariance(timestamp start);
     Doubles_Matrix &future_log_returns(timestamp start);
