@@ -413,7 +413,7 @@ Sada možemo definirati PCA dekompoziciju.
 \label{pog:implementacija}
 Ovaj dio rada opisuje implementaciju aplikacije za simulaciju
 portfelja kriptovaluta. Aplikacija je napisana u \texttt{C++} programskom
-jeziku i koristi isključivo standardnu biblioteku \texttt{C++} za matematičke
+jeziku i koristi isključivo standardnu biblioteku \texttt{C++}-a za matematičke
 operacije i modeliranje. Za interakciju s korisnikom koristi se
 grafičko sučelje(implementirano sa Qt bibliotekom za \texttt{C++}) koje
 omogućuje vizualizaciju rezultata. Prikaz modela rada aplikacije
@@ -596,7 +596,7 @@ class Portfolio {
 Matematički okvir aplikacije implementira osnovne matematičke
 operacije nad vektorima i matricama, kao što su množenje
 matrica i vektora te razne matrične dekompozicije. Sve metode koriste
-samo standardnu biblioteku \texttt{C++}.
+samo standardnu biblioteku \texttt{C++}-a.
 
 \begin{lstlisting}[caption={Metode implementirane u matematičkom okviru}, label={lst:cpp_example}]
 template <typename T>
@@ -777,7 +777,7 @@ primjer rezultata PCA dekompozicije je dan na slici
 \subsection{Vizualizacija rezultata}
 \label{sek:vizualizacija_rezultata}
 Za vizualizaciju rezultata i interakciju s korisnikom koristi se
-grafičko sučelje implementirano u \texttt{C++} koristeći Qt biblioteku.
+grafičko sučelje implementirano u \texttt{C++}-u koristeći Qt biblioteku.
 Grafičko sučelje omogućuje korisniku da odabere kriptovalute koje želi
 staviti u portfelj, postavi udjele kriptovaluta u portfelju,
 odabere vremenski period simulacije i broj simulacija.
