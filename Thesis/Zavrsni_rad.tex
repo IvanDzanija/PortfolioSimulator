@@ -206,7 +206,7 @@ u budućnosti ili smanjenje gubitka vrijednosti novca.
 \section{Portfelj}
 \label{sek:portfelj}
 Investicijske portfelje matematički prikazujemo kao linearnu kombinaciju
-pojedinih investicija sa vektorom pojedinih udjela $\mathbf{w}$.
+pojedinih investicija s vektorom pojedinih udjela $\mathbf{w}$.
 \begin{definition}
 	Vektor $\mathbf{w}$ predstavlja udjele investicija u portfelju.
 \end{definition}
@@ -233,8 +233,8 @@ Povrat investicije je osnovna mjera uspješnosti investicije.
 \noindent Neka buduća cijena nam neće biti poznata pri investiranju te
 zato povrat promatramo kao slučajnu varijablu.
 Vidimo kako je moguće imati negativan povrat ako je cijena koju
-promatramo manja od početne cijene i to je upravo situacija koji
-pokušavamo izbjeći.
+promatramo manja od početne cijene i to je upravo situacija koju
+nastojimo izbjeći.
 
 \subsection{Logaritamski povrat}
 Logaritamski povrat $r_t$ definiramo preko prirodnog logaritma omjera cijena.
@@ -305,7 +305,7 @@ Eksplicitno rješenje GBM-a daje formulu za cijenu u trenutku $t$:
 S_t = S_0 \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)t +
     \sigma W_t\right] \label{eq:gbm}
 \end{align}
-\indent gdje je $S_0$ početna cijena, $\mu$ drift, $\sigma$ volatilnost i $W_t$
+\indent gdje je $S_0$ početna cijena, $\mu$ \textit{drift}, $\sigma$ volatilnost i $W_t$
 Wienerov proces.\\
 Detaljno objašnjene GBM-a i njegovih svojstava te kompletan derivacijski
 postupak možete pronaći u \cite{GMBIzvod}.
@@ -434,9 +434,9 @@ kriptovaluta preuzete sa stranice \cite{kaggledataset}.
 Podatci su u CSV formatu i sadrže informacije o otvorenoj, zatvorenoj,
 najvišoj i najnižoj cijeni te volumenu kriptovalute i ukupnom tržišnom
 kapitalu za svaki vremenski interval. Za potrebe aplikacije,
-ovaka pristup je dovoljan jer se fokusiramo na analizu i
+ovakav pristup je dovoljan jer se fokusiramo na analizu i
 implementaciju modela portfelja i potrebnih matematičkih operacija.
-U budućnosti bi se mogla implementirati i dohvaćanje podataka
+U budućnosti bi se moglo implementirati i dohvaćanje podataka
 u realnom vremenu preko nekog javno dostupnog API-ja. Time bi
 aplikacija postala korisna i za praćenje portfelja u realnom vremenu.\\
 U trenutnim podatcima nalaze se povijesne vrijednosti za 23 različite kriptovalute.
@@ -506,8 +506,8 @@ Podatci se parsiraju u \emph{candle} strukturu koja sadrži
 otvorenu, zatvorenu, najvišu i najnižu cijenu te volumen
 kriptovalute za svaki vremenski interval. Također se pri parsiranju
 računaju i logaritamski povrati za svaki vremenski interval te se izvršava
-poravnanje vremenskih oznaka svih kriptovaluta. U pravilu se kriptovaluta može
-i trguje 24/7, ali je problem bio što neke kriptovalute nisu postojale ili
+poravnanje vremenskih oznaka svih kriptovaluta. U pravilu se kriptovalutama trguje
+24/7, ali je problem bio što neke kriptovalute nisu postojale ili
 nisu imale podatke za sve dane svih ostalih kriptovaluta.
 \begin{lstlisting}[caption={Struktura \emph{candle} koja sadrži povijesne
 podatke o cijenama kriptovaluta}, label={lst:candle}]
@@ -666,7 +666,7 @@ kao metoda koja prima kovarijacijsku matricu i matricu $L$ u koju se sprema
 donja trokutasta matrica dekompozicije te metoda vraća \texttt{int} koji
 označava uspješnost dekompozicije.
 Algoritam radi točno prema koracima matematične notacije.
-Znamo da je matrica kovarijance uvijek simetična i
+Znamo da je matrica kovarijance uvijek simetrična i
 pozitivno definitna, pa je Cholesky dekompozicija uvijek moguća.
 
 \subsubsection{QR dekompozicija}
@@ -687,7 +687,6 @@ Householderove refleksije na preostale stupce matrice.
     \label{fig:householder}
 \end{figure}
 
-
 \subsubsection{Svojstvena dekompozicija}
 \label{sek:svojstvena_dekompozicija}
 Svojstvena dekompozicija je implementirana kao metoda koja prima
@@ -695,7 +694,7 @@ kovarijacijsku matricu te par vlastitih vrijednosti i vlastitih vektora u koje
 se spremaju rezultati dekompozicije.
 Za izračun vlastitih vrijednosti koristi se \emph{metoda QR iteracija}
 \cite{NLA} koja QR dekompoziciju
-iterativno primjenjuje na matricu dok ne dobijemo i onda množi
+iterativno primjenjuje na matricu i onda množi
 matricu $R$ i $Q$ te tako dobivamo novu matricu koja je
 približno dijagonalna. Zatim se vlastiti vektori dobivaju
 posebno za svaku vlastitu vrijednost koristeći \emph{metodu
@@ -785,7 +784,7 @@ odabere vremenski period simulacije i broj simulacija.
 Rezultati simulacija se prikazuju u obliku grafova koji
 se otvaraju u novom prozoru aplikacije i prikazuju teoretsko kretanje
 vrijednosti portfelja u budućnosti. Korisnik također može odabrati
-broj glavnih komponenti te izvrši PCA dekompoziciju portfelja. Prikaz
+broj glavnih komponenti te izvršiti PCA dekompoziciju portfelja. Prikaz
 rezultata PCA dekompozicije je također u obliku grafova koji
 se otvara u novom prozoru aplikacije i prikazuje glavne komponente
 portfelja te varijancu koju objašnjavaju.
@@ -814,14 +813,14 @@ datoteke i aproksimacijom broja redaka u datoteci. To nam omogućuje
 da unaprijed rezerviramo memoriju za vektor \emph{candle} struktura
 što značajno ubrzava proces parsiranja pogotovo kod većih skupova
 podataka jer ne moramo konstantno realocirati memoriju pri proširivanju
-vektora. Ova implementacija je na dostpunim skupovima podataka
+vektora. Ova implementacija je na dostupnim skupovima podataka
 postigla brzinu parsiranja usporedivu s popularnom bibliotekom
 \emph{csv2} \cite{csv2} koja je optimizirana za parsiranje CSV datoteka.
 
 \subsection{Matematički okvir}
 \label{sek:matematicki_okvir_rezultati}
 Matematički okvir aplikacije implementiran je tako da
-se koristi samo standardna biblioteka \texttt{C++}. Iako je ovakav pristup
+se koristi samo standardna biblioteka \texttt{C++}-a. Iako je ovakav pristup
 produljio vrijeme izrade aplikacije te samo izvođenje aplikacije
 nije optimizirano kao što bi bilo da se koriste biblioteke poput
 \emph{Eigen} \cite{Eigen3} ili \emph{Armadillo} \cite{10980539},
@@ -840,7 +839,7 @@ kako bi se osiguralo da su svi koraci jasni i razumljivi. Jedine
 optimizacije su napravljene koristeći \emph{move semantics} i
 kako bi se izbjeglo nepotrebno kopiranje podataka te korištenje
 \texttt{OpenMP}-a \cite{660313} za paralelizaciju određenih operacija.
-Sve operacije su testirane na skupnjenim skupovima podataka i
+Sve operacije su testirane na prikupljenim skupovima podataka i
 vrijeme izvođenja je zadovoljavajuće za većinu operacija. Jedino
 što je potrebno optimizirati je traženje vlastitih vektora koristeći
 neki od asimptotski efikasnijih algoritama u odnosu na \emph{metodu
@@ -896,7 +895,7 @@ kriptovalute za dulje vremenske periode.
 Budući da se radi o finacijskim instrumentima koji su
 relativno novi i malo je povijesnih podataka,
 Monte Carlo simulacije koje su statistička metoda i temelje se
-na povijesnim podacima i modeliranju stohastičkog proces,
+na povijesnim podacima i modeliranju stohastičkog procesa,
 ne daju uvijek
 realistične rezultate. Problem je u zanemarivanju dodatnih
 informacija o tržištu koje bi se mogle modelirati korištenjem
@@ -928,7 +927,7 @@ Primjer testiranja Monte Carlo simulacije je dan na slici
 \ref{fig:monte_carlo_test}.
 Na slici se jasno vidi kako model može simulirati generalno kretanje
 vrijednosti portfelja te intervale u kojima očekuje volatilnost, ali
-je problem odrediti točan smjer kretanja te volatilnosti. Također vidimo
+je problem odrediti točan smjer kretanja volatilnosti. Također vidimo
 da što je manji interval predviđanja to je simulacija točnija.
 \begin{figure}[H]
     \centering
@@ -958,7 +957,7 @@ Ovakva implementacija je dovoljno brza za manje skupove podataka i za
 potrebe ove aplikacije, ali već za matrice veličine 30x30 i više
 vrijeme izvođenja je par sekundi što je neprihvatljivo za
 aplikaciju koja bi trebala raditi u realnom vremenu. Ovakva bi se
-implementacija trebala optimizirati korištenjem i pametnijih algoritama
+implementacija trebala optimizirati korištenjem pametnijih algoritama
 za izračun svojstvenih vrijednosti i vektora te optimizacijama na
 razini \texttt{C++} koda, kao što su \emph{SIMD} instrukcije i \emph{Cache}
 optimizacije.\\
@@ -992,8 +991,8 @@ nad izgledom i ponašanjem sučelja. Također, mogla bi se razmotriti
 izrada boljeg rješenja za vizualizaciju rezultata simulacija i PCA dekompozicije
 kao što su 3D grafovi ili animacije koje bi omogućile bolje razumijevanje
 rizika i mogućnosti portfelja kriptovaluta.\\
-Navedena poboljšanja bi omogućila također i bolji dizajn aplikacije
-te unaprijeđenje korisčkog iskustva u vidu \textit{UX} i \textit{UI} dizajna.
+Navedena poboljšanja bi omogućila bolji dizajn aplikacije
+te unapređenje korisničkog iskustva u vidu \textit{UX} i \textit{UI} dizajna.
 
 \chapter{Upute za korištenje i pokretanje aplikacije}
 \label{sek:upute_za_koristenje}
@@ -1010,8 +1009,8 @@ stvoriti izvršna datoteka \texttt{PortfolioSimulator} koja se može pokrenuti
 direktno iz terminala. Aplikacija će se pokrenuti u grafičkom sučelju
 i korisnik dalje može interaktivno koristiti aplikaciju. Uz samu aplikaciju
 stvara se i dodatna datoteka \texttt{run\_tests} koja služi za provođenje
-testova aplikacije. Testovi su napisani opet u \texttt{C++} i koriste samo standardnu
-biblioteku \texttt{C++}. Napisani su tako da pokrivaju sve ključne
+testova aplikacije. Testovi su napisani opet u \texttt{C++}-u i koriste samo standardnu
+biblioteku \texttt{C++}-a. Napisani su tako da pokrivaju sve ključne
 komponente aplikacije i provjeravaju ispravnost implementacije.
 Sve naredbe i primjeri za pokretanje aplikacije i testova dani su u
 nastavku.
