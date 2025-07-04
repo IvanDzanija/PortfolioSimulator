@@ -114,34 +114,35 @@ u investicijskim portfeljima uz pomoć Monte Carlo simulacija}
 \chapter{Uvod}
 \label{pog:uvod}
 
-Modeliranje ponašanja portfelja je jedna od ključnih metoda pri odabiru
-investicijskog pristupa. Od odabira pojedinačnih dionica, raznih
-derivata, sigurnih obveznica ili investicijkih fondova sve do mogućnosti
-čuvanja novčanih rezervi.\\
+Modeliranje ponašanja portfelja je jedna od ključnih metoda pri odabiru pristupa
+investiranju. To podrazumijeva odabir pojedinačnih dionica, raznih
+derivata, sigurnih obveznica ili investicijskih fondova.\\
 U posljednjem desetljeću, kriptovalute su postale sveprisutna
 komponenta financijskih tržišta, karakterizirana visokom volatilnošću,
 nelinearnim ovisnostima i globalnom dostupnošću što kroz iznimno pouzdane izvore
 što kroz izrazito nepouzdane izvore.
 Upravljanje rizikom u takvom okruženju zahtijeva napredne alate za
 modeliranje budućih scenarija.
-Jedan od takvih alata u standarnim financijskim modelima je Monte Carlo
+Jedan od takvih alata u standardnim financijskim modelima je Monte Carlo
 simulacija.\\
 Monte Carlo simulacija, kao statistička metoda temeljena na ponovljenom
 uzorkovanju slučajnih varijabli i često korištena metoda u modeliranju
 ostalih financijskih instrumenata, nameće se kao potencijalno uspješan
 pristup za analizu portfelja kriptovaluta.\\
-U ovom radu fokusira se na ručnoj implementaciji svih matematičkih
+U ovom radu fokusira se na samostalnoj implementaciji svih matematičkih
 operacija i modela u \texttt{C++} programskom jeziku bez korištenja
 vanjskih biblioteka potrebnih za modeliranje i provođenje Monte
-Carlo simulacija. Cilj je stečeno znanje na kolegijima primjeniti
-na barem naivne implementacije kako bi se moglo usporediti rad takog
-pristupa sa razvijenim i maksimalno optimiziranim bibliotekama.\\
+Carlo simulacija. Cilj je stečeno znanje na kolegijima primijeniti
+na barem naivne implementacije kako bi se moglo usporediti rad takvog
+pristupa s razvijenim bibliotekama koje su maksimalno optimizirane
+za brzinu izvođenja velikog broja matematičkih operacija.
+\\
 To uključuje Monte Carlo metodu za predviđanje vrijednosti portfelja s primjenom
 Cholesky dekompozicije kako bi se osigurala realistična obrada
 korelacija između kriptovaluta koje su još uvijek specijalna skupina investicija
-s visokom međusobnom korelecijom.\\
+s visokom međusobnom korelacijom.\\
 Osim Monte Carlo simulacija za predviđanje budućih cijena portfelja,
-implementira se i PCA (Principal Component Analysis) dekompozicija
+implementira se i PCA (eng. Principal Component Analysis) dekompozicija
 kao jedna od jednostavnih metoda za efikasnu diverzifikaciju portfelja
 i samim time smanjenje rizika upravo kroz smanjenje dimenzionalnosti podataka
 i identifikaciju glavnih komponenti koje objašnjavaju najveći dio

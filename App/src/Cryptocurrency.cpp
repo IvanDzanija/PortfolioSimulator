@@ -1,5 +1,6 @@
 #include "Cryptocurrency.h"
 #include <random>
+
 class CorruptData : public std::exception {
   private:
     std::string message;

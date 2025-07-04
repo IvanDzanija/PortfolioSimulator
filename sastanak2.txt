@@ -1,0 +1,77 @@
+Na kraju svakog poglavlja dodati sta ce se dalje raditi
+1. Uvod
+
+Odradeno.
+Od odabira -> dodati pocetak recenice.
+
+Odradeno. Promijenjeno ručnoj -> samostalnoj
+U ovom radu fokus je na ručnoj implementaciji.
+
+Odradeno.
+Maksimalno optimiziranim bibliotekama -> dodati pojasnjene da je
+brza implementacija, a ne nuzno mogucnost predvidanja
+
+korelecijom
+
+Na svaki engleski naziv -> dodati eng. tocka u opis
+
+opis rada -> struktura podataka staviti
+
+za daljnja istrazivanja -> nije pokrenuo razvoj bibliteke neko je vec razvijena
+bibliteka koja se moze nadograditi
+
+2. Teorija
+Na samom pocetku navesti da u nastvku slijedi teorija potrebna za razumijevanje
+ovog rada
+Svaki podnasnalov treba imati svoj mali uvod
+Uvesti definiciju drifta
+
+Monte carlo simulacija -> azuriraju se cijene simulacije -> cijene instrumenta
+Naglasiti da volatilnost se prikazuje i u samom kretanju pojedine cijene i u
+dekompoziciji preko koje stvaramo zavisnost varijabl -> objasniti formulu 2.10
+
+3. implementacija
+Kod daje samo definicije funckije -> logika je opisana u tekstu i moze se
+pronaci u prilogu radu
+Opisati ciljeve zasto je takva aplikacija -> detaljni ciljevi -> pregled
+porftelja i onda odredivanje pca dekompozicije i iz toga adjustiranje
+portfelja -> cilj je za pojedini portfelj  dati detaljnu analizu i uvide u
+buduca kretanja. -> Cijelo novo poglavlje!!!
+razmak izmedu zagrade i teksta
+na slici staviti da je graficki prikaz monte carlo simulacije za cijeli
+portfelj. Detaljno opisati sliku -> dodati jos da iz pca dekompozicije bi
+se treblo odrediti tezine portfelja to je optimalno prema teoriji
+
+3.1 dodati dvotocku za nabrajanje kriptovalute
+
+3.2 Algoritmi i komponenta
+Naglasiti koji su koji za realizaciju kojeg procesa ->
+Kako su povezane? Prikazano je u poglavlju 3.2.5 monte carlo
+
+
+Parsiranje -> objasniti da poravnavamo tako da uzimamo najkrace definiranu
+Napisati -> kod je dan u nastavku staviti referncu kao i slike i tablice
+UVIJEK PRIJE SLIKE STAVITI REFERENCU U TEKSTU!!!
+
+Monte Carlo i PCA -> oslanja se na ranije razvijene komponente
+Slika 3.4 -> primjer vizualcija monte carlo simulacije portfelja
+slika 3.5 -> opisati sta je tocno na slici(koliko dana i simulacija)
+Detalji se objasnjavju kasnije
+
+PCA dekompozicija -> slika-> dan je prikaz glavnih komponenti -> oznake na osima
+opisati i sta predstavlja koja boja -> objassniti sta znaci kad je neka
+negativna vrijednost -> objasniti da svaka komponenta je zasebna i tocno tako se
+treba promatrati. NE mijesati komponente i ne gladati zasebnu kritptovalutu!
+Objasniti shortanje.
+
+Objasniti na guiju da ako je prazno datum pocetka da se uzima zadnji moguci dan.
+
+4. poglavlja sva gurnuti stepenicu gore
+Naglasiti da je to porftelj samo jedne kriptovalute!!!
+Naglasiti na slikama da je drift i volatilnost iz uzoracke
+Objasniti zdravo razumski
+Staviti prednosti u neko posebno poglavlje
+
+Dodati i slike krajnjih distribucija
+
+Dodati sliku 4.6 samo jedna crta srednje vrijednosti
