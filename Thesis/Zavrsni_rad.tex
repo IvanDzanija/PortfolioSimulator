@@ -181,12 +181,15 @@ Ovakav rad može poslužiti kao osnova za daljnje istraživanje i razvoj
 naprednijih modela i aplikacija koji će omogućiti bolje razumijevanje i upravljanje
 rizicima povezanima s kriptovalutama, ali i ostalim financijskim instrumentima.
 Pogotovo jer se kroz izradu sustava i aplikacije kao sekundarni rezultat
-pokrenuo razvitak biblioteke za rad s financijskim podatcima i potrebnim
-matematičkim okvirima koja će se moći koristiti u budućim radovima i projektima.
+razvila modularna i fleksibilna biblioteka za rad s financijskim podatcima i
+potrebnim matematičkim okvirima koja će se moći koristiti u budućim radovima i
+projektima.
 
 %-------------------------------------------------------------------------------
 \chapter{Teorija portfelja i matematičke osnove}
 \label{pog:teorija_portelja}
+U ovom poglavlju dajemo uvod u teorijsku i matematičku pozadinu potrebnu za
+razumijevanje i implementaciju ovog rada.\\
 Teorija portfelja, čiji su začetnici Harry Markowitz i James Tobin,
 daje strogu matematičku definiciju financijskim pojmovima.
 Ključni optimizacijski problem teorije portfelja je
@@ -201,7 +204,7 @@ većeg povrata ili dodatne koristi u budućnosti \cite{Investments}.
 Ovime kažemo kako investicija ne mora nužno biti financijska,
 ali u ovom radu se fokusiramo na financijske investicije koje nam
 predstavljaju izdvajanje i ulaganje novca u različite financijske instrumente
-kroz određeni vremenski period s ciljem ostvarivanja većeg povrata
+kroz određeni period s ciljem ostvarivanja većeg povrata
 u budućnosti ili smanjenje gubitka vrijednosti novca.
 
 \section{Portfelj}
@@ -218,9 +221,12 @@ pojedinih investicija s vektorom pojedinih udjela $\mathbf{w}$.
 
 \section{Povrati}
 \label{sek:povrati}
-Povrat investicije je osnovna mjera uspješnosti investicije.
-\subsection{Aritmetički povrat}
+Povrat investicije je osnovna mjera uspješnosti investicije. U nastavku
+ćemo definirati dva osnovna tipa povrata: aritmetički i logaritamski povrat.
 
+\subsection{Aritmetički povrat}
+Aritmetički povrat definiramo kao omjer promjene cijene financijskog instrumenta
+u odnosu na njegovu početnu cijenu.
 \begin{definition}
 	Neka je $P_t$ cijena financijskog instrumenta u trenutku $t$ te
     $P_{t-1}$ cijena istog instrumenta u trenutku $t-1$. Aritmetički povrat
@@ -252,12 +258,14 @@ Logaritamski povrat $r_t$ definiramo preko prirodnog logaritma omjera cijena.
 matematičkih svojstava kao što je svojstvo simetrije $\ln(a) = -\ln(1/a)$
 te svojstvo aditivnosti $r_{0,T} = \sum_{t=1}^T r_t$.
 
-\subsection{Očekivani povrat }
+\subsection{Očekivani povrat}
+Očekivani povrat prirodno definiramo kao nepristran procjenitelj očekivanja
+slučajne varijable $R_t$ i za to koristimo srednju vrijednost prijašnjih
+povrata.
 \label{sek:ocekivani_povrat}
 \begin{definition}
 	Očekivani povrat promatramo kao srednju vrijednost prijašnjih
-	povrata jer je upravo srednja vrijednost nepristran procjenitelj
-	očekivanja slučajne varijable $R_t$ za koji vrijedi:
+	povrata očekivanja slučajne varijable $R_t$ za koji vrijedi:
 \end{definition}
 \begin{align}
 	E(R_t) =\frac{1}{N} \sum_{i = 1}^{N} R_i
@@ -308,13 +316,17 @@ S_t = S_0 \exp\left[\left(\mu - \frac{\sigma^2}{2}\right)t +
 \end{align}
 \indent gdje je $S_0$ početna cijena, $\mu$ \textit{drift}, $\sigma$ volatilnost i $W_t$
 Wienerov proces.\\
+\indent Za procjenu drifta $\mu$ koristimo uzoračku srednju vrijednost
+logaritamskih povrata.\\
+\indent Za procjenu volatilnosti $\sigma$ koristimo uzoračku
+procjenu standardne devijacije.\\
 Detaljno objašnjene GBM-a i njegovih svojstava te kompletan derivacijski
-postupak možete pronaći u \cite{GMBIzvod}.
+postupak u \cite{GMBIzvod}.
 
 \section{Monte Carlo simulacije}
 \label{sek:monte_carlo}
-Monte Carlo metoda je numerička metoda koja koristi slučajno
-uzorkovanje za rješavanje problema.
+Monte Carlo metoda je statistička metoda koja koristi slučajno i ponovljeno
+uzorkovanje za rješavanje postavljenog problema.
 Jedan iznimno intuitivan i elegantan primjer je određivanje
 vrijednost broja $\pi$.
 Ideja je generiranje što većeg broja točaka unutar jediničnog
@@ -327,16 +339,20 @@ U kontekstu financija, Monte Carlo simulacije koriste se za
 generiranje vjerojatnosnih scenarija budućih cijena.
 Za portfelj od $n$ instrumenata, koraci su:
 \begin{enumerate}
-    \item Generiraj nezavisne slučajne varijable $Z_i \sim N(0,1)$ (i.i.d.)
-\item Transformiraj slučajni vektor nezavisnih varijabli $Z$ u
+    \item Generiramo nezavisne slučajne varijable $Z_i \sim N(0,1)$ (i.i.d.)
+\item Transformiramo slučajni vektor nezavisnih varijabli $Z$ u
     slučajni vektor koreliranih varijabli $\mathbf{Y} = L\mathbf{Z}$
     gdje je $L$ donje trokutasta matrica Cholesky
-        dekompozicije $\boldsymbol{\Sigma}$
-\item Ažuriraj cijene simulacije po GBM formuli za svaki instrument:
+        dekompozicije uzoračke kovarijacijske matrice $\boldsymbol{\Sigma}$
+\item Ažuriramo cijenu $i$-tog instrumenta po GBM formuli za svaki instrument:
 \begin{align}
 S_t^{(i)} = S_0^{(i)} \exp\left(\left(\mu_i - \frac{\sigma_i^2}{2}\right)\Delta t + \sigma_i Y_i \sqrt{\Delta t}\right)
 \end{align}
-\item Izračunaj vrijednost portfelja $V_t = \sum_{i=1}^n w_i S_t^{(i)}$
+        \indent gdje je $S_0^{(i)}$ početna cijena, $\mu_i$ drift te $\sigma_i$
+        volatilnost $i$-tog instrumenta, a $\Delta t$ vremenski interval
+        i $Y_i$ $i$-ta komponenta vektora koreliranih slučajnih varijabli.
+
+\item Izračunamo vrijednost portfelja $V_t = \sum_{i=1}^n w_i S_t^{(i)}$
 \end{enumerate}
 
 \section{Cholesky dekompozicija}
@@ -410,13 +426,13 @@ Sada možemo definirati PCA dekompoziciju.
 
 
 %--- IMPLEMENTACIJA / IMPLEMENTATION -------------------------------------------
-\chapter{Implementacija aplikacije}
+\chapter{Implementacija i opis aplikacije}
 \label{pog:implementacija}
 Ovaj dio rada opisuje implementaciju aplikacije za simulaciju
 portfelja kriptovaluta. Aplikacija je napisana u \texttt{C++} programskom
 jeziku i koristi isključivo standardnu biblioteku \texttt{C++}-a za matematičke
 operacije i modeliranje. Za interakciju s korisnikom koristi se
-grafičko sučelje(implementirano sa Qt bibliotekom za \texttt{C++}) koje
+grafičko sučelje (implementirano s Qt bibliotekom za \texttt{C++}) koje
 omogućuje vizualizaciju rezultata. Prikaz modela rada aplikacije
 je dan na slici \ref{fig:model_aplikacije}.
 \\
@@ -427,6 +443,10 @@ je dan na slici \ref{fig:model_aplikacije}.
     \caption{Model rada aplikacije}
     \label{fig:model_aplikacije}
 \end{figure}
+
+\section{Pregled funkcionalnosti}
+\label{sek:pregled_funkcionalnosti}
+
 
 \section{Podatci}
 \label{sek:podaci}

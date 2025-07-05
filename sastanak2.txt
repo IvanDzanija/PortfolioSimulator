@@ -11,22 +11,33 @@ Odradeno.
 Maksimalno optimiziranim bibliotekama -> dodati pojasnjene da je
 brza implementacija, a ne nuzno mogucnost predvidanja
 
+Odradeno.
 korelecijom
 
 Na svaki engleski naziv -> dodati eng. tocka u opis
 
 opis rada -> struktura podataka staviti
 
+Odradeno.
 za daljnja istrazivanja -> nije pokrenuo razvoj bibliteke neko je vec razvijena
 bibliteka koja se moze nadograditi
 
 2. Teorija
+
+Odradeno.
 Na samom pocetku navesti da u nastvku slijedi teorija potrebna za razumijevanje
 ovog rada
-Svaki podnasnalov treba imati svoj mali uvod
+
+Odradeno.
+Svaki podnasnalov treba imati svoj mali uvod.
+
+Odradeno.
 Uvesti definiciju drifta
 
+Odradeno.
 Monte carlo simulacija -> azuriraju se cijene simulacije -> cijene instrumenta
+
+Odradeno.
 Naglasiti da volatilnost se prikazuje i u samom kretanju pojedine cijene i u
 dekompoziciji preko koje stvaramo zavisnost varijabl -> objasniti formulu 2.10
 
@@ -37,7 +48,10 @@ Opisati ciljeve zasto je takva aplikacija -> detaljni ciljevi -> pregled
 porftelja i onda odredivanje pca dekompozicije i iz toga adjustiranje
 portfelja -> cilj je za pojedini portfelj  dati detaljnu analizu i uvide u
 buduca kretanja. -> Cijelo novo poglavlje!!!
-razmak izmedu zagrade i teksta
+
+Odradeno.
+Razmak izmedu zagrade i teksta.
+
 na slici staviti da je graficki prikaz monte carlo simulacije za cijeli
 portfelj. Detaljno opisati sliku -> dodati jos da iz pca dekompozicije bi
 se treblo odrediti tezine portfelja to je optimalno prema teoriji
