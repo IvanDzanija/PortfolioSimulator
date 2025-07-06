@@ -446,6 +446,20 @@ je dan na slici \ref{fig:model_aplikacije}.
 
 \section{Pregled funkcionalnosti}
 \label{sek:pregled_funkcionalnosti}
+Cilj aplikacije je omogućiti korisniku odabir i analizu portfelja kriptovaluta. Nakon
+odabira portfelja korisniku se omogućuje detaljan pregled i analiza portfelja
+kroz simulaciju budućih cijena portfelja, pregled simulacija i distribucija te
+mogućnost optimiranja portfelja korištenjem PCA dekompozicije.\\
+Na slici \ref{fig:model_aplikacije} možemo vidjeti kako aplikacija prvo zahtjeva
+odabir portfelja kriptovaluta, zatim se parsiraju povijesni podatci kriptovaluta
+koje su izabrane u portfelj. Nakon toga korisnik može odabrati ili Monte Carlo
+simulaciju budućih cijena cijelog portfelja i pregled simulacija i distribucija
+simulacija ili PCA dekompoziciju portfelja iz kojeg onda se generira grafički
+prikaz optimalnog svojstvenog portfelja.\\
+U nastavku slijedi detaljan opis svih funkcionalnosti aplikacije te
+definicije klasa i funkcija koje su implementirane u aplikaciji. Logika
+funkcija je opisana u tekstu uz definicije, a samu izvedbu funkcija je moguće
+pronaći u kodu aplikacije koji je dostupan u prilogu rada.\\
 
 
 \section{Podatci}
@@ -460,7 +474,8 @@ implementaciju modela portfelja i potrebnih matematičkih operacija.
 U budućnosti bi se moglo implementirati i dohvaćanje podataka
 u realnom vremenu preko nekog javno dostupnog API-ja. Time bi
 aplikacija postala korisna i za praćenje portfelja u realnom vremenu.\\
-U trenutnim podatcima nalaze se povijesne vrijednosti za 23 različite kriptovalute.
+U trenutnim podatcima nalaze se povijesne vrijednosti za 23 različite
+kriptovalute:
 \begin{itemize}
     \item Aave (AAVE)
     \item Bitcoin (BTC)
@@ -493,12 +508,13 @@ U trenutnim podatcima nalaze se povijesne vrijednosti za 23 različite kriptoval
 \label{sek:algoritmi_i_komponente}
 Aplikacija se sastoji od nekoliko ključnih komponenti:
 \begin{itemize}
-    \item \textbf{Parsiranje podataka (\ref{sek:parsiranje_podataka}):} učitavanje i obrada povijesnih
+    \item \textbf{Parsiranje podataka (\ref{sek:parsiranje_podataka}):} Učitavanje i obrada povijesnih
     podataka o cijenama kriptovaluta.
 
 \item \textbf{Model kriptovaluta (\ref{sek:model_kriptovalute}):} Implementacija modela kriptovaluta.
 
-    \item \textbf{Model portfelja (\ref{sek:model_portfelja}):} Definiranje portfelja kriptovaluta.
+    \item \textbf{Model portfelja (\ref{sek:model_portfelja}):} Definiranje i
+        implementacija modela investicijskog portfelja.
 
     \item \textbf{Matematički okvir (\ref{sek:matematicki_okvir}):} Implementacija matematičkih
     operacija potrebnih za simulaciju i modeliranje portfelja. Npr.
@@ -520,16 +536,21 @@ Aplikacija se sastoji od nekoliko ključnih komponenti:
 \subsection{Parsiranje podataka}
 \label{sek:parsiranje_podataka}
 Efikasno parsiranje povijesnih podataka o cijenama kriptovaluta
-je prvi korak u simulaciji i stavaranju modela portfelja.
+je prvi korak u simulaciji i stvaranju modela portfelja.
 Podatci se učitavaju iz CSV datoteka koje sadrže povijesne cijene
-kriptovaluta. Povijesni podatci su preuzeti sa \cite{kaggledataset}.
+kriptovaluta. Povijesni podatci su preuzeti s \cite{kaggledataset}.
 Podatci se parsiraju u \emph{candle} strukturu koja sadrži
 otvorenu, zatvorenu, najvišu i najnižu cijenu te volumen
 kriptovalute za svaki vremenski interval. Također se pri parsiranju
 računaju i logaritamski povrati za svaki vremenski interval te se izvršava
-poravnanje vremenskih oznaka svih kriptovaluta. U pravilu se kriptovalutama trguje
+poravnanje vremenskih oznaka svih kriptovaluta tako da se uzima najraniji
+početni trenutak u kojem su dostupni podatci za sve kriptovalute u portfelju.
+U pravilu se kriptovalutama trguje
 24/7, ali je problem bio što neke kriptovalute nisu postojale ili
 nisu imale podatke za sve dane svih ostalih kriptovaluta.
+U isječku \ref{lst:candle} prikan je kod strukture \emph{candle}.
+
+
 \begin{lstlisting}[caption={Struktura \emph{candle} koja sadrži povijesne
 podatke o cijenama kriptovaluta}, label={lst:candle}]
 struct Candle {
@@ -549,7 +570,8 @@ struct Candle {
 Model kriptovalute je implementiran kao klasa koja
 sadrži povijesne podatke o cijenama kriptovalute
 i metode za izračunavanje povrata, volatilnosti
-i driftova.
+i driftova. U isječku \ref{lst:kriptovaluta} prikazana je definicija
+klase \emph{Cryptocurrency} koja predstavlja model kriptovalute.
 \begin{lstlisting}[caption={Model kriptovalute}, label={lst:kriptovaluta}]
 class Cryptocurrency {
   public:
@@ -573,6 +595,10 @@ class Cryptocurrency {
 \label{sek:model_portfelja}
 Model portfelja je implementiran kao klasa koja
 sadrži vektor kriptovaluta i njihove udjele u portfelju.
+U isječku \ref{lst:portfelj} prikazana je definicija klase \emph{Portfolio}
+koja predstavlja model portfelja. Ovaj model omogućuje dodavanje i
+uklanjanje kriptovaluta iz portfelja te izračunavanje potrebnih metrika.
+
 \begin{lstlisting}[caption={Model portfelja}, label={lst:portfelj}]
 class Portfolio {
   private:
@@ -617,7 +643,10 @@ class Portfolio {
 Matematički okvir aplikacije implementira osnovne matematičke
 operacije nad vektorima i matricama, kao što su množenje
 matrica i vektora te razne matrične dekompozicije. Sve metode koriste
-samo standardnu biblioteku \texttt{C++}-a.
+samo standardnu biblioteku \texttt{C++}-a. Matrica je implementirana
+kao vektor vektora, a vektor kao vektor.
+U isječku \ref{lst:cpp_example} prikazane su definicije metoda koje
+su implementirane u matematičkom okviru aplikacije.
 
 \begin{lstlisting}[caption={Metode implementirane u matematičkom okviru}, label={lst:cpp_example}]
 template <typename T>
@@ -728,24 +757,31 @@ i trebale napraviti.
 
 \subsection{Monte Carlo simulacija}
 \label{sek:monte_carlo_simulacija}
+Monte Carlo simulacija je implementirana kao metoda klase
+\texttt{Portfolio} koja generira simulacije budućih cijena portfelja
+kriptovaluta. Prije generiranja simulacija, aplikacija prvo prvo
+parsira povijesne podatke kriptovaluta koje su izabrane u portfelj te
+izračunava kovarijacijsku matricu.
+Simulacije koriste model geometrijskog Brownovog gibanja
+za generiranje budućih cijena te Cholesky dekompoziciju za
+osiguranje uzoračke korelacije između kriptovaluta.
+Na slici \ref{fig:monte_carlo} je prikazan model generiranja Monte Carlo
+simulacija.
+
 \begin{figure}[H]
     \centering
     \includegraphics[height=0.7\textheight, keepaspectratio]{Figures/Monte_Carlo_explanation.png}
-    \caption{Monte Carlo simulacija portfelja kriptovaluta}
+    \caption{Model generiranja Monte Carlo simulacija portfelja kriptovaluta}
     \label{fig:monte_carlo}
 \end{figure}
-Monte Carlo simulacija je implementirana kao metoda klase
-\texttt{Portfolio} koja generira simulacije budućih cijena portfelja
-kriptovaluta. Simulacije koriste model geometrijskog Brownovog gibanja
-za generiranje budućih cijena te Cholesky dekompoziciju za
-osiguranje uzoračke korelacije između kriptovaluta.
-Implementacija Monte Carlo simulacija prvo koristi metodu za izračuvanje
+\noindent Implementacija Monte Carlo simulacija prvo koristi metodu za izračunavanje
 kovarijacijske matrice portfelja iz povijesnih podataka kriptovaluta.
-Također se može postaviti početni datum simulacije, broj simulacija i
+Također se može postaviti početni datum simulacije (ako se izostavi, onda se
+uzima se zadnji dan dostupan u podatcima), broj simulacija i
 broj koraka simulacije.
 Zatim se koristeći \texttt{std::normal\_distribution(0,1)} generiraju
 nezavisne slučajne varijable(\textasciitilde \textit{N(0,1)}) koje se
-transformiraju u korelirane slučajne varijable pomoću Cholesky dekompozicije.
+transformiraju u korelirane slučajne varijable s pomoću Cholesky dekompozicije.
 Zatim se ažuriraju cijene simulacije koristeći geometrijsko Brownovo gibanje
 prema formuli:
 \ref{sek:gbm}. Primjer rezultata simulacije je dan na slici
@@ -768,7 +804,8 @@ simulacije dan je na slici \ref{fig:distribution_example}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/distribution_example.png}
-    \caption{Primjer statističke analize i distribucije simulacije portfelja kriptovaluta}
+    \caption{Primjer statističke analize i distribucije simulacije portfelja
+    kriptovaluta (500 simulacija, 60 dana)}
     \label{fig:distribution_example}
 \end{figure}
 
@@ -785,9 +822,15 @@ slučaju to je suma svih vlastitih vrijednosti) i varijancu objašnjenu glavnim
 komponentama. Metoda vrati \texttt{int} koji označava uspješnost dekompozicije.
 Za izračun glavnih komponenti koristi se svojstvena dekompozicija koja
 daje vlastite vrijednosti i vlastite vektore kovarijacijske matrice te je
-objašnjena u \ref{sek:svojstvena_dekompozicija}.
-primjer rezultata PCA dekompozicije je dan na slici
-\ref{fig:pca_example}.
+objašnjena u \ref{sek:svojstvena_dekompozicija}. Svaka glavna komponenta
+se promatra zasebno i nema utjecaj na ostale glavne komponente.
+Primjer rezultata PCA dekompozicije je dan na slici
+\ref{fig:pca_example}. Na slici vidimo kako je svaka komponenta
+označena različitom bojom. Također vidimo da je moguća situacija
+u kojoj je neka težina u komponenti negativna, što znači da je
+negativno korelirana s ostatkom portfelja te bi se trebala uzeti
+kratka pozicija (eng. \textit{short position}) u toj kriptovaluti.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/pca_example.png}
@@ -812,7 +855,9 @@ portfelja te varijancu koju objašnjavaju.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/gui.png}
-    \caption{Grafičko sučelje aplikacije za simulaciju portfelja kriptovaluta}
+    \caption{Grafičko sučelje aplikacije za simulaciju portfelja kriptovaluta
+    (ako se ne izabere početno vrijeme simulacije, uzima se zadnji dan iz
+    podataka)}
     \label{fig:portfolio_gui}
 \end{figure}
 
@@ -823,9 +868,8 @@ U ovom poglavlju prikazujemo rezultate postignute implementacijom aplikacije
 te raspravljamo o njihovoj važnosti i primjenjivosti u stvarnom svijetu.
 Također, analiziramo prednosti i nedostatke implementacije te mogućnosti
 optimizacija i proširenja aplikacije.
-\section{Analiza i diskusija implementacijskih rezultata}
 \label{sek:implementacijski_rezultati}
-\subsection{Funkcionalnost učitavanja i parsiranja podataka}
+\section{Funkcionalnost učitavanja i parsiranja podataka}
 Ručna implementacija parsiranja podataka omogućila je
 optimizaciju učitavanja i obrade podataka zbog specifičnosti
 izgleda samog skupa podataka. Osim što odmah znamo koji su stupci
@@ -838,7 +882,7 @@ vektora. Ova implementacija je na dostupnim skupovima podataka
 postigla brzinu parsiranja usporedivu s popularnom bibliotekom
 \emph{csv2} \cite{csv2} koja je optimizirana za parsiranje CSV datoteka.
 
-\subsection{Matematički okvir}
+\section{Matematički okvir}
 \label{sek:matematicki_okvir_rezultati}
 Matematički okvir aplikacije implementiran je tako da
 se koristi samo standardna biblioteka \texttt{C++}-a. Iako je ovakav pristup
@@ -857,7 +901,7 @@ efikasno upravljanje memorijom i automatsko proširivanje
 kada je potrebno.\\
 Većina matematičkih operacija je implementirana na \emph{naivni} način
 kako bi se osiguralo da su svi koraci jasni i razumljivi. Jedine
-optimizacije su napravljene koristeći \emph{move semantics} i
+optimizacije su napravljene koristeći \emph{move semantics}
 kako bi se izbjeglo nepotrebno kopiranje podataka te korištenje
 \texttt{OpenMP}-a \cite{660313} za paralelizaciju određenih operacija.
 Sve operacije su testirane na prikupljenim skupovima podataka i
@@ -866,7 +910,7 @@ vrijeme izvođenja je zadovoljavajuće za većinu operacija. Jedino
 neki od asimptotski efikasnijih algoritama u odnosu na \emph{metodu
 inverznih iteracija}.
 
-\subsection{Monte Carlo simulacija}
+\section{Monte Carlo simulacija}
 \label{sek:monte_carlo_rezultati}
 Monte Carlo simulacija se pokazala kao efikasan način
 generiranja vjerojatnosnih scenarija budućih cijena portfelja kriptovaluta
@@ -886,8 +930,8 @@ Drugi primjer simulacije je dan na slici \ref{fig:monte_carlo_example2}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example2.png}
-    \caption{Primjer Monte Carlo simulacije portfelja (XRP) kriptovaluta (100
-    simulacija, 60 dana, drift = 0.00154516, volatilnost = 0.0727809)}
+    \caption{Primjer Monte Carlo simulacije portfelja jedne kriptovalute (XRP) (100
+    simulacija, 60 dana, uzorački drift = 0.00154516, uzoračka volatilnost = 0.0727809)}
     \label{fig:monte_carlo_example2}
 \end{figure}
 
@@ -927,8 +971,9 @@ od nekoliko posto u sljedećih 60 dana, ali to nije nužno točno
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/monte_carlo_example3.png}
-    \caption{Primjer Monte Carlo simulacije portfelja (Bitcoin) kriptovaluta (100
-    simulacija, 60 dana, drift = 0.0017602, volatilnost = 0.0426928)}
+    \caption{Primjer Monte Carlo simulacije portfelja jedne kriptovalute
+    (Bitcoin)
+    (100 simulacija, 60 dana, uzorački drift = 0.0017602, uzoračka volatilnost = 0.0426928)}
     \label{fig:monte_carlo_example3}
 \end{figure}
 Promatajući povijesne podatke \textit{Bitcoin}-a, dane na slici \ref{fig:BTC_hist},
@@ -963,7 +1008,7 @@ da što je manji interval predviđanja to je simulacija točnija.
 
 
 
-\subsection{PCA dekompozicija}
+\section{PCA dekompozicija}
 \label{sek:pca_rezultati}
 
 Implementacija PCA dekompozicije koristi implementirane metode
@@ -994,7 +1039,7 @@ jednakih težina.
     \label{fig:pca_example2}
 \end{figure}
 
-\subsection{Vizualizacija rezultata}
+\section{Vizualizacija rezultata}
 \label{sek:vizualizacija_rezultata_rezultati}
 Grafičko sučelje aplikacije omogućuje korisnicima jednostavno
 upravljanje portfeljem, pokretanje simulacija i vizualizaciju rezultata.
