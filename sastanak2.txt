@@ -112,4 +112,7 @@ Objasniti zdravo razumski
 Odradeno.
 Dodati i slike krajnjih distribucija i referencirati ih
 
+Mislim da je ovo preteško za ubaciti u sami program zbog načina na koji je
+implementirano prikazivanje grafova, a ne donosi previše novih informacija (sama
+distribucija puno više informacija nosi).
 Dodati sliku 4.6 samo jedna crta srednje vrijednosti
