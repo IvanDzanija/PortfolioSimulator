@@ -18,7 +18,6 @@
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QValueAxis>
 #include <ctime>
-#include <fstream>
 
 typedef std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>
     timestamp;
@@ -474,6 +473,7 @@ void MainWindow::plotEigenvectors(
 
 void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
     QChart *chart = new QChart();
+    std::vector<std::pair<int, double>> avg;
     for (const auto &sim : data) {
         QLineSeries *series = new QLineSeries();
         for (size_t step = 0; step < sim.at(0).size(); ++step) {
@@ -482,8 +482,13 @@ void MainWindow::plotSimulation(const std::vector<Doubles_Matrix> &data) {
                 sum += sim.at(i).at(step);
             }
             series->append(step, sum);
+            avg.push_back(std::make_pair(step, sum));
         }
         chart->addSeries(series);
+    }
+    std::sort(avg.begin(), avg.end());
+    for (int i = 0; i < avg.size(); ++i) {
+        std::cout << avg[i].first << ' ' << avg[i].second << std::endl;
     }
 
     chart->createDefaultAxes();

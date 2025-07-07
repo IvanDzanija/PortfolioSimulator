@@ -914,12 +914,15 @@ inverznih iteracija}.
 \label{sek:monte_carlo_rezultati}
 Monte Carlo simulacija se pokazala kao efikasan način
 generiranja vjerojatnosnih scenarija budućih cijena portfelja kriptovaluta
-ukoliko je inicijalni uzorak smislen i dovoljno velik.
-Treba napomenuti kako bi Monte Carlo metoda modelirana sa
+ako je inicijalni uzorak smislen i dovoljno velik.
+Treba napomenuti kako bi Monte Carlo metoda modelirana s
 geometrijskim Brownovim gibanjem (GBM) trebala biti korištena
 na kratkim vremenskim intervalima jer ipak uzima malo mogućih
 značajki iz povijesnih podataka i dalje se bazira na simuliranju
-stohastičkog procesa. Za duže vremenske periode se preporučuju
+stohastičkog procesa. Dodatan razlog je pretpostavka konstantne volatilnosti.
+U realnosti, volatilnost kriptovaluta može značajno varirati i često je
+grupirana u ciklusima.
+Za duže periode se preporučuju
 regresijske metode koje prate trendove i sezonalnost.
 Jedan primjer simulacije koji izgleda realistično i smisleno
 dan je ranije na slici \ref{fig:monte_carlo_example}.
@@ -939,7 +942,27 @@ Ovaj primjer simulacije pokazuje da je \textit{drift} povrata portfelja izrazito
 nisko pozitivan, ali da je volatilnost portfelja toliko visoka da model predviđa
 budući pad. Ovakav izgled simulacije je očekivan ako uzmemo u obzir da koristimo
 statističku metodu koja gleda samo povijesne podatke i ne uzima u obzir
-puno drugih faktora koji utječu na cijene kriptovaluta. Izgled kretanja
+puno drugih faktora koji utječu na cijene kriptovaluta. Razlog zašto želimo
+model koji na ovakav način predviđa buduće kretanje cijena je asimetričnost
+povrata. Asimetričnost povrata se vidi u ovom primjeru:
+\begin{align}
+    \text{Početna vrijednost $= 100.0$}\\
+    \text{Vrijednost nakon trenutka $t = 80.0 \left(-20.0 \%\right)$} \\
+    \text{Vrijednost nakon trenutka $t+1 = 100.0 \left(+25\%\right)$}
+\end{align}
+Na slici \ref{fig:xrp_dist} možemo vidjeti izgled distribucije predviđenih
+vrijednosti portfelja kriptovalute XRP za posljednji dan simulacije.
+Primjećujemo da je distribucija asimetrična i da je većina vrijednosti u lijevom
+repu distribucije. To znači da je model predvidio da će vrijednost portfelja
+XRP pasti.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/xrp_dist.png}
+    \caption{Distribucija predviđenih vrijednosti kriptovalute XRP na zadnji dan simulacije
+    (100 simulacija, 60 dana)}
+    \label{fig:xrp_dist}
+\end{figure}
+Izgled kretanja
 vrijednosti portfelja u povijesnim podatcima dan je na slici \ref{fig:XRP_hist}.
 Na slici se vidi da je volatilnost cijene kriptovalute XRP
 visoka te je vrijednost iste u zadnjih nekoliko godina
@@ -951,7 +974,9 @@ većinom opadala uz 2 velika i nagla porasta.
     \label{fig:XRP_hist}
 \end{figure}
 
-Treći primjer simulacije je dan na slici \ref{fig:monte_carlo_example3}.
+Treći primjer simulacije dan je na slici \ref{fig:monte_carlo_example3} te
+distribucija vrijednosti portfelja na posljedni dan simulacija na slici
+\ref{fig:BTC_dist}.
 Na slici se vidi da je \textit{drift} povrata portfelja pozitivan,
 ali da je volatilnost nešto niža nego u prethodnom primjeru te model
 predviđa stabilniji budući rast.\\
@@ -975,6 +1000,13 @@ od nekoliko posto u sljedećih 60 dana, ali to nije nužno točno
     (Bitcoin)
     (100 simulacija, 60 dana, uzorački drift = 0.0017602, uzoračka volatilnost = 0.0426928)}
     \label{fig:monte_carlo_example3}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/bitcoin_dist.png}
+    \caption{Distribucija predviđenih vrijednosti kriptovalute Bitcoin na zadnji dan simulacije
+    (100 simulacija, 60 dana)}
+    \label{fig:BTC_dist}
 \end{figure}
 Promatajući povijesne podatke \textit{Bitcoin}-a, dane na slici \ref{fig:BTC_hist},
 vidimo da je volatilnost cijene \textit{Bitcoin}-a također visoka, ali da je

@@ -106,11 +106,10 @@ Naglasiti da je to porftelj samo jedne kriptovalute!!!
 Odradeno.
 Naglasiti na slikama da je drift i volatilnost iz uzorka
 
+Odradeno.
 Objasniti zdravo razumski
 
-
-Staviti prednosti u neko posebno poglavlje
-
+Odradeno.
 Dodati i slike krajnjih distribucija i referencirati ih
 
 Dodati sliku 4.6 samo jedna crta srednje vrijednosti
